@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51db72e37f5c3bb4c90f8a58f258aa92, type: 3}
+  m_Name: testDungeonCard
+  m_EditorClassIdentifier: 
+  startingWidth: 0
+  StartingDepth: 0
+  numberOfFloors: 0
+  entranceTile: {fileID: 0}
+  exitTile: {fileID: 0}
+  openTiles: []
+  pillarTiles: []
+  lineTiles: []
+  cornerTiles: []
+  tTiles: []
+  endTiles: []
+  crossTiles: []
