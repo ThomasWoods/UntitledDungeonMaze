@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5872680541799547253}
   - component: {fileID: 5415927785513694441}
   - component: {fileID: 7420137139209563881}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: TestOpenTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,8 +58,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.2, z: 0.8}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &2126284638151932601
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,8 +71,7 @@ GameObject:
   - component: {fileID: 5639258326811879190}
   - component: {fileID: 8890927786876402128}
   - component: {fileID: 1706809210855045531}
-  - component: {fileID: 4950107399027266892}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 2126284638151932601}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5872680541799547253}
   m_RootOrder: 0
@@ -139,17 +138,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4950107399027266892
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2126284638151932601}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}

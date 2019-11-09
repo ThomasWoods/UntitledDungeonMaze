@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 649640764917945760}
   - component: {fileID: 1393075338580697148}
   - component: {fileID: 4505165786834762300}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: TestCrossTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,8 +71,7 @@ GameObject:
   - component: {fileID: 7774839510061419341}
   - component: {fileID: 8703429297366335771}
   - component: {fileID: 622948741567214254}
-  - component: {fileID: 5207006511041443743}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 8664310180251705025}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.25, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.5, z: 0.9}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 649640764917945760}
   m_RootOrder: 0
@@ -118,7 +117,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fce40c38795392e4f898ed21493f3ec5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -139,16 +138,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &5207006511041443743
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8664310180251705025}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

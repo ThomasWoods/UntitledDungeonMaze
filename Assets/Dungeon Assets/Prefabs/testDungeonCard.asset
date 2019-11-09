@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51db72e37f5c3bb4c90f8a58f258aa92, type: 3}
+  m_Name: testDungeonCard
+  m_EditorClassIdentifier: 
+  startingWidth: 3
+  StartingDepth: 3
+  numberOfFloors: 1
+  entranceTile: {fileID: 1192262549458459824, guid: 57598bc3cbf4d00409bea014dae2e2d8,
+    type: 3}
+  exitTile: {fileID: 1192262549458459824, guid: 57598bc3cbf4d00409bea014dae2e2d8,
+    type: 3}
+  openTiles:
+  - {fileID: 1192262549458459824, guid: 57598bc3cbf4d00409bea014dae2e2d8, type: 3}
+  pillarTiles:
+  - {fileID: 5257894820172171365, guid: 8e363f3efa15ed6419c3f1074e3194e2, type: 3}
+  lineTiles:
+  - {fileID: 5257894820172171365, guid: 8e363f3efa15ed6419c3f1074e3194e2, type: 3}
+  cornerTiles:
+  - {fileID: 5257894820172171365, guid: 8e363f3efa15ed6419c3f1074e3194e2, type: 3}
+  tTiles:
+  - {fileID: 5257894820172171365, guid: 8e363f3efa15ed6419c3f1074e3194e2, type: 3}
+  endTiles:
+  - {fileID: 5257894820172171365, guid: 8e363f3efa15ed6419c3f1074e3194e2, type: 3}
+  crossTiles:
+  - {fileID: 5257894820172171365, guid: 8e363f3efa15ed6419c3f1074e3194e2, type: 3}

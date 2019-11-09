@@ -71,16 +71,16 @@ public class CharacterMovementController : MonoBehaviour
     public TileBase CheckTile()
     {
         TileBase tile = null;
-        Collider[] tileColliders = Physics.OverlapSphere(transform.position, checkRadius);
+		Collider[] tileColliders = Physics.OverlapSphere(transform.position, checkRadius);
 
-        Debug.Log(transform.position);
+		if (tileColliders.Length != 0)
+		{
+			tile = tileColliders[0].GetComponent<TileBase>();
+		}
+		else { Debug.Log("No tiles within range"); }
 
-        if (tileColliders.Length != 0)
-        {
-            tile = tileColliders[0].GetComponent<TileBase>();
-        }
 
-        return tile;
+		return tile;
     }
 
     public void UpdateMovement()
@@ -105,7 +105,8 @@ public class CharacterMovementController : MonoBehaviour
     public void OccupyTile()
     {
         currentTile = CheckTile();
-        currentTile.occupant = gameObject;
+		if(currentTile!=null)
+			currentTile.occupant = gameObject;
     }
 
     void CalculateHeading(Vector3 targetPos)

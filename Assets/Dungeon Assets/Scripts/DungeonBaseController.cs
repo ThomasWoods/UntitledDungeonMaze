@@ -41,8 +41,8 @@ public class DungeonBaseController : MonoBehaviour
         m_DungeonGenerator.floorDepth = DungeonManager.instance.dungeonCard.StartingDepth;
 
         m_DungeonGenerator.CacheDungeonCard();
-        BuildDungeonFloor();
-    }
+		StartCoroutine(BuildDungeonFloor());
+	}
 
     void PlacePlayer()
     {
@@ -86,8 +86,8 @@ public class DungeonBaseController : MonoBehaviour
             {
                 m_DungeonGenerator.floorDepth++;
             }
-
-            BuildDungeonFloor();
+			
+			StartCoroutine(BuildDungeonFloor());
         }
         else
         {
@@ -101,11 +101,12 @@ public class DungeonBaseController : MonoBehaviour
         }
     }
 
-    void BuildDungeonFloor()
+    IEnumerator BuildDungeonFloor()
     {
         m_DungeonGenerator.ResetFloorGenerator();
         m_DungeonGenerator.GenerateDungeon();
-        PlacePlayer();
+		yield return 0;
+		PlacePlayer();
 
         DungeonManager.instance.SwitchDungeonGameState(DungeonManager.dungeonGameState.dungeonExploring);
     }

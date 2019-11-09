@@ -32,8 +32,9 @@ public class CharacterBaseController : MonoBehaviour
                 break;
 
             case characterStatus.idle:
-                // When it's the character's turn, m_DungeonBaseControl switches the character's status to selectingMovement.
-                break;
+				// When it's the character's turn, m_DungeonBaseControl switches the character's status to selectingMovement.
+				SwitchCharacterStatus(characterStatus.selectingMovement);
+				break;
 
             case characterStatus.selectingMovement:
 
