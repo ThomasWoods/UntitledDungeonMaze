@@ -8,7 +8,7 @@ public class NoisyButton : Button
 {
 	public override void OnPointerEnter(PointerEventData eventData)
 	{
-		Game.instance.PlaySound();
+		if(IsInteractable())Game.instance.PlaySound();
 		base.OnPointerEnter(eventData);
 	}
 	public override void OnSelect(BaseEventData eventData)
