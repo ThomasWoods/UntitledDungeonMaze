@@ -19,6 +19,13 @@ public class Game : MonoBehaviour
 		get { float volume = 0.5f; audioMixer.GetFloat("SFXVolume", out volume); return volume; }
 		set { audioMixer.SetFloat("SFXVolume", value); } }
 
+	public void PlaySound()
+	{
+		AudioClip sound = Resources.Load<AudioClip>("GDC Audio/button_002");
+		if (sound != null) SFXPlayer.PlayOneShot(sound);
+	}
+
+
 	public static Game _instance;
 	public static Game instance
 	{
@@ -49,8 +56,10 @@ public class Game : MonoBehaviour
 
 		GameObject newObj = Instantiate(audioPlayerPrefab);
 		BGMPlayer = newObj.GetComponent<AudioSource>();
+		BGMPlayer.outputAudioMixerGroup = audioMixer.FindMatchingGroups("BGM")[0];
 		newObj = Instantiate(audioPlayerPrefab);
 		SFXPlayer = newObj.GetComponent<AudioSource>();
+		SFXPlayer.outputAudioMixerGroup = audioMixer.FindMatchingGroups("SFX")[0];
 
 		DontDestroyOnLoad(gameObject);
 
