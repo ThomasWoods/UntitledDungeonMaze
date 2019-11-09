@@ -136,7 +136,6 @@ GameObject:
   m_Component:
   - component: {fileID: 696577754}
   - component: {fileID: 696577756}
-  - component: {fileID: 696577755}
   m_Layer: 0
   m_Name: CameraToRenderTexture
   m_TagString: MainCamera
@@ -158,14 +157,6 @@ Transform:
   m_Father: {fileID: 323320747}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &696577755
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 696577753}
-  m_Enabled: 1
 --- !u!20 &696577756
 Camera:
   m_ObjectHideFlags: 0

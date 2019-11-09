@@ -10,21 +10,8 @@ public class Game : MonoBehaviour
 	[HideInInspector]
 	public AudioSource BGMPlayer, SFXPlayer;
 	public float MasterVolume {
-		get {
-			float volume = -100;
-			audioMixer.GetFloat("MasterVolume",out volume);
-			if (volume > -80)
-			{
-				Debug.Log("MasterVolume retrieved: "+volume);
-				return volume;
-			}
-			else
-			{
-				Debug.Log("No MasterVolume in audioiMixer?" + audioMixer);
-				return 0;
-			}
-		}
-		set { Debug.Log("Setting Master Volume to " + value+", "+audioMixer); audioMixer.SetFloat("MasterVolume", value); } }
+		get { float volume = 0.0f; audioMixer.GetFloat("MasterVolume",out volume); return volume; }
+		set { audioMixer.SetFloat("MasterVolume", value); } }
 	public float BGMVolume {
 		get { float volume = 0.0f; audioMixer.GetFloat("BGMVolume", out volume); return volume; }
 		set { audioMixer.SetFloat("BGMVolume", value); } }
