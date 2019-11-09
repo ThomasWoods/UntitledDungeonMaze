@@ -2,9 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Events;
 
 public class Game : MonoBehaviour
 {
+	//singleton
+	public static Game _instance;
+	public static Game instance
+	{
+		get {
+			if (_instance) return _instance;
+			else
+			{
+				Game findGame = FindObjectOfType<Game>();
+				if (findGame != null) return findGame;
+				else
+				{
+					GameObject newGameObj = new GameObject("Game");
+					findGame = newGameObj.AddComponent<Game>();
+					return findGame;
+				}
+			}
+		}
+		set {
+			if (_instance != null) Destroy(_instance.gameObject);
+			_instance = value;
+		}
+	}
+
+	//Audio
 	public AudioMixer audioMixer;
 	public GameObject audioPlayerPrefab;
 	[HideInInspector]
@@ -24,31 +50,21 @@ public class Game : MonoBehaviour
 		AudioClip sound = Resources.Load<AudioClip>("GDC Audio/button_002");
 		if (sound != null) SFXPlayer.PlayOneShot(sound);
 	}
-
 	public bool SettingsLoaded = false;
 
 
-	public static Game _instance;
-	public static Game instance
+	//Pause
+	public bool _isPaused = false;
+	public bool isPaused
 	{
-		get {
-			if (_instance) return _instance;
-			else {
-				Game findGame = FindObjectOfType<Game>();
-				if (findGame != null) return findGame;
-				else {
-					GameObject newGameObj = new GameObject("Game");
-					findGame = newGameObj.AddComponent<Game>();
-					return findGame;
-				}
-			}
-		}
-		set {
-			if (_instance != null) Destroy(_instance.gameObject);
-			_instance = value;
-		}
+		get { return _isPaused; }
+		set { if (_isPaused == value) return; if (!_isPaused) OnPause.Invoke(); else OnUnpause.Invoke(); _isPaused = value; }
 	}
-	
+	public UnityEvent OnPause = new UnityEvent();
+	public UnityEvent OnUnpause = new UnityEvent();
+
+
+
     void Awake()
     {
 
@@ -95,5 +111,10 @@ public class Game : MonoBehaviour
 	void OnApplicationQuit()
 	{
 		SaveSettings();
+	}
+
+	public void Pause()
+	{
+		isPaused = !isPaused;
 	}
 }

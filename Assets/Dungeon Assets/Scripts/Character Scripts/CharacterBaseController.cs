@@ -24,6 +24,7 @@ public class CharacterBaseController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (Game.instance.isPaused) return;
         CharacterStateMachine();
     }
 
