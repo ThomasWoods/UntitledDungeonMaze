@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51db72e37f5c3bb4c90f8a58f258aa92, type: 3}
-  m_Name: testDungeonCard
+  m_Name: ForestDungeonCard
   m_EditorClassIdentifier: 
   startingWidth: 4
   StartingDepth: 3
@@ -22,7 +22,7 @@ MonoBehaviour:
   openTiles:
   - {fileID: 2292143078135154294, guid: 290ece5f95975944eba4cf02dfe14064, type: 3}
   pillarTiles:
-  - {fileID: 5257894820172171365, guid: 8e363f3efa15ed6419c3f1074e3194e2, type: 3}
+  - {fileID: 4693886861996653671, guid: db057c7ba1a2c62469df3042be10927c, type: 3}
   lineTiles:
   - {fileID: 4693886861996653671, guid: d06bbe199ec22c843adb9794fc7d39b1, type: 3}
   cornerTiles:
