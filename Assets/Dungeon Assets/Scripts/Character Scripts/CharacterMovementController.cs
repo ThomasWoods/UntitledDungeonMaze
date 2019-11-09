@@ -34,12 +34,14 @@ public class CharacterMovementController : MonoBehaviour
                 // The tile in front of the character is walkable and empty
                 currentTile.occupant = null;
                 targetTilePos = tile.transform.position;
-                m_BaseController.SwitchCharacterStatus(CharacterBaseController.characterStatus.moving);
+                m_BaseController.SwitchCharacterStatus(characterStatus.moving);
             }
         }
         else
         {
-            Debug.LogWarning(tile.gameObject.name + " is in the Tiles layer but doesn't have a BaseTile component!");
+			if (tile != null)
+				Debug.LogWarning(tile.gameObject.name + " is in the Tiles layer but doesn't have a BaseTile component!");
+			else Debug.LogWarning("Tile does not exist.");
         }
     }
 
@@ -49,7 +51,7 @@ public class CharacterMovementController : MonoBehaviour
         targetRotaion = transform.rotation;
         targetRotaion *= Quaternion.Euler(new Vector3(0, 90f * turnRotation, 0));
 
-        m_BaseController.SwitchCharacterStatus(CharacterBaseController.characterStatus.turning);
+        m_BaseController.SwitchCharacterStatus(characterStatus.turning);
     }
 
     public TileBase CheckTileInfront()
@@ -98,7 +100,7 @@ public class CharacterMovementController : MonoBehaviour
             // The target tile has been reached
             transform.position = targetTilePos;
             OccupyTile();
-            m_BaseController.SwitchCharacterStatus(CharacterBaseController.characterStatus.hasMoved);
+            m_BaseController.SwitchCharacterStatus(characterStatus.hasMoved);
         }
     }
 
@@ -133,7 +135,7 @@ public class CharacterMovementController : MonoBehaviour
         {
             transform.rotation = targetRotaion;
             degreesRotated = 0;
-            m_BaseController.SwitchCharacterStatus(CharacterBaseController.characterStatus.selectingMovement);
+            m_BaseController.SwitchCharacterStatus(characterStatus.selectingMovement);
         }
     }
 }

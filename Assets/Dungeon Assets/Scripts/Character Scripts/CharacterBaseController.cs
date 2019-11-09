@@ -1,20 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
+public enum characterStatus { setup, idle, selectingMovement, moving, turning, hasMoved, defeated }
 public class CharacterBaseController : MonoBehaviour
 {
     public CharacterMovementController m_MovementController;
     public CharacterInputBase m_Input;
 
-    public enum characterStatus { setup, idle, selectingMovement, moving, turning, hasMoved, defeated }
     public characterStatus currentCharacterStatus;
+
+	public CharacterStatusEvent OnStatusChange = new CharacterStatusEvent();
+	public UnityEvent OnDefeated = new UnityEvent();
 
     private void Awake()
     {
         m_MovementController = GetComponent<CharacterMovementController>();
         m_Input = GetComponent<CharacterInputBase>();
-    }
+
+	}
 
     // Update is called once per frame
     void Update()
@@ -55,6 +60,7 @@ public class CharacterBaseController : MonoBehaviour
                 break;
 
             case characterStatus.defeated:
+				OnDefeated.Invoke();
                 break;
         }
     }
@@ -62,6 +68,7 @@ public class CharacterBaseController : MonoBehaviour
     public void SwitchCharacterStatus(characterStatus newStatus)
     {
         currentCharacterStatus = newStatus;
+		OnStatusChange.Invoke(currentCharacterStatus);
     }
 
     void CheckCharacterMovementInput()

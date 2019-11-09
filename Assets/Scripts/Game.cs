@@ -57,13 +57,24 @@ public class Game : MonoBehaviour
 		LoadSettings();
 
 		instance = this;
-
 	}
 
 	void LoadSettings()
 	{
 		if (PlayerPrefs.HasKey("MasterVolume")) MasterVolume = PlayerPrefs.GetFloat("MasterVolume");
-		if (PlayerPrefs.HasKey("BGMVolume")) MasterVolume = PlayerPrefs.GetFloat("BGMVolume");
-		if (PlayerPrefs.HasKey("SFXVolume")) MasterVolume = PlayerPrefs.GetFloat("SFXVolume");
+		if (PlayerPrefs.HasKey("BGMVolume")) BGMVolume = PlayerPrefs.GetFloat("BGMVolume");
+		if (PlayerPrefs.HasKey("SFXVolume")) SFXVolume = PlayerPrefs.GetFloat("SFXVolume");
+	}
+
+	public void SaveSettings()
+	{
+		PlayerPrefs.SetFloat("MasterVolume", MasterVolume);
+		PlayerPrefs.SetFloat("BGMVolume", BGMVolume);
+		PlayerPrefs.SetFloat("SFXVolume", SFXVolume);
+	}
+
+	void OnApplicationQuit()
+	{
+		SaveSettings();
 	}
 }
