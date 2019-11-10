@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class ActionKeyMap
 {
+	public static List<CharacterAction> PerPressActions = new List<CharacterAction> { CharacterAction.Wait };
 	[Tooltip("Array Index to Action\n[0]: NoAction, [1]:Forward, [2]:Backstep, [3]:MoveLeft, [4]:MoveRight, [5]:TurnLeft, [6]:TurnRight, [7]:Wait, [8]:Interact")]
 	public KeyCode[] KeyMap = new KeyCode[0];
 }
@@ -21,7 +22,8 @@ public class PlayerKeyboardController : CharacterInputBase
 			for (int i = 0; i < System.Enum.GetNames(typeof(CharacterAction)).Length; i++)
 			{
 				if (Map.KeyMap.Length <= i) continue;
-				if (Input.GetKey(Map.KeyMap[i]))
+				if ((ActionKeyMap.PerPressActions.Contains((CharacterAction)i) && Input.GetKeyDown(Map.KeyMap[i])) || 
+					(!ActionKeyMap.PerPressActions.Contains((CharacterAction)i) && Input.GetKey(Map.KeyMap[i])))
 					nextAction = (CharacterAction)i;
 			}
 		}
