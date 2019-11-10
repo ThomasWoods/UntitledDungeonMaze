@@ -12,6 +12,7 @@ public class TurnWaitIndicator : MonoBehaviour
 
 	void OnEnable()
 	{
+		waitTimer = 0.1f;
 		spun = false;
 		rotation = 0;
 		transform.eulerAngles = new Vector3(0, 0, rotation);
@@ -39,7 +40,8 @@ public class TurnWaitIndicator : MonoBehaviour
 
 	public void UpdateIndicator(CharacterStatus status)
 	{
-		if (status == CharacterStatus.selectingMovement) gameObject.SetActive(false);
+		if (status == CharacterStatus.selectingMovement || status == CharacterStatus.moving || status == CharacterStatus.turning)
+			gameObject.SetActive(false);
 		else gameObject.SetActive(true);
 	}
 }
