@@ -49,8 +49,12 @@ public class TurnManager : MonoBehaviour
         switch (currentTeamTurn)
         {
             case TeamTurn.player:
-
-                if(DungeonBaseController.instance.m_PlayerController.currentCharacterStatus == CharacterStatus.idle)
+				bool ready = true;
+				foreach (CharacterBaseController enemy in DungeonBaseController.instance.enemies)
+				{
+					if (enemy.currentCharacterStatus != CharacterStatus.idle) ready = false;
+				}
+				if (ready && DungeonBaseController.instance.m_PlayerController.currentCharacterStatus == CharacterStatus.idle)
                 {
                     DungeonBaseController.instance.m_PlayerController.Activate();
                     SwitchCurrentState(TurnManagerState.idle);
@@ -87,7 +91,7 @@ public class TurnManager : MonoBehaviour
         {
             case TeamTurn.player:
                 SwitchTeamTurn(TeamTurn.enemies);
-                DequeueCharacterToAct();
+				SwitchCurrentState(TurnManagerState.dequeueing);
                 break;
 
             case TeamTurn.enemies:
