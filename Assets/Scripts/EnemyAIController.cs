@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class EnemyAIController : CharacterInputBase
 {
-	CharacterAction[] AI_Actions = new CharacterAction[] {
+	public CharacterAction[] AI_Actions = new CharacterAction[] {
 		CharacterAction.MoveForward,
 		CharacterAction.Backstep,
 		CharacterAction.MoveLeft,
 		CharacterAction.MoveRight,
 		//CharacterAction.TurnLeft,
 		//CharacterAction.TurnRight,
-		//CharacterAction.Wait,
+		CharacterAction.Wait,
 	};
 	public override CharacterAction CheckMovementInput()
 	{
