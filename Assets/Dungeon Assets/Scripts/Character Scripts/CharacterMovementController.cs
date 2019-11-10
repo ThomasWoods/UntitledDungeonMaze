@@ -19,6 +19,8 @@ public class CharacterMovementController : MonoBehaviour
     int turnRotation;
     float degreesRotated = 0;
 
+	public bool AlwaysFaceForward = false;
+
     private void Awake()
     {
         m_BaseController = GetComponent<CharacterBaseController>();
@@ -71,6 +73,30 @@ public class CharacterMovementController : MonoBehaviour
 		return tile;
     }
 
+	public TileBase FindNearestOpenTile(Vector3 SearchFrom, bool includeSpecialTiles = false)
+	{
+		TileBase tile = null;
+		List<TileBase> checkedTiles = new List<TileBase>();
+		int growingRadius = 1;
+		do {
+			Collider[] tileColliders = Physics.OverlapSphere(SearchFrom, growingRadius++);
+			for(int i=0;i<tileColliders.Length;i++)
+			{
+				TileBase check = tileColliders[i].GetComponent<TileBase>();
+				if (check != null && check.walkable && check.occupant == null && 
+					(includeSpecialTiles || (check != DungeonBaseController.instance.entranceTile && check != DungeonBaseController.instance.exitTile)) )
+				{
+					tile = check;
+					growingRadius = 20;
+					break;
+				}
+			}
+		}
+		while (growingRadius<20);
+
+		return tile;
+	}
+
     public void UpdateMovement()
     {
         if (Vector3.Distance(transform.position, targetTilePos) >= 0.05)
@@ -78,7 +104,7 @@ public class CharacterMovementController : MonoBehaviour
             // The target tile has not yet been reached
             CalculateHeading(targetTilePos);
             SetHorizontalVelocity();
-            //transform.forward = heading;
+            if(AlwaysFaceForward) transform.forward = heading;
             transform.position += velocity * Time.deltaTime;
         }
         else

@@ -63,8 +63,6 @@ public class Game : MonoBehaviour
 	public UnityEvent OnPause = new UnityEvent();
 	public UnityEvent OnUnpause = new UnityEvent();
 
-
-
     void Awake()
     {
 		if (_instance != null)

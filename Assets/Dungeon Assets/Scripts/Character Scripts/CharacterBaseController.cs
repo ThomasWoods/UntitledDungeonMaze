@@ -10,17 +10,37 @@ public class CharacterBaseController : MonoBehaviour
     public CharacterMovementController m_MovementController;
     public CharacterInputBase m_Input;
 
-    public CharacterStatus currentCharacterStatus;
+    public CharacterStatus currentCharacterStatus=CharacterStatus.setup;
 	public CharacterAction LastAction;
 
 	public CharacterStatusEvent OnStatusChange = new CharacterStatusEvent();
 	public UnityEvent OnDefeated = new UnityEvent();
+
+	public bool UseStartPosition = false;
+	public bool RandomStartPosition = false;
+	public Vector3 StartPosition;
 
     private void Awake()
     {
         m_MovementController = GetComponent<CharacterMovementController>();
         m_Input = GetComponent<CharacterInputBase>();
 
+	}
+	IEnumerator Start()
+	{
+		DungeonBaseController.instance.OnNewTurn.AddListener(OnNewTurn);
+		DungeonBaseController.instance.OnEndTurn.AddListener(OnEndTurn);
+		if(!DungeonBaseController.instance.allCharacters.Contains(this))
+			DungeonBaseController.instance.allCharacters.Add(this);
+
+		if(UseStartPosition)
+		{
+			yield return 0;
+			TileBase newTile = m_MovementController.FindNearestOpenTile(RandomStartPosition ? new Vector3(0,0,0) : StartPosition);
+			transform.position = newTile.transform.position;
+			m_MovementController.OccupyTile();
+		}
+		SwitchCharacterStatus(CharacterStatus.idle);
 	}
 
     // Update is called once per frame
@@ -36,18 +56,15 @@ public class CharacterBaseController : MonoBehaviour
         {
             case CharacterStatus.setup:
                 // When the character has been initialized, switch.
-                SwitchCharacterStatus(CharacterStatus.idle);
                 break;
 
             case CharacterStatus.idle:
 				// When it's the character's turn, m_DungeonBaseControl switches the character's status to selectingMovement.
-				SwitchCharacterStatus(CharacterStatus.selectingMovement);
 				break;
 
             case CharacterStatus.selectingMovement:
-
                 CheckCharacterMovementInput();
-                break;
+				break;
 
             case CharacterStatus.moving:
                 // When the character has moved, switch
@@ -58,7 +75,6 @@ public class CharacterBaseController : MonoBehaviour
                 break;
 
             case CharacterStatus.hasMoved:
-                DungeonBaseController.instance.ClearActiveObject();
                 SwitchCharacterStatus(CharacterStatus.idle);
                 break;
 
@@ -85,7 +101,7 @@ public class CharacterBaseController : MonoBehaviour
 				m_MovementController.Move(transform.forward);
 				break;
 			case CharacterAction.Backstep:
-				m_MovementController.Move(transform.forward*-1);
+				m_MovementController.Move(transform.forward * -1);
 				break;
 			case CharacterAction.MoveLeft:
 				m_MovementController.Move(transform.right * -1);
@@ -103,10 +119,15 @@ public class CharacterBaseController : MonoBehaviour
 				SwitchCharacterStatus(CharacterStatus.hasMoved);
 				break;
 		}
+		if (nextAction != CharacterAction.NoAction)
+			LastAction = nextAction;
 	}
 
     public void Activate()
     {
         SwitchCharacterStatus(CharacterStatus.selectingMovement);
     }
+	virtual protected void OnNewTurn() { }
+	virtual protected void OnEndTurn() { }
+
 }

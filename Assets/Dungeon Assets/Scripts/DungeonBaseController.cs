@@ -1,27 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DungeonBaseController : MonoBehaviour
 {
     public static DungeonBaseController instance;
 
     public GameObject m_Player;
+    public CharacterBaseController m_PlayerController;
+    public List<CharacterBaseController> allCharacters;
     public GameObject entranceTile;
     public GameObject exitTile;
     
     public DungeonGenerator m_DungeonGenerator;
     public FloorSweeper m_FloorSweeper;
 
-    public enum dungeonTurnState { setup, sot, player, neutral, enemy, eot, battle }
-    public dungeonTurnState currentDungeonTurnState;
+    public enum dungeonTurnState { SettingUpDungeon, TurnStart, ProcessTurns, TurnEnd }
+    public dungeonTurnState currentDungeonTurnState= dungeonTurnState.SettingUpDungeon;
     public dungeonTurnState lastTurnState;
+	
+	public UnityEvent OnNewTurn = new UnityEvent();
+	public UnityEvent OnEndTurn = new UnityEvent();
 
     public int floorNumber;
     public int dungeonTurn;
     
-    public List<GameObject> hasNotActed = new List<GameObject>();
-    public GameObject activeCharacter;
+    public CharacterBaseController activeCharacter;
+	Stack<CharacterBaseController> ActionQueue = new Stack<CharacterBaseController>(); 
 
     int growthOdds;
 
@@ -32,6 +38,7 @@ public class DungeonBaseController : MonoBehaviour
         m_DungeonGenerator = GetComponentInChildren<DungeonGenerator>();
         m_FloorSweeper = GetComponentInChildren<FloorSweeper>();
         m_Player = GameObject.FindWithTag("Player");
+		m_PlayerController = m_Player.GetComponent<CharacterBaseController>();
     }
 
     private void Start()
@@ -44,27 +51,56 @@ public class DungeonBaseController : MonoBehaviour
 		StartCoroutine(BuildDungeonFloor());
 	}
 
+	void Update()
+	{
+		DungeonStateLogic();
+	}
+
+	void DungeonStateLogic()
+	{
+		switch (currentDungeonTurnState)
+		{
+			case dungeonTurnState.SettingUpDungeon: break;
+			case dungeonTurnState.TurnStart:
+				OnNewTurn.Invoke();
+				ActionQueue = new Stack<CharacterBaseController>(allCharacters);
+				SwitchDungeonTurnState(dungeonTurnState.ProcessTurns);
+				break;
+			case dungeonTurnState.ProcessTurns:
+				if (activeCharacter == null || activeCharacter.currentCharacterStatus == CharacterStatus.idle)
+					ActivateNextCharacter();
+				break;
+			case dungeonTurnState.TurnEnd:
+				OnEndTurn.Invoke();
+				SwitchDungeonTurnState(dungeonTurnState.TurnStart);
+				break;
+		}
+	}
+
+	void ActivateNextCharacter()
+	{
+		if (ActionQueue.Count > 0)
+		{
+			activeCharacter = ActionQueue.Pop();
+			activeCharacter.Activate();
+		}
+		else
+		{
+			activeCharacter = null;
+			SwitchDungeonTurnState(dungeonTurnState.TurnEnd);
+		}
+	}
+
     void PlacePlayer()
     {
-        Vector3 posOffset = new Vector3(0, 0, 1);
         m_Player.transform.position = entranceTile.transform.position;
-        //m_Player.transform.position = entranceTile.transform.position + posOffset;
-
-        
-        Debug.Log("Check1");
         m_Player.GetComponent<CharacterMovementController>().OccupyTile();
-        Debug.Log("Check2");
-        
     }
     
     public void SwitchDungeonTurnState(dungeonTurnState newState)
     {
+		lastTurnState = currentDungeonTurnState;
         currentDungeonTurnState = newState;
-    }
-
-    public void ClearActiveObject()
-    {
-        activeCharacter = null;
     }
 
     public void BuildNewDungeonFloor()
@@ -109,5 +145,7 @@ public class DungeonBaseController : MonoBehaviour
 		PlacePlayer();
 
         DungeonManager.instance.SwitchDungeonGameState(DungeonManager.dungeonGameState.dungeonExploring);
+		SwitchDungeonTurnState(dungeonTurnState.TurnStart);
     }
+	
 }
