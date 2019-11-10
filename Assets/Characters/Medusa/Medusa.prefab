@@ -56,6 +56,9 @@ MonoBehaviour:
   OnDefeated:
     m_PersistentCalls:
       m_Calls: []
+  UseStartPosition: 1
+  RandomStartPosition: 1
+  StartPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1141076890783799104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,6 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26716e06bbe6fae4ebf8b97e024be5f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AI_Actions: 0100000002000000030000000400000007000000
 --- !u!114 &2694283053572858513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,10 +84,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc307767dd32c1943a48e3739dcd98bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0
-  rotationSpeed: 0
+  movementSpeed: 2
+  rotationSpeed: 120
   currentTile: {fileID: 0}
   m_BaseController: {fileID: 0}
+  AlwaysFaceForward: 1
 --- !u!1 &7113220941968027284
 GameObject:
   m_ObjectHideFlags: 0
