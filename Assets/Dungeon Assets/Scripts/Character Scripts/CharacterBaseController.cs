@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum characterStatus { setup, idle, selectingMovement, moving, turning, hasMoved, defeated }
+public enum characterStatus { setup, idle, selectingMovement, moving, turning, hasMoved, defeated}
 public class CharacterBaseController : MonoBehaviour
 {
     public CharacterMovementController m_MovementController;

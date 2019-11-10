@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8953574786493128388}
   - component: {fileID: 8953574786493128391}
   - component: {fileID: 8953574786493128390}
+  - component: {fileID: 6405157523422115506}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -49,6 +50,12 @@ MonoBehaviour:
   m_MovementController: {fileID: 0}
   m_Input: {fileID: 0}
   currentCharacterStatus: 0
+  OnStatusChange:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDefeated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8953574786493128391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +93,19 @@ MonoBehaviour:
   secondaryLeft: 276
   secondaryRight: 275
   secondaryInteract: 13
+--- !u!114 &6405157523422115506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8953574786493128384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eee4df61852e6940be8c804dc99a0bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CharacterController: {fileID: 0}
 --- !u!1 &8953574787460770235
 GameObject:
   m_ObjectHideFlags: 0
