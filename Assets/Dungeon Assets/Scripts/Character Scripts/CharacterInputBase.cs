@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CharacterInputBase : MonoBehaviour
 {
-    public virtual int[] CheckMovementInput()
+    public virtual CharacterAction CheckMovementInput()
     {
-        int[] backupDir = new int[2];
+		CharacterAction backupDir = CharacterAction.Wait;
         Debug.LogWarning(gameObject.name + " doesn't override the base movement input method!");
         return backupDir;
     }

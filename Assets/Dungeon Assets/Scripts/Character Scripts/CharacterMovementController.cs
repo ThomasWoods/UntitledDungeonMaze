@@ -24,9 +24,9 @@ public class CharacterMovementController : MonoBehaviour
         m_BaseController = GetComponent<CharacterBaseController>();
     }
 
-    public void MoveForward()
+    public void Move(Vector3 relativePos = new Vector3())
     {
-        TileBase tile = CheckTileInfront();
+        TileBase tile = CheckTile(relativePos);
         if (tile != null)
         {
             if (tile.walkable && tile.occupant == null)
@@ -34,7 +34,7 @@ public class CharacterMovementController : MonoBehaviour
                 // The tile in front of the character is walkable and empty
                 currentTile.occupant = null;
                 targetTilePos = tile.transform.position;
-                m_BaseController.SwitchCharacterStatus(characterStatus.moving);
+                m_BaseController.SwitchCharacterStatus(CharacterStatus.moving);
             }
         }
         else
@@ -44,6 +44,7 @@ public class CharacterMovementController : MonoBehaviour
 			else Debug.LogWarning("Tile does not exist.");
         }
     }
+	
 
     public void Turn(int dir)
     {
@@ -51,29 +52,14 @@ public class CharacterMovementController : MonoBehaviour
         targetRotaion = transform.rotation;
         targetRotaion *= Quaternion.Euler(new Vector3(0, 90f * turnRotation, 0));
 
-        m_BaseController.SwitchCharacterStatus(characterStatus.turning);
+        m_BaseController.SwitchCharacterStatus(CharacterStatus.turning);
     }
+	
 
-    public TileBase CheckTileInfront()
+    public TileBase CheckTile(Vector3 relativePos = new Vector3())
     {
         TileBase tile = null;
-        Collider[] tileColliders = Physics.OverlapSphere(transform.position + transform.forward, checkRadius);
-
-        if (tileColliders.Length != 0)
-        {
-            tile = tileColliders[0].GetComponent<TileBase>();
-        } else
-        {
-            Debug.Log("Found no tile");
-        }
-
-        return tile;
-    }
-
-    public TileBase CheckTile()
-    {
-        TileBase tile = null;
-		Collider[] tileColliders = Physics.OverlapSphere(transform.position, checkRadius);
+		Collider[] tileColliders = Physics.OverlapSphere(transform.position+relativePos, checkRadius);
 
 		if (tileColliders.Length != 0)
 		{
@@ -92,7 +78,7 @@ public class CharacterMovementController : MonoBehaviour
             // The target tile has not yet been reached
             CalculateHeading(targetTilePos);
             SetHorizontalVelocity();
-            transform.forward = heading;
+            //transform.forward = heading;
             transform.position += velocity * Time.deltaTime;
         }
         else
@@ -100,7 +86,7 @@ public class CharacterMovementController : MonoBehaviour
             // The target tile has been reached
             transform.position = targetTilePos;
             OccupyTile();
-            m_BaseController.SwitchCharacterStatus(characterStatus.hasMoved);
+            m_BaseController.SwitchCharacterStatus(CharacterStatus.hasMoved);
         }
     }
 
@@ -135,7 +121,7 @@ public class CharacterMovementController : MonoBehaviour
         {
             transform.rotation = targetRotaion;
             degreesRotated = 0;
-            m_BaseController.SwitchCharacterStatus(characterStatus.selectingMovement);
+            m_BaseController.SwitchCharacterStatus(CharacterStatus.selectingMovement);
         }
     }
 }

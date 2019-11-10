@@ -2,56 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class ActionKeyMap
+{
+	[Tooltip("Array Index to Action\n[0]: NoAction, [1]:Forward, [2]:Backstep, [3]:MoveLeft, [4]:MoveRight, [5]:TurnLeft, [6]:TurnRight, [7]:Wait, [8]:Interact")]
+	public KeyCode[] KeyMap = new KeyCode[0];
+}
 public class PlayerKeyboardController : CharacterInputBase
 {
-    public KeyCode primaryForward = KeyCode.W;
-    public KeyCode primaryLeft = KeyCode.A;
-    public KeyCode primaryRight = KeyCode.D;
-    public KeyCode primarySpace = KeyCode.Space;
-    public KeyCode primaryInteract = KeyCode.E;
+	public List<ActionKeyMap> ActionKeys = new List<ActionKeyMap>();
 
-    public KeyCode secondaryForward = KeyCode.UpArrow;
-    public KeyCode secondaryLeft = KeyCode.LeftArrow;
-    public KeyCode secondaryRight = KeyCode.RightArrow;
-    public KeyCode secondaryInteract = KeyCode.Return;
-
-    public override int[] CheckMovementInput()
+    public override CharacterAction CheckMovementInput()
     {
-        int[] inputDir = new int[2];
+		CharacterAction nextAction = CharacterAction.NoAction;
 
-        if (Input.GetKeyDown(primarySpace))
-        {
-            inputDir[0] = 2;
-        }
-        else if (Input.GetKey(primaryForward) || Input.GetKey(secondaryForward))
-        {
-            inputDir[0] = 1;
-        }
-        else
-        {
-            if (Input.GetKey(primaryLeft) || Input.GetKey(secondaryLeft))
-            {
-                inputDir[1] -= 1;
-            }
-
-            if (Input.GetKey(primaryRight) || Input.GetKey(secondaryRight))
-            {
-                inputDir[1] += 1;
-            }
-        }
-
-        return inputDir;
+		foreach (ActionKeyMap Map in ActionKeys)
+		{
+			for (int i = 0; i < System.Enum.GetNames(typeof(CharacterAction)).Length; i++)
+			{
+				if (Map.KeyMap.Length <= i) continue;
+				if (Input.GetKey(Map.KeyMap[i]))
+					nextAction = (CharacterAction)i;
+			}
+		}
+        return nextAction;
     }
 
     public override bool CheckInteractionInput()
-    {
-        if (Input.GetKeyDown(primaryInteract) || Input.GetKeyDown(secondaryInteract))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+	{
+		foreach (ActionKeyMap Map in ActionKeys)
+		{
+			int i = (int)CharacterAction.Interact;
+			if (Map.KeyMap.Length <= i) continue;
+			if (Input.GetKey(Map.KeyMap[i])) return true;
+		}
+		return false;
+	}
 }

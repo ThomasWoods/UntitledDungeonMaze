@@ -67,6 +67,13 @@ public class Game : MonoBehaviour
 
     void Awake()
     {
+		if (_instance != null)
+		{
+			Destroy(gameObject);
+			return;
+		}
+		_instance = this;
+		DontDestroyOnLoad(gameObject);
 
 		if (audioMixer == null) audioMixer = Resources.Load("GameAudioMixer") as AudioMixer;
 		if (audioPlayerPrefab == null) audioPlayerPrefab = Resources.Load("Prefabs/AudioPlayer") as GameObject;
@@ -78,10 +85,6 @@ public class Game : MonoBehaviour
 		newObj = Instantiate(audioPlayerPrefab,transform);
 		SFXPlayer = newObj.GetComponent<AudioSource>();
 		SFXPlayer.outputAudioMixerGroup = audioMixer.FindMatchingGroups("SFX")[0];
-
-		DontDestroyOnLoad(gameObject);
-
-		instance = this;
 	}
 
 	void Start()
