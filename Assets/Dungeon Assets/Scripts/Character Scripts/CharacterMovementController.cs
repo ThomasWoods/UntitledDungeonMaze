@@ -35,8 +35,9 @@ public class CharacterMovementController : MonoBehaviour
             {
                 // The tile in front of the character is walkable and empty
                 currentTile.occupant = null;
+                OccupyNextTile(tile);
                 targetTilePos = tile.transform.position;
-                m_BaseController.SwitchCharacterStatus(CharacterStatus.moving);
+                m_BaseController.SetWalking();
             }
         }
         else
@@ -111,8 +112,11 @@ public class CharacterMovementController : MonoBehaviour
         {
             // The target tile has been reached
             transform.position = targetTilePos;
-            OccupyTile();
-            m_BaseController.SwitchCharacterStatus(CharacterStatus.hasMoved);
+            //OccupyTile();
+
+            currentTile.TileSteppedOn();
+
+            m_BaseController.DoneWalking();
         }
     }
 
@@ -121,6 +125,12 @@ public class CharacterMovementController : MonoBehaviour
         currentTile = CheckTile();
 		if(currentTile!=null)
 			currentTile.occupant = gameObject;
+    }
+
+    void OccupyNextTile(TileBase nextTile)
+    {
+        currentTile = nextTile;
+        currentTile.occupant = gameObject;
     }
 
     void CalculateHeading(Vector3 targetPos)
@@ -147,7 +157,11 @@ public class CharacterMovementController : MonoBehaviour
         {
             transform.rotation = targetRotaion;
             degreesRotated = 0;
-            m_BaseController.SwitchCharacterStatus(CharacterStatus.selectingMovement);
+
+            if(gameObject.tag == "Player")
+                m_BaseController.SwitchCharacterStatus(CharacterStatus.selectingMovement);
+            else
+                m_BaseController.SwitchCharacterStatus(CharacterStatus.idle);
         }
     }
 }

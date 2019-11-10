@@ -9,6 +9,7 @@ public class CharacterBaseController : MonoBehaviour
 {
     public CharacterMovementController m_MovementController;
     public CharacterInputBase m_Input;
+    public GraphicsController m_GraphicsController;
 
     public CharacterStatus currentCharacterStatus=CharacterStatus.setup;
 	public CharacterAction LastAction;
@@ -24,14 +25,29 @@ public class CharacterBaseController : MonoBehaviour
     {
         m_MovementController = GetComponent<CharacterMovementController>();
         m_Input = GetComponent<CharacterInputBase>();
+        m_GraphicsController = GetComponent<GraphicsController>();
 
 	}
+
 	IEnumerator Start()
 	{
 		DungeonBaseController.instance.OnNewTurn.AddListener(OnNewTurn);
 		DungeonBaseController.instance.OnEndTurn.AddListener(OnEndTurn);
+        
 		if(!DungeonBaseController.instance.allCharacters.Contains(this))
 			DungeonBaseController.instance.allCharacters.Add(this);
+
+        switch (gameObject.tag)
+        {
+            case "Player":
+                DungeonBaseController.instance.m_Player = gameObject;
+                DungeonBaseController.instance.m_PlayerController = this;
+                break;
+
+            case "Enemy":
+                DungeonBaseController.instance.enemies.Add(this);
+                break;
+        }
 
 		if(UseStartPosition)
 		{
@@ -75,7 +91,7 @@ public class CharacterBaseController : MonoBehaviour
                 break;
 
             case CharacterStatus.hasMoved:
-                SwitchCharacterStatus(CharacterStatus.idle);
+                //SwitchCharacterStatus(CharacterStatus.idle);
                 break;
 
             case CharacterStatus.defeated:
@@ -116,7 +132,9 @@ public class CharacterBaseController : MonoBehaviour
 				m_MovementController.Turn(1);
 				break;
 			case CharacterAction.Wait:
-				SwitchCharacterStatus(CharacterStatus.hasMoved);
+                //SwitchCharacterStatus(CharacterStatus.hasMoved);
+                SwitchCharacterStatus(CharacterStatus.idle);
+                ActivationIsDone();
 				break;
 		}
 		if (nextAction != CharacterAction.NoAction)
@@ -127,6 +145,33 @@ public class CharacterBaseController : MonoBehaviour
     {
         SwitchCharacterStatus(CharacterStatus.selectingMovement);
     }
+
+    public void ActivationIsDone()
+    {
+        DungeonBaseController.instance.m_TurnManager.ActionIsDone();
+    }
+
+    public void SetWalking()
+    {
+        Debug.Log("Check");
+        if (m_GraphicsController != null)
+            m_GraphicsController.StartWalking();
+
+        SwitchCharacterStatus(CharacterStatus.moving);
+        
+        ActivationIsDone();
+    }
+
+    public void DoneWalking()
+    {
+        if (m_GraphicsController != null)
+            m_GraphicsController.StopWalking();
+
+        SwitchCharacterStatus(CharacterStatus.idle);
+    }
+
+
+
 	virtual protected void OnNewTurn() { }
 	virtual protected void OnEndTurn() { }
 

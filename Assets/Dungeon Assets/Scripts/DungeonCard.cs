@@ -10,6 +10,11 @@ public class DungeonCard : ScriptableObject
 
     public int numberOfFloors;
 
+    public GameObject firstEnemy;
+    public GameObject secondEnemy;
+
+    public GameObject bossEnemy;
+
     public GameObject entranceTile;
     public GameObject exitTile;
 
@@ -20,4 +25,5 @@ public class DungeonCard : ScriptableObject
     public GameObject[] tTiles;
     public GameObject[] endTiles;
     public GameObject[] crossTiles;
+    public GameObject[] trapTiles;
 }

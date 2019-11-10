@@ -6,4 +6,9 @@ public class TileBase : MonoBehaviour
 {
     public bool walkable;
     public GameObject occupant;
+
+    public virtual void TileSteppedOn()
+    {
+
+    }
 }

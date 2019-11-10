@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class CharacterInputBase : MonoBehaviour
 {
+    public CharacterBaseController m_CharacterBaseController;
+
+    private void Awake()
+    {
+        m_CharacterBaseController = GetComponent<CharacterBaseController>();
+    }
+
     public virtual CharacterAction CheckMovementInput()
     {
 		CharacterAction backupDir = CharacterAction.Wait;

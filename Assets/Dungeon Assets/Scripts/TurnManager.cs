@@ -1,0 +1,116 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TurnManager : MonoBehaviour
+{
+    public int turnCounter = 0;
+
+    public enum TurnManagerState { idle, dequeueing}
+    public TurnManagerState currentState;
+
+    public enum TeamTurn { player, enemies}
+    public TeamTurn currentTeamTurn;
+
+    private Queue<CharacterBaseController> enemiesToAct = new Queue<CharacterBaseController>();
+    private CharacterBaseController characterToAct;
+
+    public void StartNewTurn()
+    {
+        turnCounter++;
+        EnqueueEnemies();
+
+        //DungeonBaseController.instance.TurnStart();
+
+        SwitchTeamTurn(TeamTurn.player);
+        SwitchCurrentState(TurnManagerState.dequeueing);
+    }
+
+    public void TurnManagerUpdate()
+    {
+        switch (currentState)
+        {
+            case TurnManagerState.dequeueing:
+                DequeueCharacterToAct();
+                break;
+        }
+    }
+
+    public void EnqueueEnemies()
+    {
+        foreach(CharacterBaseController enemy in DungeonBaseController.instance.enemies)
+        {
+            enemiesToAct.Enqueue(enemy);
+        }
+    }
+
+    public void DequeueCharacterToAct()
+    {
+        switch (currentTeamTurn)
+        {
+            case TeamTurn.player:
+
+                if(DungeonBaseController.instance.m_PlayerController.currentCharacterStatus == CharacterStatus.idle)
+                {
+                    DungeonBaseController.instance.m_PlayerController.Activate();
+                    SwitchCurrentState(TurnManagerState.idle);
+                }
+                
+                break;
+
+            case TeamTurn.enemies:
+
+                if(enemiesToAct.Count > 0)
+                {
+                    characterToAct = enemiesToAct.Dequeue();
+
+                    if(characterToAct != null)
+                    {
+                        characterToAct.Activate();
+                        SwitchCurrentState(TurnManagerState.idle);
+                    }
+
+                }
+                else
+                {
+                    TurnIsOver();
+                }
+
+                break;
+        }
+        
+    }
+
+    public void ActionIsDone()
+    {
+        switch (currentTeamTurn)
+        {
+            case TeamTurn.player:
+                SwitchTeamTurn(TeamTurn.enemies);
+                DequeueCharacterToAct();
+                break;
+
+            case TeamTurn.enemies:
+                DequeueCharacterToAct();
+                break;
+        }
+    }
+
+    void TurnIsOver()
+    {
+        //DungeonBaseController.instance.TurnEnd();
+        StartNewTurn();
+    }
+
+    public void SwitchCurrentState(TurnManagerState newState)
+    {
+        currentState = newState;
+    }
+
+
+    public void SwitchTeamTurn(TeamTurn newTeamTurn)
+    {
+        currentTeamTurn = newTeamTurn;
+    }
+
+}

@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51db72e37f5c3bb4c90f8a58f258aa92, type: 3}
   m_Name: ForestDungeonCard
   m_EditorClassIdentifier: 
-  startingWidth: 4
-  StartingDepth: 3
+  startingWidth: 2
+  StartingDepth: 2
   numberOfFloors: 2
-  entranceTile: {fileID: 2292143078135154294, guid: 290ece5f95975944eba4cf02dfe14064,
+  firstEnemy: {fileID: 0}
+  secondEnemy: {fileID: 2628749298594423992, guid: e39b4005a0926074ea82e2d36eadcb7e,
     type: 3}
-  exitTile: {fileID: 2292143078135154294, guid: 290ece5f95975944eba4cf02dfe14064,
+  bossEnemy: {fileID: 0}
+  entranceTile: {fileID: 3629044442337999025, guid: 712b9896cec8a5e4489dc1a2e2b71e10,
+    type: 3}
+  exitTile: {fileID: 7988860570590717318, guid: 62e6798f32c4dbd499d43ca75d1d5cfc,
     type: 3}
   openTiles:
   - {fileID: 2292143078135154294, guid: 290ece5f95975944eba4cf02dfe14064, type: 3}
@@ -33,3 +37,5 @@ MonoBehaviour:
   - {fileID: 4693886861996653671, guid: bbc37c7236c77df49839f01fa521eed6, type: 3}
   crossTiles:
   - {fileID: 5257894820172171365, guid: 8e363f3efa15ed6419c3f1074e3194e2, type: 3}
+  trapTiles:
+  - {fileID: 2214542103791988907, guid: ea115768cadfed742a70685c6cd639e0, type: 3}

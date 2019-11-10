@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 3702750559571490638}
   - component: {fileID: 1141076890783799104}
   - component: {fileID: 2694283053572858513}
+  - component: {fileID: 138935849626221846}
   m_Layer: 0
   m_Name: Medusa
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MovementController: {fileID: 2694283053572858513}
   m_Input: {fileID: 1141076890783799104}
+  m_GraphicsController: {fileID: 0}
   currentCharacterStatus: 0
   LastAction: 0
   OnStatusChange:
@@ -56,6 +58,9 @@ MonoBehaviour:
   OnDefeated:
     m_PersistentCalls:
       m_Calls: []
+  UseStartPosition: 1
+  RandomStartPosition: 0
+  StartPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1141076890783799104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,6 +73,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26716e06bbe6fae4ebf8b97e024be5f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_CharacterBaseController: {fileID: 0}
+  AI_Actions: 0100000002000000030000000400000007000000
 --- !u!114 &2694283053572858513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,10 +87,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc307767dd32c1943a48e3739dcd98bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0
-  rotationSpeed: 0
+  movementSpeed: 3
+  rotationSpeed: 200
   currentTile: {fileID: 0}
   m_BaseController: {fileID: 0}
+  AlwaysFaceForward: 0
+--- !u!114 &138935849626221846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2628749298594423992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c05705c35d7e2f43ac3a50a597e0b98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 7451093634356488565}
 --- !u!1 &7113220941968027284
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,8 +171,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2402641
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d416f2912852e8440a8469952a585d04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -171,6 +192,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5137756104481992079}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 8d7a672fc81021043950a7d128def15b,
+        type: 3}
+      propertyPath: m_Name
+      value: Medusa 01
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8d7a672fc81021043950a7d128def15b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -226,11 +252,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 8d7a672fc81021043950a7d128def15b,
-        type: 3}
-      propertyPath: m_Name
-      value: Medusa 01
-      objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: 8d7a672fc81021043950a7d128def15b,
         type: 3}
       propertyPath: m_Controller
@@ -251,6 +272,12 @@ PrefabInstance:
 --- !u!4 &715397169240769551 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 8d7a672fc81021043950a7d128def15b,
+    type: 3}
+  m_PrefabInstance: {fileID: 5518929491888647957}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7451093634356488565 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 8d7a672fc81021043950a7d128def15b,
     type: 3}
   m_PrefabInstance: {fileID: 5518929491888647957}
   m_PrefabAsset: {fileID: 0}

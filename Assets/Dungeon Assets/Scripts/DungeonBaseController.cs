@@ -10,11 +10,15 @@ public class DungeonBaseController : MonoBehaviour
     public GameObject m_Player;
     public CharacterBaseController m_PlayerController;
     public List<CharacterBaseController> allCharacters;
+
+    public List<CharacterBaseController> enemies = new List<CharacterBaseController>();
+
     public GameObject entranceTile;
     public GameObject exitTile;
     
     public DungeonGenerator m_DungeonGenerator;
     public FloorSweeper m_FloorSweeper;
+    public TurnManager m_TurnManager;
 
     public enum dungeonTurnState { SettingUpDungeon, TurnStart, ProcessTurns, TurnEnd }
     public dungeonTurnState currentDungeonTurnState= dungeonTurnState.SettingUpDungeon;
@@ -34,16 +38,20 @@ public class DungeonBaseController : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        
+
+        floorNumber = 1;
         m_DungeonGenerator = GetComponentInChildren<DungeonGenerator>();
         m_FloorSweeper = GetComponentInChildren<FloorSweeper>();
-        m_Player = GameObject.FindWithTag("Player");
-		m_PlayerController = m_Player.GetComponent<CharacterBaseController>();
+        m_TurnManager = GetComponent<TurnManager>();
+
+        // Moved the "Find player" to the character controller
+
+        //m_Player = GameObject.FindWithTag("Player");
+		//m_PlayerController = m_Player.GetComponent<CharacterBaseController>();
     }
 
     private void Start()
     {
-        floorNumber = 1;
         m_DungeonGenerator.floorWidth = DungeonManager.instance.dungeonCard.startingWidth;
         m_DungeonGenerator.floorDepth = DungeonManager.instance.dungeonCard.StartingDepth;
 
@@ -58,6 +66,21 @@ public class DungeonBaseController : MonoBehaviour
 
 	void DungeonStateLogic()
 	{
+        switch (currentDungeonTurnState)
+        {
+            case dungeonTurnState.SettingUpDungeon: break;
+
+            case dungeonTurnState.TurnStart:
+                m_TurnManager.StartNewTurn();
+                SwitchDungeonTurnState(dungeonTurnState.ProcessTurns);
+                break;
+
+            case dungeonTurnState.ProcessTurns:
+                m_TurnManager.TurnManagerUpdate();
+                break;
+        }
+
+        /*
 		switch (currentDungeonTurnState)
 		{
 			case dungeonTurnState.SettingUpDungeon: break;
@@ -75,9 +98,24 @@ public class DungeonBaseController : MonoBehaviour
 				SwitchDungeonTurnState(dungeonTurnState.TurnStart);
 				break;
 		}
-	}
+        */
+    }
 
-	void ActivateNextCharacter()
+    public void TurnStart()
+    {
+        //Called from the turn manager
+
+        OnNewTurn.Invoke();
+    }
+
+    public void TurnEnd()
+    {
+        //Called from the turn manager
+
+        OnEndTurn.Invoke();
+    }
+
+    void ActivateNextCharacter()
 	{
 		if (ActionQueue.Count > 0)
 		{
@@ -93,7 +131,8 @@ public class DungeonBaseController : MonoBehaviour
 
     void PlacePlayer()
     {
-        m_Player.transform.position = entranceTile.transform.position;
+        Vector3 offset = new Vector3(0, 0, 1);
+        m_Player.transform.position = entranceTile.transform.position + offset;
         m_Player.GetComponent<CharacterMovementController>().OccupyTile();
     }
     
@@ -124,16 +163,6 @@ public class DungeonBaseController : MonoBehaviour
             }
 			
 			StartCoroutine(BuildDungeonFloor());
-        }
-        else
-        {
-            // The bottom floor has been reached
-            // TODO:
-            // If dungeon boss hasn't been defeated, go to boss battle
-            // else leave dungeon
-
-            // Temporary code
-            Debug.Log("You have reached the end of the dungeon.");
         }
     }
 

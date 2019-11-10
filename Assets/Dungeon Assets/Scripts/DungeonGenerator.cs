@@ -232,10 +232,14 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         // Entrance tile
-        floorTileMap[startXCoord * roomSize + 7, 0] = 90;
+        floorTileMap[startXCoord * roomSize + 7, 1] = 90;
 
         // Exit tile
-        floorTileMap[endXCoord * roomSize + 7, floorDepth * roomSize] = 91;
+
+        if(DungeonBaseController.instance.floorNumber == dungeonCard.numberOfFloors)
+            floorTileMap[endXCoord * roomSize + 7, floorDepth * roomSize - 1] = 22;
+        else
+            floorTileMap[endXCoord * roomSize + 7, floorDepth * roomSize - 1] = 91;
     }
 
     void BuildDungeon()
@@ -258,6 +262,22 @@ public class DungeonGenerator : MonoBehaviour
                         SpawnWall(xx, zz, tilePos);
                         break;
 
+                    case 20:
+                        SpawnEnemyTile(tilePos, 0);
+                        break;
+
+                    case 21:
+                        SpawnEnemyTile(tilePos, 1);
+                        break;
+
+                    case 22:
+                        SpawnEnemyTile(tilePos, 2);
+                        break;
+
+                    case 30:
+                        SpawnTrapTile(tilePos);
+                        break;
+
                     case 90:
                         SpawnEntranceTile(tilePos);
                         break;
@@ -274,7 +294,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         GameObject instance = Instantiate(dungeonCard.entranceTile, transform.position, Quaternion.identity);
         instance.transform.position = tilePos;
-        instance.transform.parent = gameObject.transform;
+        instance.transform.parent = DungeonManager.instance.tileParentObj.transform;
         m_DungeonBase.entranceTile = instance;
     }
 
@@ -283,7 +303,7 @@ public class DungeonGenerator : MonoBehaviour
         GameObject instance = Instantiate(dungeonCard.exitTile, transform.position, Quaternion.identity);
         //instance.GetComponent<ExitTileInteracton>().m_DungeonFloor = gameObject;
         instance.transform.position = tilePos;
-        instance.transform.parent = gameObject.transform;
+        instance.transform.parent = DungeonManager.instance.tileParentObj.transform;
         m_DungeonBase.exitTile = instance;
     }
 
@@ -291,7 +311,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         GameObject instance = Instantiate(dungeonCard.openTiles[Random.Range(0, dungeonCard.openTiles.Length)], transform.position, Quaternion.identity);
         instance.transform.position = tilePos;
-        instance.transform.parent = gameObject.transform;
+        instance.transform.parent = DungeonManager.instance.tileParentObj.transform;
     }
     
     void SpawnWall(int xx, int zz, Vector3 tilePos)
@@ -374,7 +394,45 @@ public class DungeonGenerator : MonoBehaviour
 
         instance.transform.position = tilePos;
         instance.transform.rotation = Quaternion.Euler(tileRot);
-        instance.transform.parent = gameObject.transform;
+        instance.transform.parent = DungeonManager.instance.tileParentObj.transform;
+    }
+
+    void SpawnEnemyTile(Vector3 tilePos, int type)
+    {
+        GameObject instance = Instantiate(dungeonCard.openTiles[Random.Range(0, dungeonCard.openTiles.Length)], transform.position, Quaternion.identity);
+        instance.transform.position = tilePos;
+        instance.transform.parent = DungeonManager.instance.tileParentObj.transform;
+
+
+        
+        GameObject enemy = null;
+
+        switch (type)
+        {
+            case 0:
+                enemy = Instantiate(dungeonCard.firstEnemy, instance.transform.position, Quaternion.identity);
+                enemy.transform.parent = DungeonManager.instance.enemyParentObj.transform;
+                break;
+
+            case 1:
+                enemy = Instantiate(dungeonCard.secondEnemy, instance.transform.position, Quaternion.identity);
+                enemy.transform.parent = DungeonManager.instance.enemyParentObj.transform;
+                break;
+
+            case 2:
+                enemy = Instantiate(dungeonCard.bossEnemy, instance.transform.position, Quaternion.identity);
+                enemy.transform.parent = DungeonManager.instance.enemyParentObj.transform;
+                break;
+        }
+        
+
+    }
+
+    void SpawnTrapTile(Vector3 tilePos)
+    {
+        GameObject instance = Instantiate(dungeonCard.trapTiles[Random.Range(0, dungeonCard.trapTiles.Length)], transform.position, Quaternion.identity);
+        instance.transform.position = tilePos;
+        instance.transform.parent = DungeonManager.instance.tileParentObj.transform;
     }
 
     int checkTileForWall(int xx, int zz, int dir)

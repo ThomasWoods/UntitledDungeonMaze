@@ -9,8 +9,11 @@ public class DungeonManager : MonoBehaviour
     public DungeonCard dungeonCard;
 
     public Camera dungeonCamera;
-    public Camera battleCamera;
     public GameObject CharacterStatusCanvas;
+
+    public GameObject tileParentObj;
+    public GameObject enemyParentObj;
+
 
     public enum dungeonGameState { init, dungeonExploring, Battling }
     public dungeonGameState currentDungeonGameState;
@@ -20,27 +23,8 @@ public class DungeonManager : MonoBehaviour
         instance = this;
     }
 
-    public void StartRandomBattle()
-    {
-        CharacterStatusCanvas.SetActive(true);
-        SwitchToBattleCamera();
-        Debug.Log("Battle!");
-    }
-
     public void SwitchDungeonGameState(dungeonGameState newState)
     {
         currentDungeonGameState = newState;
-    }
-
-    void SwitchToDungeonCamera()
-    {
-        dungeonCamera.gameObject.SetActive(true);
-        battleCamera.gameObject.SetActive(false);
-    }
-
-    void SwitchToBattleCamera()
-    {
-        dungeonCamera.gameObject.SetActive(false);
-        battleCamera.gameObject.SetActive(true);
     }
 }
