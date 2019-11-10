@@ -2111,41 +2111,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shadow Sprite
       objectReference: {fileID: 0}
-    - target: {fileID: 3702750559571490638, guid: e39b4005a0926074ea82e2d36eadcb7e,
-        type: 3}
-      propertyPath: UseStartPosition
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3702750559571490638, guid: e39b4005a0926074ea82e2d36eadcb7e,
-        type: 3}
-      propertyPath: RandomStartPosition
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141076890783799104, guid: e39b4005a0926074ea82e2d36eadcb7e,
-        type: 3}
-      propertyPath: AI_Actions.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1141076890783799104, guid: e39b4005a0926074ea82e2d36eadcb7e,
-        type: 3}
-      propertyPath: AI_Actions.Array.data[4]
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2694283053572858513, guid: e39b4005a0926074ea82e2d36eadcb7e,
-        type: 3}
-      propertyPath: movementSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2694283053572858513, guid: e39b4005a0926074ea82e2d36eadcb7e,
-        type: 3}
-      propertyPath: rotationSpeed
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 2694283053572858513, guid: e39b4005a0926074ea82e2d36eadcb7e,
-        type: 3}
-      propertyPath: AlwaysFaceForward
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e39b4005a0926074ea82e2d36eadcb7e, type: 3}
 --- !u!1 &1813389336
