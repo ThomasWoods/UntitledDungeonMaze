@@ -153,7 +153,6 @@ public class CharacterBaseController : MonoBehaviour
 
     public void SetWalking()
     {
-        Debug.Log("Check");
         if (m_GraphicsController != null)
             m_GraphicsController.StartWalking();
 
