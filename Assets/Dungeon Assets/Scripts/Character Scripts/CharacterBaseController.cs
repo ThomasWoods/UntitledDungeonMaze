@@ -21,6 +21,8 @@ public class CharacterBaseController : MonoBehaviour
 	public bool RandomStartPosition = false;
 	public Vector3 StartPosition;
 
+	public bool hasBeenDefeated = false;
+
     private void Awake()
     {
         m_MovementController = GetComponent<CharacterMovementController>();
@@ -103,6 +105,7 @@ public class CharacterBaseController : MonoBehaviour
     public void SwitchCharacterStatus(CharacterStatus newStatus)
     {
         currentCharacterStatus = newStatus;
+		if (hasBeenDefeated) currentCharacterStatus = CharacterStatus.defeated;
 		OnStatusChange.Invoke(currentCharacterStatus);
     }
 

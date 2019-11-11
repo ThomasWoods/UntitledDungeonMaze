@@ -102,16 +102,13 @@ public class TurnManager : MonoBehaviour
     {
         // Check if hte player is standing on the tile in front of the enemy at the start of their turn.
         TileBase tile = characterToAct.m_MovementController.CheckTile(characterToAct.transform.forward);
-        
-        if(tile.occupant == DungeonBaseController.instance.m_Player)
-        {
-            Debug.Log("The player was cought!");
-            DungeonManager.instance.GameOver();
-        }
-        else
-        {
-            characterToAct.Activate();
-        }
+
+		if (tile.occupant == DungeonBaseController.instance.m_Player)
+		{
+			Debug.Log("The player was cought!");
+			DungeonManager.instance.GameOver();
+		}
+        characterToAct.Activate();
 
         SwitchCurrentState(TurnManagerState.idle);
     }

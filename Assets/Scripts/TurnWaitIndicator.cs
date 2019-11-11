@@ -40,7 +40,7 @@ public class TurnWaitIndicator : MonoBehaviour
 
 	public void UpdateIndicator(CharacterStatus status)
 	{
-		if (status == CharacterStatus.selectingMovement || status == CharacterStatus.moving || status == CharacterStatus.turning)
+		if (status == CharacterStatus.selectingMovement || status == CharacterStatus.moving || status == CharacterStatus.turning || status==CharacterStatus.defeated)
 			gameObject.SetActive(false);
 		else gameObject.SetActive(true);
 	}

@@ -17,9 +17,12 @@ public class DungeonManager : MonoBehaviour
     public enum dungeonGameState { init, dungeonExploring, victory, defeat}
     public dungeonGameState currentDungeonGameState;
 
+	public DungeonBaseController dungeonController;
+
     private void Awake()
     {
         instance = this;
+		dungeonController = FindObjectOfType<DungeonBaseController>();
     }
 
     private void Start()
@@ -40,6 +43,7 @@ public class DungeonManager : MonoBehaviour
     public void GameOver()
     {
         SwitchDungeonGameState(dungeonGameState.defeat);
+		dungeonController.m_PlayerController.hasBeenDefeated=true;
         Debug.Log("Game Over!");
     }
 }
