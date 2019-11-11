@@ -6,6 +6,6 @@ public class InteractableExit : InteractableBase
 {
     public override void InteractedWith()
     {
-        Debug.Log("The player continues to the next floor.");
+        DungeonBaseController.instance.BuildNewDungeonFloor();
     }
 }

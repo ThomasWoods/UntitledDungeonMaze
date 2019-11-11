@@ -2586,8 +2586,8 @@ Camera:
   m_GameObject: {fileID: 8953574786584787317}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.19215687, g: 0.6784314, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2664,6 +2664,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ac376d2666c204baa4f8dc8837de71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilesParent: {fileID: 249804490}
+  enemyParent: {fileID: 193338024}
 --- !u!114 &8953574787253953804
 MonoBehaviour:
   m_ObjectHideFlags: 0

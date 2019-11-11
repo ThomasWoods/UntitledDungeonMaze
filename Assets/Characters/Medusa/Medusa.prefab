@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfccd141cf25b99419950fb158f93022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SightRadius: 20
+  SightRadius: 4
   Destination: {x: 0, y: 0, z: 0}
   ShortestPath:
     Exists: 0

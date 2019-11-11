@@ -148,7 +148,9 @@ public class CharacterBaseController : MonoBehaviour
             {
                 interactable.InteractedWith();
                 SwitchCharacterStatus(CharacterStatus.idle);
-                ActivationIsDone();
+
+                if(DungeonBaseController.instance.currentDungeonTurnState != DungeonBaseController.dungeonTurnState.SettingUpDungeon)
+                    ActivationIsDone();
             } 
         }
 

@@ -15,10 +15,13 @@ MonoBehaviour:
   startingWidth: 2
   StartingDepth: 2
   numberOfFloors: 2
-  firstEnemy: {fileID: 0}
-  secondEnemy: {fileID: 371415953068175433, guid: 1f41378f452719c4dab6455a744cd839,
+  skyColour: {r: 0.45109472, g: 0.8773585, b: 0.6986027, a: 0}
+  firstEnemy: {fileID: 371415953068175433, guid: 1f41378f452719c4dab6455a744cd839,
     type: 3}
-  bossEnemy: {fileID: 0}
+  secondEnemy: {fileID: 2628749298594423992, guid: e39b4005a0926074ea82e2d36eadcb7e,
+    type: 3}
+  bossEnemy: {fileID: 371415953068175433, guid: 1f41378f452719c4dab6455a744cd839,
+    type: 3}
   entranceTile: {fileID: 3629044442337999025, guid: 712b9896cec8a5e4489dc1a2e2b71e10,
     type: 3}
   exitTile: {fileID: 7988860570590717318, guid: 62e6798f32c4dbd499d43ca75d1d5cfc,

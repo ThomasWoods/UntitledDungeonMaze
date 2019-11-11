@@ -10,6 +10,8 @@ public class DungeonCard : ScriptableObject
 
     public int numberOfFloors;
 
+    public Color skyColour;
+
     public GameObject firstEnemy;
     public GameObject secondEnemy;
 

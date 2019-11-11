@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class FloorSweeper : MonoBehaviour
 {
+    public Transform tilesParent;
+    public Transform enemyParent;
+
     public void SweepFloor()
     {
-        foreach (Transform child in gameObject.transform)
+        foreach (Transform child in enemyParent)
         {
-            GameObject.Destroy(child.gameObject);
+            Destroy(child.gameObject);
+        }
+
+        foreach (Transform child in tilesParent)
+        {
+            Destroy(child.gameObject);
         }
     }
 }

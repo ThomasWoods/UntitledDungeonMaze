@@ -33,7 +33,7 @@ public class DungeonBaseController : MonoBehaviour
     public CharacterBaseController activeCharacter;
 	Stack<CharacterBaseController> ActionQueue = new Stack<CharacterBaseController>(); 
 
-    int growthOdds;
+    int growthOdds = 2;
 
     private void Awake()
     {
@@ -154,21 +154,20 @@ public class DungeonBaseController : MonoBehaviour
     {
         if (floorNumber < DungeonManager.instance.dungeonCard.numberOfFloors)
         {
+            SwitchDungeonTurnState(dungeonTurnState.SettingUpDungeon);
+
             m_FloorSweeper.SweepFloor();
+            m_TurnManager.ResetTurnManager();
             floorNumber++;
 
             int widthRoll = Random.Range(0, growthOdds);
             int depthRoll = Random.Range(0, growthOdds);
 
             if (widthRoll == 0)
-            {
                 m_DungeonGenerator.floorWidth++;
-            }
 
             if (depthRoll == 0)
-            {
                 m_DungeonGenerator.floorDepth++;
-            }
 			
 			StartCoroutine(BuildDungeonFloor());
         }

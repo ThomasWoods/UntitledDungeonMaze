@@ -13,14 +13,18 @@ public class DungeonManager : MonoBehaviour
 
     public GameObject tileParentObj;
     public GameObject enemyParentObj;
-
-
+    
     public enum dungeonGameState { init, dungeonExploring, victory, defeat}
     public dungeonGameState currentDungeonGameState;
 
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        dungeonCamera.backgroundColor = dungeonCard.skyColour;
     }
 
     public void SwitchDungeonGameState(dungeonGameState newState)

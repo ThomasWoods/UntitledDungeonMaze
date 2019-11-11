@@ -123,6 +123,12 @@ public class TurnManager : MonoBehaviour
         StartNewTurn();
     }
 
+    public void ResetTurnManager()
+    {
+        turnCounter = 0;
+        enemiesToAct.Clear();
+    }
+
     public void SwitchCurrentState(TurnManagerState newState)
     {
         currentState = newState;
