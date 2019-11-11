@@ -136,6 +136,14 @@ public class DungeonBaseController : MonoBehaviour
         m_Player.GetComponent<CharacterMovementController>().OccupyTile();
     }
     
+    void PlaceEnemies()
+    {
+        foreach(CharacterBaseController charBC in enemies)
+        {
+            charBC.m_MovementController.OccupyTile();
+        }
+    }
+
     public void SwitchDungeonTurnState(dungeonTurnState newState)
     {
 		lastTurnState = currentDungeonTurnState;
@@ -172,6 +180,7 @@ public class DungeonBaseController : MonoBehaviour
         m_DungeonGenerator.GenerateDungeon();
 		yield return 0;
 		PlacePlayer();
+        PlaceEnemies();
 
         DungeonManager.instance.SwitchDungeonGameState(DungeonManager.dungeonGameState.dungeonExploring);
 		SwitchDungeonTurnState(dungeonTurnState.TurnStart);

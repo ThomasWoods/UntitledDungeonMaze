@@ -36,7 +36,7 @@ public class PlayerKeyboardController : CharacterInputBase
 		{
 			int i = (int)CharacterAction.Interact;
 			if (Map.KeyMap.Length <= i) continue;
-			if (Input.GetKey(Map.KeyMap[i])) return true;
+			if (Input.GetKeyDown(Map.KeyMap[i])) return true;
 		}
 		return false;
 	}

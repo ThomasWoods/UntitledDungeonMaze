@@ -46,8 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f76b015e4136f4f9ca3093d9aaa2e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 2
   walkable: 1
   occupant: {fileID: 0}
+  trapStr: 1
 --- !u!65 &7550840431187526386
 BoxCollider:
   m_ObjectHideFlags: 0

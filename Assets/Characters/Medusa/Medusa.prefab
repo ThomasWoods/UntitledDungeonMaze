@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2694283053572858513}
   - component: {fileID: 138935849626221846}
   - component: {fileID: 7259615298123202381}
+  - component: {fileID: -7500043655229328050}
   m_Layer: 0
   m_Name: Medusa
   m_TagString: Enemy
@@ -33,6 +34,7 @@ Transform:
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 715397169240769551}
+  - {fileID: 7390242522092061475}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -59,7 +61,7 @@ MonoBehaviour:
   OnDefeated:
     m_PersistentCalls:
       m_Calls: []
-  UseStartPosition: 1
+  UseStartPosition: 0
   RandomStartPosition: 0
   StartPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1141076890783799104
@@ -131,6 +133,19 @@ MonoBehaviour:
     F_Cost: 0
     Tile: {fileID: 0}
   ShowGizmos: 0
+--- !u!114 &-7500043655229328050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2628749298594423992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8196a8bef701164f928b8be7d161ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHp: 2
 --- !u!1 &7113220941968027284
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,12 +170,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7113220941968027284}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.01, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 715397169240769551}
-  m_RootOrder: 3
+  m_Father: {fileID: 5137756104481992079}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &8521579486687924278
 SpriteRenderer:

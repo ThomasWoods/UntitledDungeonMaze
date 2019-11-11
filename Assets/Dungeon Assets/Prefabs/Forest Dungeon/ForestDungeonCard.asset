@@ -16,7 +16,7 @@ MonoBehaviour:
   StartingDepth: 2
   numberOfFloors: 2
   firstEnemy: {fileID: 0}
-  secondEnemy: {fileID: 2628749298594423992, guid: e39b4005a0926074ea82e2d36eadcb7e,
+  secondEnemy: {fileID: 371415953068175433, guid: 1f41378f452719c4dab6455a744cd839,
     type: 3}
   bossEnemy: {fileID: 0}
   entranceTile: {fileID: 3629044442337999025, guid: 712b9896cec8a5e4489dc1a2e2b71e10,

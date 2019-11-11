@@ -137,6 +137,22 @@ public class CharacterBaseController : MonoBehaviour
                 ActivationIsDone();
 				break;
 		}
+
+        if (interacting)
+        {
+            TileBase tile = m_MovementController.CheckTile(transform.forward);
+
+            InteractableBase interactable = tile.GetComponent<InteractableBase>();
+
+            if(interactable != null)
+            {
+                interactable.InteractedWith();
+                SwitchCharacterStatus(CharacterStatus.idle);
+                ActivationIsDone();
+            } 
+        }
+
+
 		if (nextAction != CharacterAction.NoAction)
 			LastAction = nextAction;
 	}
@@ -168,8 +184,6 @@ public class CharacterBaseController : MonoBehaviour
 
         SwitchCharacterStatus(CharacterStatus.idle);
     }
-
-
 
 	virtual protected void OnNewTurn() { }
 	virtual protected void OnEndTurn() { }

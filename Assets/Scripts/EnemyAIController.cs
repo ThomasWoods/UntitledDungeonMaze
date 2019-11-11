@@ -26,6 +26,7 @@ public class EnemyAIController : CharacterInputBase
 	{
 		//CharacterAction nextAction = AI_Actions[Random.Range(0, AI_Actions.Length - 1)];
 		//return nextAction;
+        
 		if (DungeonBaseController.instance.m_PlayerController != null &&
 			DungeonBaseController.instance.m_PlayerController.m_MovementController != null &&
 			DungeonBaseController.instance.m_PlayerController.m_MovementController.currentTile != null &&
@@ -69,7 +70,7 @@ public class EnemyAIController : CharacterInputBase
 	{
 		TileBase tile = m_CharacterBaseController.m_MovementController.CheckTile(transform.forward);
 
-		if (tile.walkable == true && tile.occupant == null)
+		if (tile.walkable == true && tile.occupant == null && tile.type != TileBase.TileType.trap)
 			return CharacterAction.MoveForward;
 		else
 		{

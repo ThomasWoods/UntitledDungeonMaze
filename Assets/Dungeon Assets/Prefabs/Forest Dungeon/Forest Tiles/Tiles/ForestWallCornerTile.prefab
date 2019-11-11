@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1911479953151611966}
   - component: {fileID: 3987464858362908222}
   m_Layer: 8
-  m_Name: MossyWallCornerTile
+  m_Name: ForestWallCornerTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2d42d93bdd9d584d8ed8ab5ad69a831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 1
   walkable: 0
   occupant: {fileID: 0}
 --- !u!65 &3987464858362908222

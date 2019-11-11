@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class TrapTile : TileBase
 {
+    public int trapStr;
+
     public override void TileSteppedOn()
     {
         TrapTargetBase catchable = occupant.GetComponent<TrapTargetBase>();
 
         if(catchable != null)
         {
-            catchable.OnTrapped();
+            catchable.OnTrapped(trapStr);
         }
     }
 }

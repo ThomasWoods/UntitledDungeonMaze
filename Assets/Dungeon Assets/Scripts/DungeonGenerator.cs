@@ -403,7 +403,6 @@ public class DungeonGenerator : MonoBehaviour
         instance.transform.position = tilePos;
         instance.transform.parent = DungeonManager.instance.tileParentObj.transform;
 
-
         
         GameObject enemy = null;
 

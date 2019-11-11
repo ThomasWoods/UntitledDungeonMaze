@@ -70,10 +70,8 @@ public class TurnManager : MonoBehaviour
 
                     if(characterToAct != null)
                     {
-                        characterToAct.Activate();
-                        SwitchCurrentState(TurnManagerState.idle);
+                        ActivateEnemy();
                     }
-
                 }
                 else
                 {
@@ -99,6 +97,25 @@ public class TurnManager : MonoBehaviour
                 break;
         }
     }
+
+    private void ActivateEnemy()
+    {
+        // Check if hte player is standing on the tile in front of the enemy at the start of their turn.
+        TileBase tile = characterToAct.m_MovementController.CheckTile(characterToAct.transform.forward);
+        
+        if(tile.occupant == DungeonBaseController.instance.m_Player)
+        {
+            Debug.Log("The player was cought!");
+            DungeonManager.instance.GameOver();
+        }
+        else
+        {
+            characterToAct.Activate();
+        }
+
+        SwitchCurrentState(TurnManagerState.idle);
+    }
+
 
     void TurnIsOver()
     {

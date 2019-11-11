@@ -11,7 +11,7 @@ public class TrapTargetStunned : TrapTargetBase
         m_CharacterController = GetComponent<CharacterBaseController>();
     }
 
-    public override void OnTrapped()
+    public override void OnTrapped(int trapStr)
     {
         Debug.Log(gameObject.name + " stepped on a trap and got stunned!");
     }

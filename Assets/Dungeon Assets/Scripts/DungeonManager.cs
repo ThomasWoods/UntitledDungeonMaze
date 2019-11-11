@@ -15,7 +15,7 @@ public class DungeonManager : MonoBehaviour
     public GameObject enemyParentObj;
 
 
-    public enum dungeonGameState { init, dungeonExploring, Battling }
+    public enum dungeonGameState { init, dungeonExploring, victory, defeat}
     public dungeonGameState currentDungeonGameState;
 
     private void Awake()
@@ -26,5 +26,16 @@ public class DungeonManager : MonoBehaviour
     public void SwitchDungeonGameState(dungeonGameState newState)
     {
         currentDungeonGameState = newState;
+    }
+
+    public void Victory()
+    {
+        SwitchDungeonGameState(dungeonGameState.victory);
+    }
+
+    public void GameOver()
+    {
+        SwitchDungeonGameState(dungeonGameState.defeat);
+        Debug.Log("Game Over!");
     }
 }
