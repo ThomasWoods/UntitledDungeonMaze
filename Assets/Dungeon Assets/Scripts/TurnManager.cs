@@ -35,30 +35,35 @@ public class TurnManager : MonoBehaviour
                 break;
         }
     }
-
+    /*
     public void RemakeQueue()
     {
         enemiesToAct.Clear();
         EnqueueEnemies();
     }
-
+    */
     public void RemoveFromQueue(CharacterBaseController charBase)
     {
-        Queue<CharacterBaseController> tempQueue = new Queue<CharacterBaseController>();
+        Debug.Log("Queue: " + enemiesToAct.Count);
 
-        while(enemiesToAct.Count > 0)
+        if (enemiesToAct.Count != 0)
         {
-            CharacterBaseController enqueuedChar = enemiesToAct.Dequeue();
+            Queue<CharacterBaseController> tempQueue = new Queue<CharacterBaseController>();
 
-            if (enqueuedChar != charBase)
-                tempQueue.Enqueue(enqueuedChar);
-        }
+            while (enemiesToAct.Count > 0)
+            {
+                CharacterBaseController enqueuedChar = enemiesToAct.Dequeue();
 
-        while (tempQueue.Count > 0)
-        {
-            CharacterBaseController enqueuedChar = enemiesToAct.Dequeue();
-            
-            enemiesToAct.Enqueue(enqueuedChar);
+                if (enqueuedChar != charBase)
+                    tempQueue.Enqueue(enqueuedChar);
+            }
+
+            while (tempQueue.Count > 0)
+            {
+                CharacterBaseController enqueuedChar = enemiesToAct.Dequeue();
+
+                enemiesToAct.Enqueue(enqueuedChar);
+            }
         }
     }
 
@@ -80,10 +85,16 @@ public class TurnManager : MonoBehaviour
 				{
 					if (enemy.currentCharacterStatus != CharacterStatus.idle) ready = false;
 				}
-				if (ready && DungeonBaseController.instance.m_PlayerController.currentCharacterStatus == CharacterStatus.idle)
+
+				if (ready)
                 {
-                    DungeonBaseController.instance.m_PlayerController.Activate();
-                    SwitchCurrentState(TurnManagerState.idle);
+                    CharacterBaseController playerController = DungeonBaseController.instance.m_PlayerController;
+
+                    if (playerController.currentCharacterStatus == CharacterStatus.idle)
+                    {
+                        playerController.Activate();
+                        SwitchCurrentState(TurnManagerState.idle);
+                    }
                 }
                 
                 break;

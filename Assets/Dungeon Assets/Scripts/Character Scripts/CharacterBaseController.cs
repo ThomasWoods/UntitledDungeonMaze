@@ -113,6 +113,7 @@ public class CharacterBaseController : MonoBehaviour
     public void SwitchCharacterStatus(CharacterStatus newStatus)
     {
         currentCharacterStatus = newStatus;
+        
 		if (hasBeenDefeated) currentCharacterStatus = CharacterStatus.defeated;
 		else if (hasBeenHit) {
 			if (damageSource.Contains("Medusa")) OnMirrorVision.Invoke();

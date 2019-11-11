@@ -13,6 +13,6 @@ public class TrapTargetEnemy : TrapTargetBase
 
     public override void OnTrapped(int trapStr)
     {
-        m_CharacterBaseController.TakeDamage(trapStr);
+        m_CharacterBaseController.TakeDamage(gameObject.name, trapStr);
     }
 }
