@@ -20,6 +20,7 @@ public class CharacterBaseController : MonoBehaviour
 	public CharacterStatusEvent OnStatusChange = new CharacterStatusEvent();
 	public UnityEvent OnDefeated = new UnityEvent();
 	public UnityEvent OnHit = new UnityEvent();
+	public UnityEvent OnMirrorVision = new UnityEvent();
 
 	public bool UseStartPosition = false;
 	public bool RandomStartPosition = false;
@@ -27,6 +28,7 @@ public class CharacterBaseController : MonoBehaviour
 
 	public bool hasBeenDefeated = false;
 	public bool hasBeenHit = false;
+	public string damageSource;
 
 	private void Awake()
     {
@@ -112,7 +114,11 @@ public class CharacterBaseController : MonoBehaviour
     {
         currentCharacterStatus = newStatus;
 		if (hasBeenDefeated) currentCharacterStatus = CharacterStatus.defeated;
-		else if (hasBeenHit) { hasBeenHit = false; OnHit.Invoke(); }
+		else if (hasBeenHit) {
+			if (damageSource.Contains("Medusa")) OnMirrorVision.Invoke();
+			hasBeenHit = false;
+			OnHit.Invoke();
+		}
 		OnStatusChange.Invoke(currentCharacterStatus);
     }
 
@@ -200,9 +206,10 @@ public class CharacterBaseController : MonoBehaviour
 	virtual protected void OnNewTurn() { }
 	virtual protected void OnEndTurn() { }
 
-	public void TakeDamage(int damage=1)
+	public void TakeDamage(string source, int damage=1)
 	{
 		life-=damage;
+		damageSource = source;
 		if (life > 0) hasBeenHit = true;
 		else
 		{
@@ -211,7 +218,7 @@ public class CharacterBaseController : MonoBehaviour
             m_DefeatableBase.Defeated();
 		}
 
-		}
+	}
 
 	void OnDestroy()
 	{
