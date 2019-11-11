@@ -106,7 +106,7 @@ public class TurnManager : MonoBehaviour
 		if (tile.occupant == DungeonBaseController.instance.m_Player)
 		{
 			Debug.Log("The player was cought!");
-			DungeonManager.instance.GameOver();
+			DungeonBaseController.instance.m_PlayerController.TakeDamage();
 		}
         characterToAct.Activate();
 

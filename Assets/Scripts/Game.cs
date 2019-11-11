@@ -118,4 +118,8 @@ public class Game : MonoBehaviour
 	{
 		isPaused = !isPaused;
 	}
+	public void Unpause()
+	{
+		isPaused = false;
+	}
 }

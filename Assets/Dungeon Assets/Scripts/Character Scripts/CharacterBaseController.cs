@@ -7,6 +7,8 @@ public enum CharacterStatus { setup, idle, selectingMovement, moving, turning, h
 public enum CharacterAction { NoAction, MoveForward, Backstep, MoveLeft, MoveRight, TurnLeft, TurnRight, Wait, Interact}
 public class CharacterBaseController : MonoBehaviour
 {
+	public int life = 3;
+
     public CharacterMovementController m_MovementController;
     public CharacterInputBase m_Input;
     public GraphicsController m_GraphicsController;
@@ -16,14 +18,16 @@ public class CharacterBaseController : MonoBehaviour
 
 	public CharacterStatusEvent OnStatusChange = new CharacterStatusEvent();
 	public UnityEvent OnDefeated = new UnityEvent();
+	public UnityEvent OnHit = new UnityEvent();
 
 	public bool UseStartPosition = false;
 	public bool RandomStartPosition = false;
 	public Vector3 StartPosition;
 
 	public bool hasBeenDefeated = false;
+	public bool hasBeenHit = false;
 
-    private void Awake()
+	private void Awake()
     {
         m_MovementController = GetComponent<CharacterMovementController>();
         m_Input = GetComponent<CharacterInputBase>();
@@ -106,6 +110,7 @@ public class CharacterBaseController : MonoBehaviour
     {
         currentCharacterStatus = newStatus;
 		if (hasBeenDefeated) currentCharacterStatus = CharacterStatus.defeated;
+		else if (hasBeenHit) { hasBeenHit = false; OnHit.Invoke(); }
 		OnStatusChange.Invoke(currentCharacterStatus);
     }
 
@@ -192,6 +197,18 @@ public class CharacterBaseController : MonoBehaviour
 
 	virtual protected void OnNewTurn() { }
 	virtual protected void OnEndTurn() { }
+
+	public void TakeDamage(int damage=1)
+	{
+		life-=damage;
+		if (life > 0) hasBeenHit = true;
+		else
+		{
+			hasBeenDefeated = true;
+			if (tag == "Player") DungeonManager.instance.GameOver();
+		}
+
+		}
 
 	void OnDestroy()
 	{

@@ -11,6 +11,7 @@ public class SceneChanger : MonoBehaviour
 	}
 	public void ToMenu()
 	{
+		Game.instance.Unpause();
 		SceneManager.LoadScene(0);
 	}
 	public void QuitGame()
