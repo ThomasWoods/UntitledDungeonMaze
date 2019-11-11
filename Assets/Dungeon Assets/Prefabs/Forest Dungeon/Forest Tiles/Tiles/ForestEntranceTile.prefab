@@ -80,11 +80,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8334125648723305844}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: e9d4971d7d7b6a749ba41a934651430e,
-        type: 3}
-      propertyPath: m_Name
-      value: Stairs_01
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e9d4971d7d7b6a749ba41a934651430e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -139,6 +134,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: e9d4971d7d7b6a749ba41a934651430e,
+        type: 3}
+      propertyPath: m_Name
+      value: Stairs_01
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: e9d4971d7d7b6a749ba41a934651430e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 562411852869349725, guid: e9d4971d7d7b6a749ba41a934651430e,
         type: 3}
