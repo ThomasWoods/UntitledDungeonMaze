@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrapTargetBoss : TrapTargetEnemy
+public class DefeatableBoss : DefeatableBase
 {
-    public override void KnockedOut()
+    public override void Defeated()
     {
         Debug.Log("The Minobus has been defeated. Victory!");
     }

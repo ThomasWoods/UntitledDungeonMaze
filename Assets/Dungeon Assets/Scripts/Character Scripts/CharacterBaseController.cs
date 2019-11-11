@@ -12,6 +12,7 @@ public class CharacterBaseController : MonoBehaviour
     public CharacterMovementController m_MovementController;
     public CharacterInputBase m_Input;
     public GraphicsController m_GraphicsController;
+    public DefeatableBase m_DefeatableBase;
 
     public CharacterStatus currentCharacterStatus=CharacterStatus.setup;
 	public CharacterAction LastAction;
@@ -32,6 +33,7 @@ public class CharacterBaseController : MonoBehaviour
         m_MovementController = GetComponent<CharacterMovementController>();
         m_Input = GetComponent<CharacterInputBase>();
         m_GraphicsController = GetComponent<GraphicsController>();
+        m_DefeatableBase = GetComponent<DefeatableBase>();
 
 	}
 
@@ -205,7 +207,8 @@ public class CharacterBaseController : MonoBehaviour
 		else
 		{
 			hasBeenDefeated = true;
-			if (tag == "Player") DungeonManager.instance.GameOver();
+            //if (tag == "Player") DungeonManager.instance.GameOver();
+            m_DefeatableBase.Defeated();
 		}
 
 		}

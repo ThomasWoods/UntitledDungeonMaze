@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1857542517942501141}
   - component: {fileID: 4305562090460013656}
   - component: {fileID: -2079680692740363200}
+  - component: {fileID: -5326233730462363252}
   m_Layer: 0
   m_Name: Satyr
   m_TagString: Enemy
@@ -50,9 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c60144413bffd2458e34b5f8f21fa2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 1
   m_MovementController: {fileID: 0}
   m_Input: {fileID: 0}
   m_GraphicsController: {fileID: 0}
+  m_DefeatableBase: {fileID: 0}
   currentCharacterStatus: 0
   LastAction: 0
   OnStatusChange:
@@ -61,10 +64,14 @@ MonoBehaviour:
   OnDefeated:
     m_PersistentCalls:
       m_Calls: []
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []
   UseStartPosition: 0
   RandomStartPosition: 0
   StartPosition: {x: 0, y: 0, z: 0}
   hasBeenDefeated: 0
+  hasBeenHit: 0
 --- !u!114 &8975182578190645054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +153,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8196a8bef701164f928b8be7d161ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHp: 1
+  m_CharacterBaseController: {fileID: 0}
+--- !u!114 &-5326233730462363252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371415953068175433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb05366e63268a344a9620614157f0c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CharacterBaseController: {fileID: 0}
 --- !u!1 &2487825120420107586
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +259,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Satyr 01
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: a3bfedeb498bfaf4493973af61e68e57,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0d4b962e2ca869f448f13d0a494cba16, type: 2}
     - target: {fileID: -4216859302048453862, guid: a3bfedeb498bfaf4493973af61e68e57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -294,12 +319,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: a3bfedeb498bfaf4493973af61e68e57,
+    - target: {fileID: -7042171145538857238, guid: a3bfedeb498bfaf4493973af61e68e57,
         type: 3}
-      propertyPath: m_Controller
+      propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 9100000, guid: 0d4b962e2ca869f448f13d0a494cba16, type: 2}
+      objectReference: {fileID: 2100000, guid: de0a801641b699145acff79c4f51e75c, type: 2}
     - target: {fileID: 1651062367082650294, guid: a3bfedeb498bfaf4493973af61e68e57,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a457581380b559a479661b55e523cb46, type: 2}
+    - target: {fileID: -8221609900653767914, guid: a3bfedeb498bfaf4493973af61e68e57,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de0a801641b699145acff79c4f51e75c, type: 2}
+    - target: {fileID: -1149613533337950434, guid: a3bfedeb498bfaf4493973af61e68e57,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -359,21 +394,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a457581380b559a479661b55e523cb46, type: 2}
-    - target: {fileID: -1149613533337950434, guid: a3bfedeb498bfaf4493973af61e68e57,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a457581380b559a479661b55e523cb46, type: 2}
-    - target: {fileID: -8221609900653767914, guid: a3bfedeb498bfaf4493973af61e68e57,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: de0a801641b699145acff79c4f51e75c, type: 2}
-    - target: {fileID: -7042171145538857238, guid: a3bfedeb498bfaf4493973af61e68e57,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: de0a801641b699145acff79c4f51e75c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3bfedeb498bfaf4493973af61e68e57, type: 3}
 --- !u!4 &9215170556862134699 stripped

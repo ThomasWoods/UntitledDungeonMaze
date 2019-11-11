@@ -36,6 +36,32 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    public void RemakeQueue()
+    {
+        enemiesToAct.Clear();
+        EnqueueEnemies();
+    }
+
+    public void RemoveFromQueue(CharacterBaseController charBase)
+    {
+        Queue<CharacterBaseController> tempQueue = new Queue<CharacterBaseController>();
+
+        while(enemiesToAct.Count > 0)
+        {
+            CharacterBaseController enqueuedChar = enemiesToAct.Dequeue();
+
+            if (enqueuedChar != charBase)
+                tempQueue.Enqueue(enqueuedChar);
+        }
+
+        while (tempQueue.Count > 0)
+        {
+            CharacterBaseController enqueuedChar = enemiesToAct.Dequeue();
+            
+            enemiesToAct.Enqueue(enqueuedChar);
+        }
+    }
+
     public void EnqueueEnemies()
     {
         foreach(CharacterBaseController enemy in DungeonBaseController.instance.enemies)

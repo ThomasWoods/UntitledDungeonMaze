@@ -4,25 +4,15 @@ using UnityEngine;
 
 public class TrapTargetEnemy : TrapTargetBase
 {
-    public int baseHp;
+    public CharacterBaseController m_CharacterBaseController;
 
-    private int currentHp;
-
-    private void Start()
+    private void Awake()
     {
-        currentHp = baseHp;
+        m_CharacterBaseController = GetComponent<CharacterBaseController>();
     }
 
     public override void OnTrapped(int trapStr)
     {
-        currentHp -= trapStr;
-
-        if (currentHp <= 0)
-            KnockedOut();
-    }
-
-    public virtual void KnockedOut()
-    {
-        Debug.Log(gameObject.name + " was knocked out!");
+        m_CharacterBaseController.TakeDamage(trapStr);
     }
 }

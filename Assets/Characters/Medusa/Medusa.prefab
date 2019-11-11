@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 138935849626221846}
   - component: {fileID: 7259615298123202381}
   - component: {fileID: -7500043655229328050}
+  - component: {fileID: 4975364685327192813}
   m_Layer: 0
   m_Name: Medusa
   m_TagString: Enemy
@@ -50,9 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c60144413bffd2458e34b5f8f21fa2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 2
   m_MovementController: {fileID: 2694283053572858513}
   m_Input: {fileID: 1141076890783799104}
   m_GraphicsController: {fileID: 0}
+  m_DefeatableBase: {fileID: 0}
   currentCharacterStatus: 0
   LastAction: 0
   OnStatusChange:
@@ -61,9 +64,14 @@ MonoBehaviour:
   OnDefeated:
     m_PersistentCalls:
       m_Calls: []
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []
   UseStartPosition: 0
   RandomStartPosition: 0
   StartPosition: {x: 0, y: 0, z: 0}
+  hasBeenDefeated: 0
+  hasBeenHit: 0
 --- !u!114 &1141076890783799104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,7 +153,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8196a8bef701164f928b8be7d161ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHp: 2
+  m_CharacterBaseController: {fileID: 0}
+--- !u!114 &4975364685327192813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2628749298594423992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb05366e63268a344a9620614157f0c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CharacterBaseController: {fileID: 0}
 --- !u!1 &7113220941968027284
 GameObject:
   m_ObjectHideFlags: 0

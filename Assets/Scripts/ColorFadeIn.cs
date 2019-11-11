@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
 
 public class ColorFadeIn : MonoBehaviour
 {
@@ -72,7 +73,13 @@ public class ColorFadeIn : MonoBehaviour
 			Text ImageToColor = ObjectToColor as Text;
 			return ImageToColor.color;
 		}
-		return defaultColor;
+        if (ObjectToColor.GetType() == typeof(TextMeshProUGUI))
+        {
+            TextMeshProUGUI ImageToColor = ObjectToColor as TextMeshProUGUI;
+            return ImageToColor.color;
+        }
+
+        return defaultColor;
 	}
 	void SetObjectColor(Color c)
 	{
@@ -87,5 +94,10 @@ public class ColorFadeIn : MonoBehaviour
 			Text ImageToColor = ObjectToColor as Text;
 			ImageToColor.color = c;
 		}
-	}
+        if (ObjectToColor.GetType() == typeof(TextMeshProUGUI))
+        {
+            TextMeshProUGUI ImageToColor = ObjectToColor as TextMeshProUGUI;
+            ImageToColor.color = c;
+        }
+    }
 }
