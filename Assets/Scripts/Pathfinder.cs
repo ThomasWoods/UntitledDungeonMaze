@@ -64,60 +64,70 @@ public class Pathfinder : MonoBehaviour
 
 	public void FindPath(Vector3 startPos, Vector3 destination)
 	{
+		Area = null;
+		ShortestPath = null;
+		ShortestPathReversed = null;
 		if (Vector3.Distance(startPos, destination) > SightRadius)
 		{
 			//Debug.Log("Destination outside of range");
 			return;
 		}
-		ShortestPath = null;
 		ScopeArea(startPos);
 		if (!Area[SightRadius, SightRadius].Exists)
 		{
-			//Debug.Log("No starting location");
+			Debug.Log("No starting location");
 			return;
 		}
 		List<PathSegment> OpenPaths = new List<PathSegment>() { Area[SightRadius, SightRadius] };
-		int safetyLimiter = 9999;
+		int safetyLimiter = 1000;
+		//Debug.Log("Searching for path");
 		while (OpenPaths.Count > 0 && safetyLimiter>0)
 		{
-			PathSegment OpenPath = OpenPaths[0];
+			//Debug.Log("OpenPaths: " + OpenPaths.Count);
+			PathSegment LowestOpenPath = OpenPaths[0];
+			for (int i = 1; i < OpenPaths.Count; i++)
+			{
+				if (OpenPaths[i].F_Cost < LowestOpenPath.F_Cost || 
+					(OpenPaths[i].F_Cost == LowestOpenPath.F_Cost && OpenPaths[i].H_Cost < LowestOpenPath.H_Cost))
+					LowestOpenPath = OpenPaths[i];
+			}
 			foreach (PathPoint adjPath in adjacentPaths)
 			{
-				PathPoint adjLocation = new PathPoint(OpenPaths[0].location.x + adjPath.x, OpenPaths[0].location.y + adjPath.y);
+				PathPoint adjLocation = new PathPoint(LowestOpenPath.location.x + adjPath.x, LowestOpenPath.location.y + adjPath.y);
+				//Debug.Log("LowestOpenPath.location.x + adjPath.x, LowestOpenPath.location.y + adjPath.y");
+				//Debug.Log(LowestOpenPath.location.x +","+ adjPath.x + "," + LowestOpenPath.location.y + "," + adjPath.y);
 				if (adjLocation.x >= Area.GetLength(0) || adjLocation.x < 0 || adjLocation.y >= Area.GetLength(1) || adjLocation.y < 0)
 					continue;
 				PathSegment currentPath = Area[adjLocation.x, adjLocation.y];
 				if (currentPath.Exists && currentPath.Tile != null && currentPath.Tile.walkable && 
-					(currentPath.Tile.occupant == null || destination == currentPath.Tile.transform.position) &&
-					!(currentPath.location.x==0 && currentPath.location.y == 0))
+					(currentPath.Tile.occupant == null || currentPath.Tile.transform.position == destination) &&
+					currentPath.Tile.transform.position!=startPos)
 				{
 					PathSegment newPath = currentPath.Copy();
-					newPath.parent = OpenPath;
+					newPath.parent = LowestOpenPath;
 					newPath.G_Cost = (int)(Vector3.Distance(currentPath.Tile.transform.position, startPos) * 10);
 					newPath.H_Cost = (int)(Vector3.Distance(currentPath.Tile.transform.position, destination) * 10);
 					newPath.CalcFCost();
 					newPath.Calculated = true;
-					if (!currentPath.Calculated || newPath.F_Cost < currentPath.F_Cost)
+					if (!currentPath.Calculated || newPath.G_Cost < currentPath.G_Cost)
 					{
-						currentPath = newPath;
-						if (ShortestPath != null && currentPath.F_Cost > ShortestPath.F_Cost)
-						{
-							//Shortcircuit here because this path is longer than the shorest found path.
-							break;
-						}
-						OpenPaths.Add(currentPath);
+						Area[currentPath.location.x, currentPath.location.y] = newPath;
+						OpenPaths.Add(newPath);
 
-						if (currentPath.Tile.transform.position == destination &&
-							(ShortestPath == null || currentPath.F_Cost < ShortestPath.F_Cost))
+						if (newPath.H_Cost == 0)
 						{
-							ShortestPath = currentPath;
+							//Debug.Log("Shortest Path Found");
+							ShortestPath = newPath;
+							OpenPaths.Clear();
+							break;
 						}
 					}
 				}
 			}
-			OpenPaths.RemoveAt(0);
+			OpenPaths.Remove(LowestOpenPath);
 			safetyLimiter--;
 		}
+		if (safetyLimiter == 0) Debug.Log("Infinite Loop Detected!");
 		if (ShortestPath == null)
 		{
 			//Debug.Log("Did not find a path");
@@ -126,14 +136,15 @@ public class Pathfinder : MonoBehaviour
 		ShortestPathReversed = new Stack<PathSegment>();
 		PathSegment Parent=ShortestPath;
 		safetyLimiter = 100;
-		Debug.Log("Reversing Path");
+		//Debug.Log("Reversing Path");
 		while (!(Parent == null || Parent.Calculated == false) && safetyLimiter > 0)
 		{
-			Debug.Log(Parent.Tile.transform.position + ", "+ (Parent == null || Parent.Calculated == false));
+			//Debug.Log(Parent.Tile.transform.position + ", "+ (Parent == null || Parent.Calculated == false));
 			ShortestPathReversed.Push(Parent);
 			Parent = Parent.parent;
 			safetyLimiter--;
 		}
+		if (safetyLimiter == 0) Debug.Log("Infinite Loop Detected!");
 		if (ShortestPathReversed.Count == 0)
 		{
 			//Debug.Log("Shortest Path Reversed is 0");

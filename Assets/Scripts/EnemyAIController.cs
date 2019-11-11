@@ -37,7 +37,7 @@ public class EnemyAIController : CharacterInputBase
 			if (pathfinder.ShortestPathReversed != null && pathfinder.ShortestPathReversed.Count > 0)
 			{
 				TileBase nextTile = pathfinder.ShortestPathReversed.Peek().Tile;
-				Debug.Log("transform.position + transform.forward == nextTile.transform.position:" + (transform.position + transform.forward) + " == "+ nextTile.transform.position);
+				//Debug.Log("transform.position + transform.forward == nextTile.transform.position:" + (transform.position + transform.forward) + " == "+ nextTile.transform.position);
 				if (transform.position + transform.forward == nextTile.transform.position)
 				{
 					TileBase tile = m_CharacterBaseController.m_MovementController.CheckTile(transform.forward);
