@@ -1,17 +1,20 @@
 fileFormatVersion: 2
-guid: 82dc10f5528de8b4f9cd045a6a778cb7
+guid: a3bfedeb498bfaf4493973af61e68e57
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
-      74: 1989289236423521904
-    second: Default Take
+      74: -8945691123924629249
+    second: Armature|Idle
   - first:
-      74: -3100369314251171874
-    second: Idle
+      74: -2248545528610919299
+    second: Armature|Step
   - first:
-      74: 897100832548060586
-    second: Step
+      74: -1610662470105813061
+    second: Eyes|Idle
+  - first:
+      74: 8637040675230433938
+    second: Mouth|Idle
   externalObjects: {}
   materials:
     importMaterials: 1
