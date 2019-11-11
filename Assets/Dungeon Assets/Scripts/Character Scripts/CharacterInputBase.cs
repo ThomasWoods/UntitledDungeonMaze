@@ -6,12 +6,12 @@ public class CharacterInputBase : MonoBehaviour
 {
     public CharacterBaseController m_CharacterBaseController;
 
-    private void Awake()
-    {
-        m_CharacterBaseController = GetComponent<CharacterBaseController>();
-    }
+	virtual protected void Awake()
+	{
+		m_CharacterBaseController = GetComponent<CharacterBaseController>();
+	}
 
-    public virtual CharacterAction CheckMovementInput()
+	public virtual CharacterAction CheckMovementInput()
     {
 		CharacterAction backupDir = CharacterAction.Wait;
         Debug.LogWarning(gameObject.name + " doesn't override the base movement input method!");

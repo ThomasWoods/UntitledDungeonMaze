@@ -174,4 +174,12 @@ public class CharacterBaseController : MonoBehaviour
 	virtual protected void OnNewTurn() { }
 	virtual protected void OnEndTurn() { }
 
+	void OnDestroy()
+	{
+		DungeonBaseController.instance.OnNewTurn.RemoveListener(OnNewTurn);
+		DungeonBaseController.instance.OnEndTurn.RemoveListener(OnEndTurn);
+		
+		DungeonBaseController.instance.allCharacters.Remove(this);
+		DungeonBaseController.instance.enemies.Remove(this);
+	}
 }
