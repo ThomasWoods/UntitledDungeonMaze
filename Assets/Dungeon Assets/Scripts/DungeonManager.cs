@@ -30,6 +30,15 @@ public class DungeonManager : MonoBehaviour
         dungeonCamera.backgroundColor = dungeonCard.skyColour;
     }
 
+	void Update()
+	{
+		switch (currentDungeonGameState) {
+			case dungeonGameState.dungeonExploring:
+				DungeonBaseController.instance.DungeonStateLogic();
+				break;
+		}
+	}
+
     public void SwitchDungeonGameState(dungeonGameState newState)
     {
         currentDungeonGameState = newState;

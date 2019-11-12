@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum CharacterStatus { setup, idle, selectingMovement, moving, turning, hasMoved, defeated }
+public enum CharacterStatus { setup, idle, selectingMovement, moving, turning, defeated }
 public enum CharacterAction { NoAction, MoveForward, Backstep, MoveLeft, MoveRight, TurnLeft, TurnRight, Wait, Interact}
 public class CharacterBaseController : MonoBehaviour
 {
@@ -100,10 +100,6 @@ public class CharacterBaseController : MonoBehaviour
                 m_MovementController.UpdateTurn();
                 break;
 
-            case CharacterStatus.hasMoved:
-                //SwitchCharacterStatus(CharacterStatus.idle);
-                break;
-
             case CharacterStatus.defeated:
 				OnDefeated.Invoke();
                 break;
@@ -114,18 +110,6 @@ public class CharacterBaseController : MonoBehaviour
     {
 		if (currentCharacterStatus == CharacterStatus.defeated) return;
         currentCharacterStatus = newStatus;
-
-		if (hasBeenDefeated)
-		{
-			currentCharacterStatus = CharacterStatus.defeated;
-			m_DefeatableBase.Defeated();
-		}
-		else if (hasBeenHit)
-		{
-			if (damageSource.Contains("Medusa")) OnMirrorVision.Invoke();
-			hasBeenHit = false;
-			OnHit.Invoke();
-		}
 		OnStatusChange.Invoke(currentCharacterStatus);
     }
 
@@ -155,7 +139,6 @@ public class CharacterBaseController : MonoBehaviour
 				m_MovementController.Turn(1);
 				break;
 			case CharacterAction.Wait:
-                //SwitchCharacterStatus(CharacterStatus.hasMoved);
                 SwitchCharacterStatus(CharacterStatus.idle);
                 ActivationIsDone();
 				break;
@@ -221,17 +204,22 @@ public class CharacterBaseController : MonoBehaviour
 		else
 		{
 			hasBeenDefeated = true;
-            //if (tag == "Player") DungeonManager.instance.GameOver();
 		}
-
 	}
-	/*
-	void OnDestroy()
+
+	public void ProcessLastTurnEvents()
 	{
-		DungeonBaseController.instance.OnNewTurn.RemoveListener(OnNewTurn);
-		DungeonBaseController.instance.OnEndTurn.RemoveListener(OnEndTurn);
-		
-		DungeonBaseController.instance.allCharacters.Remove(this);
-		DungeonBaseController.instance.enemies.Remove(this);
-	}*/
+		if (hasBeenDefeated)
+		{
+			currentCharacterStatus = CharacterStatus.defeated;
+			m_DefeatableBase.Defeated();
+		}
+		else if (hasBeenHit)
+		{
+			if (damageSource.Contains("Medusa")) OnMirrorVision.Invoke();
+			hasBeenHit = false;
+			OnHit.Invoke();
+		}
+	}
+	
 }
