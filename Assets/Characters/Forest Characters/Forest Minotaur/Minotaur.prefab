@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 3
+  turn: 0
   m_MovementController: {fileID: 736813624004179784}
   m_Input: {fileID: 2344228459761107609}
   m_GraphicsController: {fileID: 0}
@@ -67,15 +68,20 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls: []
-  OnMirrorVision:
-    m_PersistentCalls:
-      m_Calls: []
   UseStartPosition: 0
   RandomStartPosition: 0
   StartPosition: {x: 0, y: 0, z: 0}
   hasBeenDefeated: 0
   hasBeenHit: 0
   damageSource: 
+  stunned: 0
+  stunTime: 0
+  OnStunned:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStunEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2344228459761107609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,6 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 3
   rotationSpeed: 200
+  canMoveAfterTurning: 0
   currentTile: {fileID: 0}
   m_BaseController: {fileID: 0}
   AlwaysFaceForward: 0
@@ -170,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d61ec0255f624746bfee62625eefd15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_CharacterBaseController: {fileID: 0}
 --- !u!1 &5614450507929156429
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,6 +270,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minotaur 01
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 5ede8a346246e2d4ea1973eb3cc25399,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6d98ae7f8e7504a49a21f782a4f32172, type: 2}
     - target: {fileID: -4216859302048453862, guid: 5ede8a346246e2d4ea1973eb3cc25399,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -317,11 +330,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 5ede8a346246e2d4ea1973eb3cc25399,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 6d98ae7f8e7504a49a21f782a4f32172, type: 2}
     - target: {fileID: 1651062367082650294, guid: 5ede8a346246e2d4ea1973eb3cc25399,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

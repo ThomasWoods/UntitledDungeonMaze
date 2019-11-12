@@ -1955,13 +1955,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1647314088}
-        m_MethodName: ToGame
-        m_Mode: 1
+      - m_Target: {fileID: 1647314089}
+        m_MethodName: StartGame
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2915,6 +2915,7 @@ GameObject:
   - component: {fileID: 1647314085}
   - component: {fileID: 1647314084}
   - component: {fileID: 1647314087}
+  - component: {fileID: 1647314089}
   - component: {fileID: 1647314088}
   m_Layer: 5
   m_Name: Main Menu
@@ -3009,6 +3010,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338fa5b4a8cd683449bf316f71db8742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1647314089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1647314083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa43acf0ab339494caed74da476fdebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneChanger: {fileID: 1647314088}
+  desertDungeonCard: {fileID: 11400000, guid: eac27f5675815354886bcd4bad7f8c5a, type: 2}
+  forestDungeonCard: {fileID: 11400000, guid: 64cdb61550293de43a95dba140e87457, type: 2}
 --- !u!1 &1652172321
 GameObject:
   m_ObjectHideFlags: 0

@@ -228,22 +228,4 @@ public class CharacterBaseController : MonoBehaviour
 		stunned = true;
 		stunTime = turns;
 	}
-
-    /*
-	public void ProcessLastTurnEvents()
-	{
-		if (hasBeenDefeated)
-		{
-			currentCharacterStatus = CharacterStatus.defeated;
-			m_DefeatableBase.Defeated();
-		}
-		else if (hasBeenHit)
-		{
-			if (damageSource.Contains("Medusa")) OnMirrorVision.Invoke();
-			hasBeenHit = false;
-			OnHit.Invoke();
-		}
-	}
-    */
-	
 }

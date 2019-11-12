@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefeatableBoss : DefeatableBase
+public class DefeatableBoss : DefeatableEnemy
 {
     public override void Defeated()
     {
-        Debug.Log("The Minotaur has been defeated. Victory!");
+        DungeonManager.instance.Victory();
+        RemoveCharacter();
     }
 }

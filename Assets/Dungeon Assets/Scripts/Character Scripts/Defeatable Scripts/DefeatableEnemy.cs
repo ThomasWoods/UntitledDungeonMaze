@@ -6,7 +6,7 @@ public class DefeatableEnemy : DefeatableBase
 {
     public CharacterBaseController m_CharacterBaseController;
 
-    private bool hasBeenDefeated = false;
+    //private bool hasBeenDefeated = false;
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class DefeatableEnemy : DefeatableBase
         RemoveCharacter();
     }
 
-    private void RemoveCharacter()
+    protected void RemoveCharacter()
     {
         DungeonBaseController.instance.allCharacters.Remove(m_CharacterBaseController);
         DungeonBaseController.instance.enemies.Remove(m_CharacterBaseController);

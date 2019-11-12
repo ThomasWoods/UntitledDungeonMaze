@@ -128,4 +128,12 @@ public class Game : MonoBehaviour
 	{
 		isPaused = false;
 	}
+
+    public class DungeonData
+    {
+        public static DungeonCard dungeonCard;
+
+        public static bool wasVictorious = false;
+    }
+
 }

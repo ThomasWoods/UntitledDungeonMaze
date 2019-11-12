@@ -14,7 +14,9 @@ public class DungeonManager : MonoBehaviour
     public GameObject tileParentObj;
     public GameObject enemyParentObj;
 
+    public GameObject victoryPanel;
     public GameObject gameOverPanel;
+    public GameObject pausePanel;
 
     public enum dungeonGameState { init, dungeonExploring, victory, defeat}
     public dungeonGameState currentDungeonGameState;
@@ -25,11 +27,15 @@ public class DungeonManager : MonoBehaviour
     {
         instance = this;
 		dungeonController = FindObjectOfType<DungeonBaseController>();
+
+        if (Game.DungeonData.dungeonCard != null)
+            dungeonCard = Game.DungeonData.dungeonCard;
     }
 
     private void Start()
     {
         dungeonCamera.backgroundColor = dungeonCard.skyColour;
+        Game.DungeonData.wasVictorious = false;
     }
 
 	void Update()
@@ -49,12 +55,15 @@ public class DungeonManager : MonoBehaviour
     public void Victory()
     {
         SwitchDungeonGameState(dungeonGameState.victory);
+        Game.DungeonData.wasVictorious = true;
+        pausePanel.SetActive(false);
+        victoryPanel.SetActive(true);
     }
 
     public void GameOver()
     {
+        pausePanel.SetActive(false);
         gameOverPanel.SetActive(true);
         SwitchDungeonGameState(dungeonGameState.defeat);
-        Debug.Log("Game Over!");
     }
 }
