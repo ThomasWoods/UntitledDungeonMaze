@@ -25,7 +25,9 @@ public class DefeatableEnemy : DefeatableBase
         DungeonBaseController.instance.m_TurnManager.RemoveFromQueue(m_CharacterBaseController);
         DungeonBaseController.instance.allCharacters.Remove(m_CharacterBaseController);
         DungeonBaseController.instance.enemies.Remove(m_CharacterBaseController);
+		m_CharacterBaseController.m_MovementController.currentTile.occupant = null;
 
-        Destroy(gameObject);
+		//Destroy(gameObject);
+		gameObject.SetActive(false);
     }
 }

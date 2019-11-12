@@ -44,8 +44,6 @@ public class TurnManager : MonoBehaviour
     */
     public void RemoveFromQueue(CharacterBaseController charBase)
     {
-        Debug.Log("Queue: " + enemiesToAct.Count);
-
         if (enemiesToAct.Count != 0)
         {
             Queue<CharacterBaseController> tempQueue = new Queue<CharacterBaseController>();
@@ -58,7 +56,7 @@ public class TurnManager : MonoBehaviour
                     tempQueue.Enqueue(enqueuedChar);
             }
 
-            while (tempQueue.Count > 0)
+            while (tempQueue.Count > 0 && enemiesToAct.Count>0)
             {
                 CharacterBaseController enqueuedChar = enemiesToAct.Dequeue();
 
@@ -73,7 +71,7 @@ public class TurnManager : MonoBehaviour
         {
             enemiesToAct.Enqueue(enemy);
         }
-    }
+	}
 
     public void DequeueCharacterToAct()
     {
@@ -83,7 +81,8 @@ public class TurnManager : MonoBehaviour
 				bool ready = true;
 				foreach (CharacterBaseController enemy in DungeonBaseController.instance.enemies)
 				{
-					if (enemy.currentCharacterStatus != CharacterStatus.idle) ready = false;
+					if (!(enemy.currentCharacterStatus == CharacterStatus.idle ||
+						enemy.currentCharacterStatus == CharacterStatus.defeated)) ready = false;
 				}
 
 				if (ready)
@@ -105,10 +104,11 @@ public class TurnManager : MonoBehaviour
                 {
                     characterToAct = enemiesToAct.Dequeue();
 
-                    if(characterToAct != null)
-                    {
-                        ActivateEnemy();
-                    }
+					if (characterToAct != null)
+					{
+						ActivateEnemy();
+					}
+					else Debug.Log("No character to act?");
                 }
                 else
                 {

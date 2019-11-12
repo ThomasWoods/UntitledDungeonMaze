@@ -112,10 +112,16 @@ public class CharacterBaseController : MonoBehaviour
 
     public void SwitchCharacterStatus(CharacterStatus newStatus)
     {
+		if (currentCharacterStatus == CharacterStatus.defeated) return;
         currentCharacterStatus = newStatus;
-        
-		if (hasBeenDefeated) currentCharacterStatus = CharacterStatus.defeated;
-		else if (hasBeenHit) {
+
+		if (hasBeenDefeated)
+		{
+			currentCharacterStatus = CharacterStatus.defeated;
+			m_DefeatableBase.Defeated();
+		}
+		else if (hasBeenHit)
+		{
 			if (damageSource.Contains("Medusa")) OnMirrorVision.Invoke();
 			hasBeenHit = false;
 			OnHit.Invoke();
@@ -216,11 +222,10 @@ public class CharacterBaseController : MonoBehaviour
 		{
 			hasBeenDefeated = true;
             //if (tag == "Player") DungeonManager.instance.GameOver();
-            m_DefeatableBase.Defeated();
 		}
 
 	}
-
+	/*
 	void OnDestroy()
 	{
 		DungeonBaseController.instance.OnNewTurn.RemoveListener(OnNewTurn);
@@ -228,5 +233,5 @@ public class CharacterBaseController : MonoBehaviour
 		
 		DungeonBaseController.instance.allCharacters.Remove(this);
 		DungeonBaseController.instance.enemies.Remove(this);
-	}
+	}*/
 }
