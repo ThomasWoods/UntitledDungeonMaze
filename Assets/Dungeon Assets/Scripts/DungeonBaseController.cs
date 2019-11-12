@@ -75,6 +75,7 @@ public class DungeonBaseController : MonoBehaviour
     public void TurnStart()
     {
         //Called from the turn manager
+
         OnNewTurn.Invoke();
     }
 

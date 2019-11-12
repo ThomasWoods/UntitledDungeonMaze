@@ -196,6 +196,8 @@ public class CharacterBaseController : MonoBehaviour
 
 	virtual protected void OnNewTurn()
 	{
+        hasBeenHit = false;
+
 		turn++;
 		if (stunned)
 		{
@@ -213,6 +215,9 @@ public class CharacterBaseController : MonoBehaviour
 
 	public void TakeDamage(string source, int damage=1)
 	{
+        if (hasBeenHit)
+            return;
+
 		life-=damage;
 		damageSource = source;
 
