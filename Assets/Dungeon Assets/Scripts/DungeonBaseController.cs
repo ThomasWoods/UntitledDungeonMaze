@@ -123,7 +123,8 @@ public class DungeonBaseController : MonoBehaviour
     {
         foreach(CharacterBaseController charBC in enemies)
         {
-            charBC.m_MovementController.OccupyTile();
+			if(charBC!=null)
+				charBC.m_MovementController.OccupyTile();
         }
     }
 
@@ -135,6 +136,8 @@ public class DungeonBaseController : MonoBehaviour
 
     public void BuildNewDungeonFloor()
     {
+		allCharacters.Clear();
+		enemies.Clear();
         if (floorNumber < DungeonManager.instance.dungeonCard.numberOfFloors)
         {
             SwitchDungeonTurnState(dungeonTurnState.SettingUpDungeon);
