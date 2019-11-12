@@ -8,6 +8,7 @@ public enum CharacterAction { NoAction, MoveForward, Backstep, MoveLeft, MoveRig
 public class CharacterBaseController : MonoBehaviour
 {
 	public int life = 3;
+	public int turn = 0;
 
     public CharacterMovementController m_MovementController;
     public CharacterInputBase m_Input;
@@ -28,6 +29,11 @@ public class CharacterBaseController : MonoBehaviour
 	public bool hasBeenDefeated = false;
 	public bool hasBeenHit = false;
 	public string damageSource;
+
+	public bool stunned = false;
+	public int stunTime = 0;
+	public UnityEvent OnStunned = new UnityEvent();
+	public UnityEvent OnStunEnd = new UnityEvent();
 
 	private void Awake()
     {
@@ -107,8 +113,10 @@ public class CharacterBaseController : MonoBehaviour
 
     void CheckCharacterMovementInput()
     {
-		CharacterAction nextAction = m_Input.CheckMovementInput();
-        bool interacting = m_Input.CheckInteractionInput();
+		CharacterAction nextAction = CharacterAction.NoAction;
+		if (stunned) nextAction = CharacterAction.Wait;
+		else nextAction = m_Input.CheckMovementInput();
+		bool interacting = m_Input.CheckInteractionInput();
 
 		switch (nextAction)
 		{
@@ -186,8 +194,22 @@ public class CharacterBaseController : MonoBehaviour
             SwitchCharacterStatus(CharacterStatus.idle);
     }
 
-	virtual protected void OnNewTurn() { }
-	virtual protected void OnEndTurn() { }
+	virtual protected void OnNewTurn()
+	{
+		turn++;
+		if (stunned)
+		{
+			if (stunTime <= 0)
+			{
+				stunned = false;
+				OnStunEnd.Invoke();
+			}
+			stunTime--;
+		}
+	}
+	virtual protected void OnEndTurn()
+	{
+	}
 
 	public void TakeDamage(string source, int damage=1)
 	{
@@ -199,6 +221,14 @@ public class CharacterBaseController : MonoBehaviour
 		else
             SwitchCharacterStatus(CharacterStatus.defeated);
 	}
+
+	public void Stun(int turns = 1)
+	{
+		OnStunned.Invoke();
+		stunned = true;
+		stunTime = turns;
+	}
+
     /*
 	public void ProcessLastTurnEvents()
 	{

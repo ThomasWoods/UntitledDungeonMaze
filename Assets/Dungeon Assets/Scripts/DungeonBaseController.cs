@@ -88,6 +88,7 @@ public class DungeonBaseController : MonoBehaviour
         //Called from the turn manager
         CheckDestroyedCharacters();
         CheckIfAttacked();
+		OnEndTurn.Invoke();
     }
 
     private void CheckDestroyedCharacters()

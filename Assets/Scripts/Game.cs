@@ -50,6 +50,7 @@ public class Game : MonoBehaviour
 		AudioClip sound = Resources.Load<AudioClip>("GDC Audio/button_002");
 		if (sound != null) SFXPlayer.PlayOneShot(sound);
 	}
+	public AudioClip MainMenuBGM, DungeonBGM, VictoryBGM;
 	public bool SettingsLoaded = false;
 
 
@@ -83,11 +84,16 @@ public class Game : MonoBehaviour
 		newObj = Instantiate(audioPlayerPrefab,transform);
 		SFXPlayer = newObj.GetComponent<AudioSource>();
 		SFXPlayer.outputAudioMixerGroup = audioMixer.FindMatchingGroups("SFX")[0];
+
+		MainMenuBGM = Resources.Load("Philammon Music/Going_Nowhere") as AudioClip;
+		VictoryBGM = Resources.Load("Philammon Music/Going_Nowhere_Victory_Theme") as AudioClip;
 	}
 
 	void Start()
 	{
 		LoadSettings();
+		BGMPlayer.clip = MainMenuBGM;
+		BGMPlayer.Play();
 	}
 
 	void LoadSettings()

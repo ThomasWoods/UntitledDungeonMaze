@@ -21,6 +21,7 @@ public class TurnManager : MonoBehaviour
     public void StartNewTurn()
     {
         turnCounter++;
+		DungeonBaseController.instance.TurnStart();
         EnqueueEnemies();
 
         SwitchTeamTurn(TeamTurn.player);
