@@ -87,14 +87,15 @@ public class TurnManager : MonoBehaviour
 
 				if (ready)
                 {
-					CharacterBaseController[] allCharacters = new CharacterBaseController[DungeonBaseController.instance.allCharacters.Count];
-					DungeonBaseController.instance.allCharacters.CopyTo(allCharacters);
-					foreach (CharacterBaseController character in allCharacters) character.ProcessLastTurnEvents();
 					CharacterBaseController playerController = DungeonBaseController.instance.m_PlayerController;
 
                     if (playerController.currentCharacterStatus == CharacterStatus.idle)
-                    {
-                        playerController.Activate();
+					{
+						CharacterBaseController[] allCharacters = new CharacterBaseController[DungeonBaseController.instance.allCharacters.Count];
+						DungeonBaseController.instance.allCharacters.CopyTo(allCharacters);
+						foreach (CharacterBaseController character in allCharacters) character.ProcessLastTurnEvents();
+
+						playerController.Activate();
                         SwitchCurrentState(TurnManagerState.idle);
                     }
                 }
