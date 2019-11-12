@@ -6,6 +6,6 @@ public class DefeatableBoss : DefeatableBase
 {
     public override void Defeated()
     {
-        Debug.Log("The Minobus has been defeated. Victory!");
+        Debug.Log("The Minotaur has been defeated. Victory!");
     }
 }

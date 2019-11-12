@@ -5,8 +5,9 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     public int turnCounter = 0;
+    public float turnTime = 0.5f;
 
-    public enum TurnManagerState { idle, dequeueing}
+    public enum TurnManagerState { idle, dequeueing, acting}
     public TurnManagerState currentState;
 
     public enum TeamTurn { player, enemies}
@@ -15,12 +16,12 @@ public class TurnManager : MonoBehaviour
     private Queue<CharacterBaseController> enemiesToAct = new Queue<CharacterBaseController>();
     private CharacterBaseController characterToAct;
 
+    private float timer = 0f;
+
     public void StartNewTurn()
     {
         turnCounter++;
         EnqueueEnemies();
-
-        //DungeonBaseController.instance.TurnStart();
 
         SwitchTeamTurn(TeamTurn.player);
         SwitchCurrentState(TurnManagerState.dequeueing);
@@ -30,40 +31,17 @@ public class TurnManager : MonoBehaviour
     {
         switch (currentState)
         {
+            case TurnManagerState.acting:
+                timer -= Time.deltaTime;
+
+                if(timer <= 0)
+                    TurnIsOver();
+
+                break;
+
             case TurnManagerState.dequeueing:
                 DequeueCharacterToAct();
                 break;
-        }
-    }
-    /*
-    public void RemakeQueue()
-    {
-        enemiesToAct.Clear();
-        EnqueueEnemies();
-    }
-    */
-    public void RemoveFromQueue(CharacterBaseController charBase)
-    {
-        Debug.Log("Queue: " + enemiesToAct.Count);
-
-        if (enemiesToAct.Count != 0)
-        {
-            Queue<CharacterBaseController> tempQueue = new Queue<CharacterBaseController>();
-
-            while (enemiesToAct.Count > 0)
-            {
-                CharacterBaseController enqueuedChar = enemiesToAct.Dequeue();
-
-                if (enqueuedChar != charBase)
-                    tempQueue.Enqueue(enqueuedChar);
-            }
-
-            while (tempQueue.Count > 0)
-            {
-                CharacterBaseController enqueuedChar = enemiesToAct.Dequeue();
-
-                enemiesToAct.Enqueue(enqueuedChar);
-            }
         }
     }
 
@@ -80,23 +58,9 @@ public class TurnManager : MonoBehaviour
         switch (currentTeamTurn)
         {
             case TeamTurn.player:
-				bool ready = true;
-				foreach (CharacterBaseController enemy in DungeonBaseController.instance.enemies)
-				{
-					if (enemy.currentCharacterStatus != CharacterStatus.idle) ready = false;
-				}
 
-				if (ready)
-                {
-                    CharacterBaseController playerController = DungeonBaseController.instance.m_PlayerController;
-
-                    if (playerController.currentCharacterStatus == CharacterStatus.idle)
-                    {
-                        playerController.Activate();
-                        SwitchCurrentState(TurnManagerState.idle);
-                    }
-                }
-                
+                DungeonBaseController.instance.m_PlayerController.Activate();
+                SwitchCurrentState(TurnManagerState.idle);
                 break;
 
             case TeamTurn.enemies:
@@ -112,7 +76,7 @@ public class TurnManager : MonoBehaviour
                 }
                 else
                 {
-                    TurnIsOver();
+                    SwitchCurrentState(TurnManagerState.acting);
                 }
 
                 break;
@@ -125,6 +89,7 @@ public class TurnManager : MonoBehaviour
         switch (currentTeamTurn)
         {
             case TeamTurn.player:
+                timer = turnTime;
                 SwitchTeamTurn(TeamTurn.enemies);
 				SwitchCurrentState(TurnManagerState.dequeueing);
                 break;
@@ -144,16 +109,18 @@ public class TurnManager : MonoBehaviour
 		{
 			Debug.Log("The player was cought!");
 			DungeonBaseController.instance.m_PlayerController.TakeDamage(characterToAct.name);
+            DequeueCharacterToAct();
 		}
-        characterToAct.Activate();
-
-        SwitchCurrentState(TurnManagerState.idle);
+        else
+        {
+            characterToAct.Activate();
+            SwitchCurrentState(TurnManagerState.idle);
+        }
     }
-
 
     void TurnIsOver()
     {
-        //DungeonBaseController.instance.TurnEnd();
+        DungeonBaseController.instance.TurnEnd();
         StartNewTurn();
     }
 
@@ -173,5 +140,7 @@ public class TurnManager : MonoBehaviour
     {
         currentTeamTurn = newTeamTurn;
     }
+
+    
 
 }

@@ -18,9 +18,9 @@ MonoBehaviour:
   skyColour: {r: 0.45109472, g: 0.8773585, b: 0.6986027, a: 0}
   firstEnemy: {fileID: 371415953068175433, guid: 1f41378f452719c4dab6455a744cd839,
     type: 3}
-  secondEnemy: {fileID: 371415953068175433, guid: 1f41378f452719c4dab6455a744cd839,
+  secondEnemy: {fileID: 2628749298594423992, guid: e39b4005a0926074ea82e2d36eadcb7e,
     type: 3}
-  bossEnemy: {fileID: 371415953068175433, guid: 1f41378f452719c4dab6455a744cd839,
+  bossEnemy: {fileID: 803476578430906721, guid: e423936dcd3a4a247b1caf0db1061bdb,
     type: 3}
   entranceTile: {fileID: 3629044442337999025, guid: 712b9896cec8a5e4489dc1a2e2b71e10,
     type: 3}

@@ -7,6 +7,8 @@ public class CharacterMovementController : MonoBehaviour
     public float movementSpeed;
     public float rotationSpeed;
 
+    public bool canMoveAfterTurning = false;
+
     public TileBase currentTile;
     public CharacterBaseController m_BaseController;
 
@@ -158,7 +160,7 @@ public class CharacterMovementController : MonoBehaviour
             transform.rotation = targetRotaion;
             degreesRotated = 0;
 
-            if(gameObject.tag == "Player")
+            if(canMoveAfterTurning)
                 m_BaseController.SwitchCharacterStatus(CharacterStatus.selectingMovement);
             else
                 m_BaseController.SwitchCharacterStatus(CharacterStatus.idle);

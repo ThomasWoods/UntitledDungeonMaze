@@ -9,6 +9,7 @@ public class DungeonBaseController : MonoBehaviour
 
     public GameObject m_Player;
     public CharacterBaseController m_PlayerController;
+    public AttackablePlayer m_AttackablePlayer;
     public List<CharacterBaseController> allCharacters;
 
     public List<CharacterBaseController> enemies = new List<CharacterBaseController>();
@@ -43,11 +44,6 @@ public class DungeonBaseController : MonoBehaviour
         m_DungeonGenerator = GetComponentInChildren<DungeonGenerator>();
         m_FloorSweeper = GetComponentInChildren<FloorSweeper>();
         m_TurnManager = GetComponent<TurnManager>();
-
-        // Moved the "Find player" to the character controller
-
-        //m_Player = GameObject.FindWithTag("Player");
-		//m_PlayerController = m_Player.GetComponent<CharacterBaseController>();
     }
 
     private void Start()
@@ -79,55 +75,42 @@ public class DungeonBaseController : MonoBehaviour
                 m_TurnManager.TurnManagerUpdate();
                 break;
         }
-
-        /*
-		switch (currentDungeonTurnState)
-		{
-			case dungeonTurnState.SettingUpDungeon: break;
-			case dungeonTurnState.TurnStart:
-				OnNewTurn.Invoke();
-				ActionQueue = new Stack<CharacterBaseController>(allCharacters);
-				SwitchDungeonTurnState(dungeonTurnState.ProcessTurns);
-				break;
-			case dungeonTurnState.ProcessTurns:
-				if (activeCharacter == null || activeCharacter.currentCharacterStatus == CharacterStatus.idle)
-					ActivateNextCharacter();
-				break;
-			case dungeonTurnState.TurnEnd:
-				OnEndTurn.Invoke();
-				SwitchDungeonTurnState(dungeonTurnState.TurnStart);
-				break;
-		}
-        */
     }
 
     public void TurnStart()
     {
         //Called from the turn manager
-
         OnNewTurn.Invoke();
     }
 
     public void TurnEnd()
     {
         //Called from the turn manager
-
-        OnEndTurn.Invoke();
+        CheckDestroyedCharacters();
+        CheckIfAttacked();
     }
 
-    void ActivateNextCharacter()
-	{
-		if (ActionQueue.Count > 0)
-		{
-			activeCharacter = ActionQueue.Pop();
-			activeCharacter.Activate();
-		}
-		else
-		{
-			activeCharacter = null;
-			SwitchDungeonTurnState(dungeonTurnState.TurnEnd);
-		}
-	}
+    private void CheckDestroyedCharacters()
+    {
+        Queue<CharacterBaseController> defeatedCharacters = new Queue<CharacterBaseController>();
+        
+        foreach(CharacterBaseController character in allCharacters)
+        {
+            if (character.currentCharacterStatus == CharacterStatus.defeated)
+                defeatedCharacters.Enqueue(character);
+        }
+
+        while(defeatedCharacters.Count > 0)
+        {
+            CharacterBaseController character = defeatedCharacters.Dequeue();
+            character.m_DefeatableBase.Defeated();
+        }
+    }
+
+    private void CheckIfAttacked()
+    {
+        m_AttackablePlayer.CheckIfAttacked();
+    }
 
     void PlacePlayer()
     {

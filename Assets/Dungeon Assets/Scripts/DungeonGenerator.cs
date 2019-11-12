@@ -301,7 +301,6 @@ public class DungeonGenerator : MonoBehaviour
     void SpawnExitTile(Vector3 tilePos)
     {
         GameObject instance = Instantiate(dungeonCard.exitTile, transform.position, Quaternion.identity);
-        //instance.GetComponent<ExitTileInteracton>().m_DungeonFloor = gameObject;
         instance.transform.position = tilePos;
         instance.transform.parent = DungeonManager.instance.tileParentObj.transform;
         m_DungeonBase.exitTile = instance;
@@ -309,7 +308,15 @@ public class DungeonGenerator : MonoBehaviour
 
     void SpawnOpenTile(Vector3 tilePos)
     {
-        GameObject instance = Instantiate(dungeonCard.openTiles[Random.Range(0, dungeonCard.openTiles.Length)], transform.position, Quaternion.identity);
+        int roll = Random.Range(0, 10);
+
+        GameObject instance = null;
+
+        if (roll == 0)
+            instance = Instantiate(dungeonCard.openTiles[Random.Range(0, dungeonCard.openTiles.Length)], transform.position, Quaternion.identity);
+        else
+            instance = Instantiate(dungeonCard.openTiles[0], transform.position, Quaternion.identity);
+        
         instance.transform.position = tilePos;
         instance.transform.parent = DungeonManager.instance.tileParentObj.transform;
     }
@@ -387,6 +394,13 @@ public class DungeonGenerator : MonoBehaviour
                 wallType = 5;
                 break;
         }
+
+        int roll = Random.Range(0, 10);
+
+        if (roll == 0)
+            chosenTile = wallTypes[wallType][Random.Range(0, wallTypes[wallType].Length)];
+        else
+            chosenTile = wallTypes[wallType][0];
         
         chosenTile = wallTypes[wallType][Random.Range(0, wallTypes[wallType].Length)];
 

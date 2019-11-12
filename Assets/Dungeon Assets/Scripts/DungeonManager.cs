@@ -13,7 +13,9 @@ public class DungeonManager : MonoBehaviour
 
     public GameObject tileParentObj;
     public GameObject enemyParentObj;
-    
+
+    public GameObject gameOverPanel;
+
     public enum dungeonGameState { init, dungeonExploring, victory, defeat}
     public dungeonGameState currentDungeonGameState;
 
@@ -42,8 +44,8 @@ public class DungeonManager : MonoBehaviour
 
     public void GameOver()
     {
+        gameOverPanel.SetActive(true);
         SwitchDungeonGameState(dungeonGameState.defeat);
-		dungeonController.m_PlayerController.hasBeenDefeated=true;
         Debug.Log("Game Over!");
     }
 }

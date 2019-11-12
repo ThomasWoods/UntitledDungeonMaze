@@ -20,7 +20,6 @@ public class CharacterBaseController : MonoBehaviour
 	public CharacterStatusEvent OnStatusChange = new CharacterStatusEvent();
 	public UnityEvent OnDefeated = new UnityEvent();
 	public UnityEvent OnHit = new UnityEvent();
-	public UnityEvent OnMirrorVision = new UnityEvent();
 
 	public bool UseStartPosition = false;
 	public bool RandomStartPosition = false;
@@ -49,11 +48,6 @@ public class CharacterBaseController : MonoBehaviour
 
         switch (gameObject.tag)
         {
-            case "Player":
-                DungeonBaseController.instance.m_Player = gameObject;
-                DungeonBaseController.instance.m_PlayerController = this;
-                break;
-
             case "Enemy":
                 DungeonBaseController.instance.enemies.Add(this);
                 break;
@@ -101,11 +95,9 @@ public class CharacterBaseController : MonoBehaviour
                 break;
 
             case CharacterStatus.hasMoved:
-                //SwitchCharacterStatus(CharacterStatus.idle);
                 break;
 
             case CharacterStatus.defeated:
-				OnDefeated.Invoke();
                 break;
         }
     }
@@ -113,14 +105,6 @@ public class CharacterBaseController : MonoBehaviour
     public void SwitchCharacterStatus(CharacterStatus newStatus)
     {
         currentCharacterStatus = newStatus;
-        
-		if (hasBeenDefeated) currentCharacterStatus = CharacterStatus.defeated;
-		else if (hasBeenHit) {
-			if (damageSource.Contains("Medusa")) OnMirrorVision.Invoke();
-			hasBeenHit = false;
-			OnHit.Invoke();
-		}
-		OnStatusChange.Invoke(currentCharacterStatus);
     }
 
     void CheckCharacterMovementInput()
@@ -149,7 +133,6 @@ public class CharacterBaseController : MonoBehaviour
 				m_MovementController.Turn(1);
 				break;
 			case CharacterAction.Wait:
-                //SwitchCharacterStatus(CharacterStatus.hasMoved);
                 SwitchCharacterStatus(CharacterStatus.idle);
                 ActivationIsDone();
 				break;
@@ -201,7 +184,8 @@ public class CharacterBaseController : MonoBehaviour
         if (m_GraphicsController != null)
             m_GraphicsController.StopWalking();
 
-        SwitchCharacterStatus(CharacterStatus.idle);
+        if(currentCharacterStatus != CharacterStatus.defeated)
+            SwitchCharacterStatus(CharacterStatus.idle);
     }
 
 	virtual protected void OnNewTurn() { }
@@ -211,14 +195,11 @@ public class CharacterBaseController : MonoBehaviour
 	{
 		life-=damage;
 		damageSource = source;
-		if (life > 0) hasBeenHit = true;
-		else
-		{
-			hasBeenDefeated = true;
-            //if (tag == "Player") DungeonManager.instance.GameOver();
-            m_DefeatableBase.Defeated();
-		}
 
+		if (life > 0)
+            hasBeenHit = true;
+		else
+            SwitchCharacterStatus(CharacterStatus.defeated);
 	}
 
 	void OnDestroy()

@@ -20,9 +20,6 @@ public class DefeatableEnemy : DefeatableBase
 
     private void RemoveCharacter()
     {
-        Debug.Log(gameObject.name + " was defeated!");
-        
-        DungeonBaseController.instance.m_TurnManager.RemoveFromQueue(m_CharacterBaseController);
         DungeonBaseController.instance.allCharacters.Remove(m_CharacterBaseController);
         DungeonBaseController.instance.enemies.Remove(m_CharacterBaseController);
 
