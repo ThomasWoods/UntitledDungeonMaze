@@ -54,13 +54,13 @@ public class DungeonBaseController : MonoBehaviour
         m_DungeonGenerator.CacheDungeonCard();
 		StartCoroutine(BuildDungeonFloor());
 	}
-
+	/*
 	void Update()
 	{
 		DungeonStateLogic();
 	}
-
-	void DungeonStateLogic()
+	*/
+	public void DungeonStateLogic()
 	{
         switch (currentDungeonTurnState)
         {

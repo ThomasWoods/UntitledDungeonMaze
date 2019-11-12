@@ -33,10 +33,8 @@ public class TurnManager : MonoBehaviour
         {
             case TurnManagerState.acting:
                 timer -= Time.deltaTime;
-
-                if(timer <= 0)
+                if (timer <= 0)
                     TurnIsOver();
-
                 break;
 
             case TurnManagerState.dequeueing:
@@ -44,14 +42,14 @@ public class TurnManager : MonoBehaviour
                 break;
         }
     }
-
+    
     public void EnqueueEnemies()
     {
         foreach(CharacterBaseController enemy in DungeonBaseController.instance.enemies)
         {
             enemiesToAct.Enqueue(enemy);
         }
-    }
+	}
 
     public void DequeueCharacterToAct()
     {
@@ -61,6 +59,27 @@ public class TurnManager : MonoBehaviour
 
                 DungeonBaseController.instance.m_PlayerController.Activate();
                 SwitchCurrentState(TurnManagerState.idle);
+				bool ready = true;
+				foreach (CharacterBaseController enemy in DungeonBaseController.instance.enemies)
+				{
+					if (!(enemy.currentCharacterStatus == CharacterStatus.idle ||
+						enemy.currentCharacterStatus == CharacterStatus.defeated)) ready = false;
+				}
+
+				if (ready)
+                {
+					CharacterBaseController playerController = DungeonBaseController.instance.m_PlayerController;
+
+                    if (playerController.currentCharacterStatus == CharacterStatus.idle)
+					{
+						CharacterBaseController[] allCharacters = new CharacterBaseController[DungeonBaseController.instance.allCharacters.Count];
+						DungeonBaseController.instance.allCharacters.CopyTo(allCharacters);
+
+						playerController.Activate();
+                        SwitchCurrentState(TurnManagerState.idle);
+                    }
+                }
+                
                 break;
 
             case TeamTurn.enemies:
@@ -69,10 +88,11 @@ public class TurnManager : MonoBehaviour
                 {
                     characterToAct = enemiesToAct.Dequeue();
 
-                    if(characterToAct != null)
-                    {
-                        ActivateEnemy();
-                    }
+					if (characterToAct != null)
+					{
+						ActivateEnemy();
+					}
+					else Debug.Log("No character to act?");
                 }
                 else
                 {
