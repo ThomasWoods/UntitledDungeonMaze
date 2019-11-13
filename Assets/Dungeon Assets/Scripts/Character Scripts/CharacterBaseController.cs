@@ -19,8 +19,8 @@ public class CharacterBaseController : MonoBehaviour
 	public CharacterAction LastAction;
 
 	public CharacterStatusEvent OnStatusChange = new CharacterStatusEvent();
-	public UnityEvent OnDefeated = new UnityEvent();
-	public UnityEvent OnHit = new UnityEvent();
+	public StringEvent OnDefeated = new StringEvent();
+	public StringEvent OnHit = new StringEvent();
 
 	public bool UseStartPosition = false;
 	public bool RandomStartPosition = false;
