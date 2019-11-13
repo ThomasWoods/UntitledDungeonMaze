@@ -169,18 +169,35 @@ public class DungeonBaseController : MonoBehaviour
         }
     }
 
-    IEnumerator BuildDungeonFloor()
-    {
-        m_DungeonGenerator.ResetFloorGenerator();
-        m_DungeonGenerator.GenerateDungeon();
+	IEnumerator BuildDungeonFloor()
+	{
+		m_DungeonGenerator.ResetFloorGenerator();
+		m_DungeonGenerator.GenerateDungeon();
 		yield return 0;
-		PlacePlayer();
-        PlaceEnemies();
 
-        m_FadeOutAnimator.SetTrigger("FadeToTransparent");
-        yield return new WaitForSeconds(1f);
+		bool allready = true;
+		do
+		{
+			PlacePlayer();
+			PlaceEnemies();
+			allready = true;
+			foreach (CharacterBaseController character in allCharacters)
+			{
+				if (character.m_MovementController.currentTile == null)
+				{
+					Debug.Log("waiting for all characters!");
+					allready = false;
+					yield return 0;
+					break;
+				}
+			}
+		}
+		while(allready==false);
 
-        DungeonManager.instance.SwitchDungeonGameState(DungeonManager.dungeonGameState.dungeonExploring);
+		m_FadeOutAnimator.SetTrigger("FadeToTransparent");
+		yield return new WaitForSeconds(1f);
+
+		DungeonManager.instance.SwitchDungeonGameState(DungeonManager.dungeonGameState.dungeonExploring);
         SwitchDungeonTurnState(dungeonTurnState.TurnStart);
     }
 	
