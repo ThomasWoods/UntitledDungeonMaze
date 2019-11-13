@@ -50,6 +50,11 @@ public class Game : MonoBehaviour
 		AudioClip sound = Resources.Load<AudioClip>("GDC Audio/button_002");
 		if (sound != null) SFXPlayer.PlayOneShot(sound);
 	}
+	public void PlayFootstep()
+	{
+		AudioClip sound = Resources.Load<AudioClip>("GDC Audio/S23_SFX_Footsteps_Gravel_Loafers_Loops_Walk_Normal (modified)");
+		if (sound != null) SFXPlayer.PlayOneShot(sound);
+	}
 	public AudioClip MainMenuBGM, DungeonBGM, VictoryBGM;
 	public bool SettingsLoaded = false;
 
