@@ -101,6 +101,7 @@ public class Game : MonoBehaviour
 	{
 		LoadSettings();
 		BGMPlayer.clip = MainMenuBGM;
+		BGMPlayer.loop = true;
 		BGMPlayer.Play();
 	}
 
