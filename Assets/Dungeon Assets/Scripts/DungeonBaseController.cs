@@ -139,7 +139,7 @@ public class DungeonBaseController : MonoBehaviour
 
     private IEnumerator FloorTransition()
     {
-        m_FadeOutAnimator.SetTrigger("FadeToColour");
+        m_FadeOutAnimator.SetBool("FadeOut", true);
         yield return new WaitForSeconds(1f);
         BuildNewDungeonFloor();
     }
@@ -194,7 +194,7 @@ public class DungeonBaseController : MonoBehaviour
 		}
 		while(allready==false);
 
-		m_FadeOutAnimator.SetTrigger("FadeToTransparent");
+        m_FadeOutAnimator.SetBool("FadeOut", false);
 		yield return new WaitForSeconds(1f);
 
 		DungeonManager.instance.SwitchDungeonGameState(DungeonManager.dungeonGameState.dungeonExploring);
