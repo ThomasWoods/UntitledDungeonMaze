@@ -76,6 +76,7 @@ public class DungeonManager : MonoBehaviour
 
     private IEnumerator Fadeout()
     {
+        DungeonBaseController.instance.m_FadeOutAnimator.SetBool("FadeOut", true);
         yield return new WaitForSeconds(1f);
         m_SceneChanger.ToMenu();
     }
