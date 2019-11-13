@@ -71,7 +71,8 @@ public class DungeonManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        Fadeout();
+        Debug.Log("Check");
+        StartCoroutine(Fadeout()); 
     }
 
     private IEnumerator Fadeout()

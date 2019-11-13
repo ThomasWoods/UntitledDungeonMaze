@@ -30,16 +30,22 @@ MonoBehaviour:
   - {fileID: 2292143078135154294, guid: 326eba92526582c4799a685ff1193068, type: 3}
   pillarTiles:
   - {fileID: 4693886861996653671, guid: 34d2e199d32f6ab4fa1d77239c0a6e7a, type: 3}
+  - {fileID: 4693886861996653671, guid: 97dfa5ca25839124388bf13652016cc7, type: 3}
   lineTiles:
   - {fileID: 4693886861996653671, guid: 930a41566246caa459a1633153591b60, type: 3}
+  - {fileID: 4693886861996653671, guid: 60c44e00b4649ca488cf2691e9fd975d, type: 3}
   cornerTiles:
   - {fileID: 4693886861996653671, guid: d4b991b39c83432498235d55c297d36f, type: 3}
+  - {fileID: 4693886861996653671, guid: 662ae202d8a0f2b46ac96ae7209a14f9, type: 3}
   tTiles:
   - {fileID: 4693886861996653671, guid: a10003270cf69c14586201e38eb1654a, type: 3}
+  - {fileID: 4693886861996653671, guid: d60453b8905e8e441b26d0d6a456ed2e, type: 3}
   endTiles:
   - {fileID: 4693886861996653671, guid: 6d370c1d47405ec4b803bec32fa4955c, type: 3}
+  - {fileID: 4693886861996653671, guid: 1beece343e6bec944b73ebfe93cba670, type: 3}
   crossTiles:
   - {fileID: 5257894820172171365, guid: 1e9b102250dd95b48862b24fc38d4b9a, type: 3}
+  - {fileID: 5257894820172171365, guid: 8a8a49e32cb4e87429eac2d698cbf932, type: 3}
   trapTiles:
   - {fileID: 2214542103791988907, guid: 57152b1ac9b4a2b4c8d5c65ae780d3a9, type: 3}
   - {fileID: 2214542103791988907, guid: 675fb87dc2b20c3489b65ffe2ce30f2d, type: 3}
