@@ -114,7 +114,6 @@ public class CharacterMovementController : MonoBehaviour
         {
             // The target tile has been reached
             transform.position = targetTilePos;
-            //OccupyTile();
 
             currentTile.TileSteppedOn();
 
@@ -160,9 +159,9 @@ public class CharacterMovementController : MonoBehaviour
             transform.rotation = targetRotaion;
             degreesRotated = 0;
 
-            if(canMoveAfterTurning)
+            if (canMoveAfterTurning && !m_BaseController.confused)
                 m_BaseController.SwitchCharacterStatus(CharacterStatus.selectingMovement);
-            else
+            else 
                 m_BaseController.SwitchCharacterStatus(CharacterStatus.idle);
         }
     }

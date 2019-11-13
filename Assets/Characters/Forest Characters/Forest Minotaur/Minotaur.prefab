@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c60144413bffd2458e34b5f8f21fa2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: Minotaur
   life: 3
   turn: 0
   m_MovementController: {fileID: 736813624004179784}
@@ -71,6 +72,7 @@ MonoBehaviour:
   UseStartPosition: 0
   RandomStartPosition: 0
   StartPosition: {x: 0, y: 0, z: 0}
+  attackEffect: 0
   hasBeenDefeated: 0
   hasBeenHit: 0
   damageSource: 
@@ -82,6 +84,12 @@ MonoBehaviour:
   OnStunEnd:
     m_PersistentCalls:
       m_Calls: []
+  confused: 0
+  confusedTime: 0
+  OnConfused:
+    m_PersistentCalls:
+      m_Calls: []
+  mirror: 0
 --- !u!114 &2344228459761107609
 MonoBehaviour:
   m_ObjectHideFlags: 0

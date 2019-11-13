@@ -11,8 +11,8 @@ public class TrapTargetEnemy : TrapTargetBase
         m_CharacterBaseController = GetComponent<CharacterBaseController>();
     }
 
-    public override void OnTrapped(int trapStr)
+    public override void OnTrapped(int trapStr, StaticEnums.StatusEffect effect)
     {
-        m_CharacterBaseController.TakeDamage(gameObject.name, trapStr);
+        m_CharacterBaseController.TakeDamage(effect, trapStr);
     }
 }

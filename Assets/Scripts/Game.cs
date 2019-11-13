@@ -48,7 +48,10 @@ public class Game : MonoBehaviour
 	public void PlaySound()
 	{
 		AudioClip sound = Resources.Load<AudioClip>("GDC Audio/button_002");
-		if (sound != null) SFXPlayer.PlayOneShot(sound);
+        if (sound != null)
+        {
+            SFXPlayer.PlayOneShot(sound);
+        } 
 	}
 	public void PlayFootstep()
 	{

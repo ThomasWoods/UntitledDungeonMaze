@@ -42,3 +42,4 @@ MonoBehaviour:
   - {fileID: 5257894820172171365, guid: 1e9b102250dd95b48862b24fc38d4b9a, type: 3}
   trapTiles:
   - {fileID: 2214542103791988907, guid: 57152b1ac9b4a2b4c8d5c65ae780d3a9, type: 3}
+  - {fileID: 2214542103791988907, guid: 675fb87dc2b20c3489b65ffe2ce30f2d, type: 3}

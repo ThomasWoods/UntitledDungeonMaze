@@ -17,6 +17,7 @@ public class TurnManager : MonoBehaviour
     private CharacterBaseController characterToAct;
 
     private float timer = 0f;
+    private bool useLongTime = false;
 
     public void StartNewTurn()
     {
@@ -110,7 +111,14 @@ public class TurnManager : MonoBehaviour
         switch (currentTeamTurn)
         {
             case TeamTurn.player:
-                timer = turnTime;
+                if (useLongTime)
+                {
+                    timer = turnTime * 2;
+                    useLongTime = false;
+                }
+                else
+                    timer = turnTime;
+
                 SwitchTeamTurn(TeamTurn.enemies);
 				SwitchCurrentState(TurnManagerState.dequeueing);
                 break;
@@ -128,7 +136,8 @@ public class TurnManager : MonoBehaviour
 
 		if (tile.occupant == DungeonBaseController.instance.m_Player)
 		{
-			DungeonBaseController.instance.m_PlayerController.TakeDamage(characterToAct.name);
+			DungeonBaseController.instance.m_PlayerController.TakeDamage(characterToAct.attackEffect);
+            DungeonBaseController.instance.m_PlayerController.damageSource = characterToAct.displayName;
             DequeueCharacterToAct();
 		}
         else
@@ -136,6 +145,11 @@ public class TurnManager : MonoBehaviour
             characterToAct.Activate();
             SwitchCurrentState(TurnManagerState.idle);
         }
+    }
+
+    public void UseLongTime()
+    {
+        useLongTime = true;
     }
 
     void TurnIsOver()
@@ -154,8 +168,7 @@ public class TurnManager : MonoBehaviour
     {
         currentState = newState;
     }
-
-
+    
     public void SwitchTeamTurn(TeamTurn newTeamTurn)
     {
         currentTeamTurn = newTeamTurn;

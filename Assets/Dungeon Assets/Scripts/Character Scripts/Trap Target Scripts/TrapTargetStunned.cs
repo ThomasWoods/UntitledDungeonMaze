@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrapTargetStunned : TrapTargetBase
 {
-	public int StunDuration = 1;
+	//public int StunDuration = 1;
     public CharacterBaseController m_CharacterController;
 
     private void Awake()
@@ -12,9 +12,8 @@ public class TrapTargetStunned : TrapTargetBase
         m_CharacterController = GetComponent<CharacterBaseController>();
     }
 
-    public override void OnTrapped(int trapStr)
+    public override void OnTrapped(int trapStr, StaticEnums.StatusEffect effect)
     {
-		m_CharacterController.Stun(StunDuration);
-        Debug.Log(gameObject.name + " stepped on a trap and got stunned!");
+        m_CharacterController.ApplyStatusEffect(trapStr, effect);
     }
 }

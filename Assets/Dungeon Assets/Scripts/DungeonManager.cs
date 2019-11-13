@@ -18,6 +18,8 @@ public class DungeonManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject pausePanel;
 
+    public SceneChanger m_SceneChanger;
+
     public enum dungeonGameState { init, dungeonExploring, victory, defeat}
     public dungeonGameState currentDungeonGameState;
 
@@ -65,5 +67,16 @@ public class DungeonManager : MonoBehaviour
         pausePanel.SetActive(false);
         gameOverPanel.SetActive(true);
         SwitchDungeonGameState(dungeonGameState.defeat);
+    }
+
+    public void ReturnToMainMenu()
+    {
+        Fadeout();
+    }
+
+    private IEnumerator Fadeout()
+    {
+        yield return new WaitForSeconds(1f);
+        m_SceneChanger.ToMenu();
     }
 }

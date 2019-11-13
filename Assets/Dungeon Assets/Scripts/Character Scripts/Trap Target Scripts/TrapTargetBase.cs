@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrapTargetBase : MonoBehaviour
 {
-    public virtual void OnTrapped(int trapStr)
+    public virtual void OnTrapped(int trapStr, StaticEnums.StatusEffect effect)
     {
         Debug.Log(gameObject.name + " stepped on a trap!");
     }

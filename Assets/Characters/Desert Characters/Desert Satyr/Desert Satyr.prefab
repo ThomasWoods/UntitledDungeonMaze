@@ -192,7 +192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c60144413bffd2458e34b5f8f21fa2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: Satyr
   life: 1
+  turn: 0
   m_MovementController: {fileID: 0}
   m_Input: {fileID: 0}
   m_GraphicsController: {fileID: 0}
@@ -208,15 +210,27 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls: []
-  OnMirrorVision:
-    m_PersistentCalls:
-      m_Calls: []
   UseStartPosition: 0
   RandomStartPosition: 0
   StartPosition: {x: 0, y: 0, z: 0}
+  attackEffect: 0
   hasBeenDefeated: 0
   hasBeenHit: 0
   damageSource: 
+  stunned: 0
+  stunTime: 0
+  OnStunned:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStunEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  confused: 0
+  confusedTime: 0
+  OnConfused:
+    m_PersistentCalls:
+      m_Calls: []
+  mirror: 0
 --- !u!114 &8975182578190645054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 3
   rotationSpeed: 200
+  canMoveAfterTurning: 0
   currentTile: {fileID: 0}
   m_BaseController: {fileID: 0}
   AlwaysFaceForward: 0

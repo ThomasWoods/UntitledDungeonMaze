@@ -30,15 +30,28 @@ MonoBehaviour:
   - {fileID: 2292143078135154294, guid: 290ece5f95975944eba4cf02dfe14064, type: 3}
   pillarTiles:
   - {fileID: 4693886861996653671, guid: db057c7ba1a2c62469df3042be10927c, type: 3}
+  - {fileID: 4693886861996653671, guid: 183b6d593ba8cb348bbfc3731507cca1, type: 3}
+  - {fileID: 4693886861996653671, guid: b9340afc3e11a1b4da793a463769117b, type: 3}
   lineTiles:
   - {fileID: 4693886861996653671, guid: d06bbe199ec22c843adb9794fc7d39b1, type: 3}
+  - {fileID: 4693886861996653671, guid: 491bfff708aaca6468413cf17383dbf8, type: 3}
+  - {fileID: 4693886861996653671, guid: fe2122a54a10a5547b2af1c5ab86d3cd, type: 3}
   cornerTiles:
   - {fileID: 4693886861996653671, guid: df7175de03d21934da7673e77259b28e, type: 3}
+  - {fileID: 4693886861996653671, guid: f3aa07b932eb4234c930108d7de5c163, type: 3}
+  - {fileID: 4693886861996653671, guid: bd9cb8de7ec566a4786df3b749ac0208, type: 3}
   tTiles:
   - {fileID: 4693886861996653671, guid: da35e722d33063241a75a3d51292635a, type: 3}
+  - {fileID: 4693886861996653671, guid: 792490d48c0c3a641ab878a88d2dd458, type: 3}
+  - {fileID: 4693886861996653671, guid: 35a8db3f41b92e140ad9ba68fce00946, type: 3}
   endTiles:
   - {fileID: 4693886861996653671, guid: bbc37c7236c77df49839f01fa521eed6, type: 3}
+  - {fileID: 4693886861996653671, guid: f9e1e85f48fb8454986ad1ecd9a8f7c7, type: 3}
+  - {fileID: 4693886861996653671, guid: 0283ee34b33bd26419fcff2f675aadb5, type: 3}
   crossTiles:
   - {fileID: 5257894820172171365, guid: 8e363f3efa15ed6419c3f1074e3194e2, type: 3}
+  - {fileID: 5257894820172171365, guid: 1749beee631c35a4688b3432d044ba5b, type: 3}
+  - {fileID: 5257894820172171365, guid: 3b3fd738be146a144954c092f1de225f, type: 3}
   trapTiles:
   - {fileID: 2214542103791988907, guid: ea115768cadfed742a70685c6cd639e0, type: 3}
+  - {fileID: 2214542103791988907, guid: 4a309beb5597ed4449703bb5e802d629, type: 3}

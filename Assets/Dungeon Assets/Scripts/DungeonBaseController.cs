@@ -20,6 +20,7 @@ public class DungeonBaseController : MonoBehaviour
     public DungeonGenerator m_DungeonGenerator;
     public FloorSweeper m_FloorSweeper;
     public TurnManager m_TurnManager;
+    public Animator m_FadeOutAnimator;
 
     public enum dungeonTurnState { SettingUpDungeon, TurnStart, ProcessTurns, TurnEnd }
     public dungeonTurnState currentDungeonTurnState= dungeonTurnState.SettingUpDungeon;
@@ -131,6 +132,18 @@ public class DungeonBaseController : MonoBehaviour
         currentDungeonTurnState = newState;
     }
 
+    public void ExitReached()
+    {
+        StartCoroutine(FloorTransition());
+    }
+
+    private IEnumerator FloorTransition()
+    {
+        m_FadeOutAnimator.SetTrigger("FadeToColour");
+        yield return new WaitForSeconds(1f);
+        BuildNewDungeonFloor();
+    }
+
     public void BuildNewDungeonFloor()
     {
 		allCharacters.Clear();
@@ -164,8 +177,11 @@ public class DungeonBaseController : MonoBehaviour
 		PlacePlayer();
         PlaceEnemies();
 
+        m_FadeOutAnimator.SetTrigger("FadeToTransparent");
+        yield return new WaitForSeconds(1f);
+
         DungeonManager.instance.SwitchDungeonGameState(DungeonManager.dungeonGameState.dungeonExploring);
-		SwitchDungeonTurnState(dungeonTurnState.TurnStart);
+        SwitchDungeonTurnState(dungeonTurnState.TurnStart);
     }
 	
 }

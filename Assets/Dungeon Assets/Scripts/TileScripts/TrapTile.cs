@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TrapTile : TileBase
 {
+    public StaticEnums.StatusEffect trapEffect;
     public int trapStr;
 
     public override void TileSteppedOn()
@@ -12,7 +13,7 @@ public class TrapTile : TileBase
 
         if(catchable != null)
         {
-            catchable.OnTrapped(trapStr);
+            catchable.OnTrapped(trapStr, trapEffect);
         }
     }
 }

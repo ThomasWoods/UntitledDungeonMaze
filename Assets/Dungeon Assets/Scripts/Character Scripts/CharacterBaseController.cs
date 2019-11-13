@@ -7,9 +7,11 @@ public enum CharacterStatus { setup, idle, selectingMovement, moving, turning, d
 public enum CharacterAction { NoAction, MoveForward, Backstep, MoveLeft, MoveRight, TurnLeft, TurnRight, Wait, Interact}
 public class CharacterBaseController : MonoBehaviour
 {
+    public string displayName;
+
 	public int life = 3;
 	public int turn = 0;
-
+    
     public CharacterMovementController m_MovementController;
     public CharacterInputBase m_Input;
     public GraphicsController m_GraphicsController;
@@ -26,6 +28,7 @@ public class CharacterBaseController : MonoBehaviour
 	public bool RandomStartPosition = false;
 	public Vector3 StartPosition;
 
+    public StaticEnums.StatusEffect attackEffect;
 	public bool hasBeenDefeated = false;
 	public bool hasBeenHit = false;
 	public string damageSource;
@@ -35,7 +38,13 @@ public class CharacterBaseController : MonoBehaviour
 	public UnityEvent OnStunned = new UnityEvent();
 	public UnityEvent OnStunEnd = new UnityEvent();
 
-	private void Awake()
+    public bool confused = false;
+    public int confusedTime = 0;
+    public UnityEvent OnConfused = new UnityEvent();
+
+    public bool mirror;
+
+    private void Awake()
     {
         m_MovementController = GetComponent<CharacterMovementController>();
         m_Input = GetComponent<CharacterInputBase>();
@@ -113,10 +122,18 @@ public class CharacterBaseController : MonoBehaviour
 
     void CheckCharacterMovementInput()
     {
-		CharacterAction nextAction = CharacterAction.NoAction;
-		if (stunned) nextAction = CharacterAction.Wait;
-		else nextAction = m_Input.CheckMovementInput();
-		bool interacting = m_Input.CheckInteractionInput();
+        CharacterAction nextAction = CharacterAction.NoAction;
+        bool interacting = false;
+
+        if (stunned)
+            nextAction = CharacterAction.Wait;
+        else if (confused)
+            nextAction = m_Input.GetRandomAction();
+        else
+        {
+            nextAction = m_Input.CheckMovementInput();
+            interacting = m_Input.CheckInteractionInput();
+        }
 
 		switch (nextAction)
 		{
@@ -160,7 +177,6 @@ public class CharacterBaseController : MonoBehaviour
             } 
         }
 
-
 		if (nextAction != CharacterAction.NoAction)
 			LastAction = nextAction;
 	}
@@ -199,6 +215,7 @@ public class CharacterBaseController : MonoBehaviour
         hasBeenHit = false;
 
 		turn++;
+
 		if (stunned)
 		{
 			if (stunTime <= 0)
@@ -208,18 +225,28 @@ public class CharacterBaseController : MonoBehaviour
 			}
 			stunTime--;
 		}
-	}
+
+        if (confused)
+        {
+            if (confusedTime <= 0)
+            {
+                confused = false;
+            }
+            confusedTime--;
+        }
+
+
+    }
 	virtual protected void OnEndTurn()
 	{
 	}
 
-	public void TakeDamage(string source, int damage=1)
+	public void TakeDamage(StaticEnums.StatusEffect effect, int damage=1)
 	{
-        if (hasBeenHit)
-            return;
+        if (!hasBeenHit)
+            life -= damage;
 
-		life-=damage;
-		damageSource = source;
+        ApplyStatusEffect(damage, effect);
 
 		if (life > 0)
             hasBeenHit = true;
@@ -227,10 +254,36 @@ public class CharacterBaseController : MonoBehaviour
             SwitchCharacterStatus(CharacterStatus.defeated);
 	}
 
+    public void ApplyStatusEffect(int effectStr, StaticEnums.StatusEffect effect)
+    {
+        switch (effect)
+        {
+            case StaticEnums.StatusEffect.mirror:
+                if (gameObject.tag == "Player")
+                    mirror = true;
+                break;
+
+            case StaticEnums.StatusEffect.stun:
+                Stun(effectStr);
+                break;
+
+            case StaticEnums.StatusEffect.confusion:
+                Confuse(effectStr);
+                break;
+        }
+    }
+    
 	public void Stun(int turns = 1)
 	{
 		OnStunned.Invoke();
 		stunned = true;
 		stunTime = turns;
 	}
+
+    public void Confuse(int turns = 1)
+    {
+        OnConfused.Invoke();
+        confused = true;
+        confusedTime = turns;
+    }
 }

@@ -22,11 +22,15 @@ public class AttackablePlayer : MonoBehaviour
     {
         if (m_CharacterBaseController.hasBeenHit)
         {
-            if (m_CharacterBaseController.damageSource.Contains("Medusa")) OnMirrorVision.Invoke();
+            if (m_CharacterBaseController.mirror)
+            {
+                OnMirrorVision.Invoke();
+                m_CharacterBaseController.mirror = false;
+                timer = Duration;
+                DungeonBaseController.instance.OnEndTurn.AddListener(Wearoff);
+            }
             m_CharacterBaseController.hasBeenHit = false;
             m_CharacterBaseController.OnHit.Invoke(m_CharacterBaseController.damageSource);
-			timer = Duration;
-			DungeonBaseController.instance.OnEndTurn.AddListener(Wearoff);
 		}
     }
 
