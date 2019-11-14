@@ -60,8 +60,9 @@ public class Game : MonoBehaviour
 		BGMPlayer.loop = true;
 		BGMPlayer.Play();
 	}
-	public void PlayVictoryMusic()
+	public IEnumerator PlayVictoryMusic()
 	{
+		yield return StartCoroutine(FadeOutBGM(1f));
 		BGMPlayer.clip = VictoryBGM;
 		BGMPlayer.loop = false;
 		BGMPlayer.Play();

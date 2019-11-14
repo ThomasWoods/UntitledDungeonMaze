@@ -173,13 +173,13 @@ public class DungeonBaseController : MonoBehaviour
 	{
 		m_DungeonGenerator.ResetFloorGenerator();
 		m_DungeonGenerator.GenerateDungeon();
-		yield return 0;
 
 		bool allready = true;
 		do
 		{
 			PlacePlayer();
 			PlaceEnemies();
+			yield return 0;
 			allready = true;
 			foreach (CharacterBaseController character in allCharacters)
 			{
@@ -187,7 +187,6 @@ public class DungeonBaseController : MonoBehaviour
 				{
 					Debug.Log("waiting for all characters!");
 					allready = false;
-					yield return 0;
 					break;
 				}
 			}

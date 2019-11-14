@@ -56,7 +56,8 @@ public class DungeonManager : MonoBehaviour
 
     public void Victory()
     {
-        SwitchDungeonGameState(dungeonGameState.victory);
+		StartCoroutine(Game.instance.PlayVictoryMusic());
+		SwitchDungeonGameState(dungeonGameState.victory);
         Game.DungeonData.wasVictorious = true;
         pausePanel.SetActive(false);
         victoryPanel.SetActive(true);
@@ -64,6 +65,7 @@ public class DungeonManager : MonoBehaviour
 
     public void GameOver()
     {
+		Game.instance.PlayDeathMusic();
         pausePanel.SetActive(false);
         gameOverPanel.SetActive(true);
         SwitchDungeonGameState(dungeonGameState.defeat);
