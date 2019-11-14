@@ -48,6 +48,7 @@ public class Game : MonoBehaviour
 	public void PlayButtonSound() { SFXPlayer.PlayOneShot(ButtonSFX); }
 	public void PlayFootstep() { SFXPlayer.PlayOneShot(WalkSFX); }
 	public void PlayNewGameSound() { SFXPlayer.PlayOneShot(NewGameSFX); }
+
 	public void PlayMainMenuMusic()
 	{
 		BGMPlayer.clip = MainMenuBGM;

@@ -4757,11 +4757,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.15294118, g: 0.20784314, b: 0.4862745, a: 1}
-    m_HighlightedColor: {r: 0.2901961, g: 0.7294118, b: 0.9882353, a: 1}
-    m_PressedColor: {r: 0.2901961, g: 0.7294118, b: 0.9882353, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_NormalColor: {r: 0.2901961, g: 0.7294118, b: 0.9882353, a: 1}
+    m_HighlightedColor: {r: 0.89411765, g: 0.5294118, b: 0.16470589, a: 1}
+    m_PressedColor: {r: 0.89411765, g: 0.5294118, b: 0.16470589, a: 1}
+    m_SelectedColor: {r: 0.8862745, g: 0.68235296, b: 0.15294118, a: 1}
+    m_DisabledColor: {r: 0.8862745, g: 0.68235296, b: 0.15294118, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -7405,7 +7405,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stunned!
+  m_text: Stuck!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8259,11 +8259,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.15294118, g: 0.20784314, b: 0.4862745, a: 1}
-    m_HighlightedColor: {r: 0.2901961, g: 0.7294118, b: 0.9882353, a: 1}
-    m_PressedColor: {r: 0.2901961, g: 0.7294118, b: 0.9882353, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_NormalColor: {r: 0.2901961, g: 0.7294118, b: 0.9882353, a: 1}
+    m_HighlightedColor: {r: 0.89411765, g: 0.5294118, b: 0.16470589, a: 1}
+    m_PressedColor: {r: 0.89411765, g: 0.5294118, b: 0.16470589, a: 1}
+    m_SelectedColor: {r: 0.8862745, g: 0.68235296, b: 0.15294118, a: 1}
+    m_DisabledColor: {r: 0.8862745, g: 0.68235296, b: 0.15294118, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -9557,7 +9557,7 @@ GameObject:
   - component: {fileID: 2043166029}
   - component: {fileID: 2043166028}
   m_Layer: 5
-  m_Name: Options
+  m_Name: Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10798,7 +10798,7 @@ GameObject:
   - component: {fileID: 364398463576229817}
   - component: {fileID: 364398463576229816}
   m_Layer: 5
-  m_Name: Options Panel
+  m_Name: Settings Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12634,7 +12634,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Options
+  m_text: Settings
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14341,6 +14341,10 @@ MonoBehaviour:
   m_SceneChanger: {fileID: 8953574786423269549}
   currentDungeonGameState: 0
   dungeonController: {fileID: 0}
+  options:
+    MasterVolumeSlider: {fileID: 744691543987193770}
+    BGMSlider: {fileID: 8148851992843092947}
+    SFXSlider: {fileID: 7127308299994668023}
 --- !u!4 &8953574786423269558
 Transform:
   m_ObjectHideFlags: 0
