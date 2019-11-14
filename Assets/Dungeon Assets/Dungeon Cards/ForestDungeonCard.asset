@@ -55,5 +55,6 @@ MonoBehaviour:
   trapTiles:
   - {fileID: 2214542103791988907, guid: ea115768cadfed742a70685c6cd639e0, type: 3}
   - {fileID: 2214542103791988907, guid: 4a309beb5597ed4449703bb5e802d629, type: 3}
+  - {fileID: 2292143078135154294, guid: 290ece5f95975944eba4cf02dfe14064, type: 3}
   items:
   - {fileID: 7211322843124064559, guid: 6ab23b7987c9c344dbe763957c0bdc56, type: 3}

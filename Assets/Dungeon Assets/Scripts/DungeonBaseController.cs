@@ -41,6 +41,8 @@ public class DungeonBaseController : MonoBehaviour
 	public UnityEvent GetCompass = new UnityEvent();
 	public UnityEvent GetSmokeBomb = new UnityEvent();
 
+    public Queue<CharacterBaseController> enemiesToAttack = new Queue<CharacterBaseController>();
+
     private void Awake()
     {
         instance = this;
@@ -80,16 +82,16 @@ public class DungeonBaseController : MonoBehaviour
     public void TurnStart()
     {
         //Called from the turn manager
-
+        enemiesToAttack.Clear();
         OnNewTurn.Invoke();
     }
 
     public void TurnEnd()
     {
         //Called from the turn manager
-        CheckDestroyedCharacters();
         CheckIfAttacked();
-		OnEndTurn.Invoke();
+        CheckDestroyedCharacters();
+        OnEndTurn.Invoke();
     }
 
     private void CheckDestroyedCharacters()
@@ -111,6 +113,14 @@ public class DungeonBaseController : MonoBehaviour
 
     private void CheckIfAttacked()
     {
+        while(enemiesToAttack.Count > 0)
+        {
+            CharacterBaseController enemy = enemiesToAttack.Dequeue();
+
+            m_PlayerController.TakeDamage(enemy.attackEffect);
+            instance.m_PlayerController.damageSource = enemy.displayName;
+        }
+
         m_AttackablePlayer.CheckIfAttacked();
     }
 

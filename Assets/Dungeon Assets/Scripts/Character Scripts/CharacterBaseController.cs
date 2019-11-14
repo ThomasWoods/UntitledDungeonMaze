@@ -243,15 +243,18 @@ public class CharacterBaseController : MonoBehaviour
 
 	public void TakeDamage(StaticEnums.StatusEffect effect, int damage=1)
 	{
-        if (!hasBeenHit)
-            life -= damage;
+        if(currentCharacterStatus != CharacterStatus.defeated)
+        {
+            if (!hasBeenHit)
+                life -= damage;
 
-        ApplyStatusEffect(damage, effect);
+            ApplyStatusEffect(damage, effect);
 
-		if (life > 0)
-            hasBeenHit = true;
-		else
-            SwitchCharacterStatus(CharacterStatus.defeated);
+            if (life > 0)
+                hasBeenHit = true;
+            else
+                SwitchCharacterStatus(CharacterStatus.defeated);
+        }
 	}
 
     public void ApplyStatusEffect(int effectStr, StaticEnums.StatusEffect effect)

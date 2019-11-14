@@ -84,7 +84,8 @@ public class Game : MonoBehaviour
 		BGMPlayer.Stop();
 		BGMPlayer.volume = startVolume;
 	}
-	public AudioClip MainMenuBGM, DungeonBGM, VictoryBGM, DeathBGM,
+
+    public AudioClip MainMenuBGM, DungeonBGM, VictoryBGM, DeathBGM,
 		ButtonSFX, WalkSFX, NewGameSFX;
 	public bool SettingsLoaded = false;
 
@@ -133,7 +134,6 @@ public class Game : MonoBehaviour
 	void Start()
 	{
 		LoadSettings();
-		PlayMainMenuMusic();
 	}
 
 	void LoadSettings()

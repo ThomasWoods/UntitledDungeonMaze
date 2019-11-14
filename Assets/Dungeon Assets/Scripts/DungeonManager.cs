@@ -18,6 +18,7 @@ public class DungeonManager : MonoBehaviour
     public GameObject victoryPanel;
     public GameObject gameOverPanel;
     public GameObject pausePanel;
+    public GameObject raycastShield;
 
     public TextMeshProUGUI gameOverText;
 
@@ -77,12 +78,13 @@ public class DungeonManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        Debug.Log("Check");
         StartCoroutine(Fadeout()); 
     }
 
     private IEnumerator Fadeout()
     {
+        raycastShield.SetActive(true);
+        Game.instance.FadeOutBGM(1f);
         DungeonBaseController.instance.m_FadeOutAnimator.SetBool("FadeOut", true);
         yield return new WaitForSeconds(1f);
         m_SceneChanger.ToMenu();

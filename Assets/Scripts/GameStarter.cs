@@ -20,8 +20,12 @@ public class GameStarter : MonoBehaviour
     public GameObject mainMenuPanel;
     public GameObject levelSelectPanel;
 
+    public GameObject raycastShield;
+
     private void Start()
     {
+        Game.instance.PlayMainMenuMusic();
+
         if (Game.DungeonData.wasVictorious)
             Game.DungeonData.hasBeenVictorious = true;
 
@@ -69,6 +73,7 @@ public class GameStarter : MonoBehaviour
 
     private IEnumerator FadeToGameplay()
     {
+        raycastShield.SetActive(true);
 		StartCoroutine(Game.instance.FadeOutBGM(1f));
 		m_FadePanelAnimator.SetBool("FadeOut", true);
 		yield return new WaitForSeconds(1f);

@@ -136,8 +136,7 @@ public class TurnManager : MonoBehaviour
 
 		if (tile.occupant == DungeonBaseController.instance.m_Player)
 		{
-			DungeonBaseController.instance.m_PlayerController.TakeDamage(characterToAct.attackEffect);
-            DungeonBaseController.instance.m_PlayerController.damageSource = characterToAct.displayName;
+            DungeonBaseController.instance.enemiesToAttack.Enqueue(characterToAct);
             DequeueCharacterToAct();
 		}
         else
