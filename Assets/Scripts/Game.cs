@@ -174,6 +174,7 @@ public class Game : MonoBehaviour
         public static DungeonCard dungeonCard;
 
         public static bool wasVictorious = false;
+        public static bool hasBeenVictorious = false;
     }
 
 }

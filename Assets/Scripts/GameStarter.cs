@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameStarter : MonoBehaviour
 {
@@ -11,6 +12,38 @@ public class GameStarter : MonoBehaviour
 
     public Animator m_FadePanelAnimator;
 
+    public TextMeshProUGUI startButtonText;
+
+    public string newGameText;
+    public string dungeonSelectText;
+
+    public GameObject mainMenuPanel;
+    public GameObject levelSelectPanel;
+
+    private void Start()
+    {
+        Game.DungeonData.hasBeenVictorious = true;
+
+        if (Game.DungeonData.wasVictorious)
+            Game.DungeonData.hasBeenVictorious = true;
+
+        if (Game.DungeonData.hasBeenVictorious)
+            startButtonText.text = dungeonSelectText;
+        else
+            startButtonText.text = newGameText;
+    }
+
+    public void StartButtonPressed()
+    {
+        if (Game.DungeonData.hasBeenVictorious)
+        {
+            levelSelectPanel.SetActive(true);
+            mainMenuPanel.SetActive(false);
+        }
+        else
+            StartGame(0);
+    }
+
     public void StartGame(int dungeonID)
     {
         DungeonCard chosenCard = null;
@@ -18,11 +51,11 @@ public class GameStarter : MonoBehaviour
         switch (dungeonID)
         {
             case 0:
-                chosenCard = desertDungeonCard;
+                chosenCard = forestDungeonCard;
                 break;
 
             case 1:
-                chosenCard = forestDungeonCard;
+                chosenCard = desertDungeonCard;
                 break;
         }
 
