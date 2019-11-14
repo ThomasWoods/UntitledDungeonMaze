@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: Minotaur
-  life: 3
+  life: 6
   turn: 0
   m_MovementController: {fileID: 736813624004179784}
   m_Input: {fileID: 2344228459761107609}

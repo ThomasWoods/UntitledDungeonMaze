@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingWidth: 2
   StartingDepth: 2
-  numberOfFloors: 2
+  numberOfFloors: 3
   skyColour: {r: 0.45109472, g: 0.8773585, b: 0.6986027, a: 0}
   firstEnemy: {fileID: 371415953068175433, guid: 1f41378f452719c4dab6455a744cd839,
     type: 3}

@@ -50,7 +50,7 @@ MonoBehaviour:
   walkable: 1
   occupant: {fileID: 0}
   trapEffect: 1
-  trapStr: 1
+  trapStr: 2
 --- !u!65 &7550840431187526386
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -71,6 +71,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6867872750944152942}
     m_Modifications:
+    - target: {fileID: 6128236241989674251, guid: 259c7b89ff7489649a5c336a5ac651f4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 2574057757942216213, guid: 259c7b89ff7489649a5c336a5ac651f4,
         type: 3}
       propertyPath: m_Name
@@ -130,11 +135,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6128236241989674251, guid: 259c7b89ff7489649a5c336a5ac651f4,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 259c7b89ff7489649a5c336a5ac651f4, type: 3}

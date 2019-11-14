@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: Medusa
-  life: 2
+  life: 4
   turn: 0
   m_MovementController: {fileID: 2694283053572858513}
   m_Input: {fileID: 1141076890783799104}

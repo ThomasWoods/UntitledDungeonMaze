@@ -50,7 +50,7 @@ MonoBehaviour:
   walkable: 1
   occupant: {fileID: 0}
   trapEffect: 1
-  trapStr: 1
+  trapStr: 2
 --- !u!65 &7550840431187526386
 BoxCollider:
   m_ObjectHideFlags: 0

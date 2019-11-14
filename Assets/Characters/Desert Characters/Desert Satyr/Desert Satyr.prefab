@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: Satyr
-  life: 1
+  life: 4
   turn: 0
   m_MovementController: {fileID: 0}
   m_Input: {fileID: 0}
