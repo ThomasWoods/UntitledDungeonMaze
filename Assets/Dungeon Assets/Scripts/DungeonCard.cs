@@ -30,4 +30,7 @@ public class DungeonCard : ScriptableObject
     public GameObject[] trapTiles;
 
     public GameObject[] items;
+
+    [TextArea]
+    public string victoryText;
 }

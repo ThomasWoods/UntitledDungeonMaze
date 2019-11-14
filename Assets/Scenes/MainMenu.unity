@@ -3694,9 +3694,9 @@ MonoBehaviour:
   m_text: "\nDonations have gone missing. Following the trail you are lead to a the
     entrance of a great labrynth. Stories speak of the legendary Minobus.\r\n\nDescend
     into the Minobus' Labyrinth and deafeat the vile creature to save the donations!
-    There is only one problem: You have never as much as much as punched someone your
-    entire life. You will have to rely on your wits and agility to reach the end of
-    the maze, and the beast that awaits you there."
+    There is only one problem: You have never as much as punched someone your entire
+    life. You will have to rely on your wits and agility to reach the end of the maze,
+    and the beast that awaits you there."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3765,10 +3765,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2707986353257347395}
-    characterCount: 441
+    characterCount: 433
     spriteCount: 0
-    spaceCount: 81
-    wordCount: 81
+    spaceCount: 79
+    wordCount: 79
     linkCount: 0
     lineCount: 10
     pageCount: 1

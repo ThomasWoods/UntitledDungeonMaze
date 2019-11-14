@@ -21,6 +21,7 @@ public class DungeonManager : MonoBehaviour
     public GameObject pausePanel;
     public GameObject raycastShield;
 
+    public TextMeshProUGUI victoryText;
     public TextMeshProUGUI gameOverText;
 
     public SceneChanger m_SceneChanger;
@@ -31,7 +32,7 @@ public class DungeonManager : MonoBehaviour
 	public DungeonBaseController dungeonController;
 
     public Options options;
-
+    
     private void Awake()
     {
         instance = this;
@@ -43,6 +44,7 @@ public class DungeonManager : MonoBehaviour
 
     private void Start()
     {
+        victoryText.text = dungeonCard.victoryText;
         dungeonCamera.backgroundColor = dungeonCard.skyColour;
         options.InitializeVolumeSliders();
         Game.DungeonData.wasVictorious = false;

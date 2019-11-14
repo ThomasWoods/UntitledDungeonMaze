@@ -55,5 +55,6 @@ MonoBehaviour:
   trapTiles:
   - {fileID: 2214542103791988907, guid: ea115768cadfed742a70685c6cd639e0, type: 3}
   - {fileID: 2214542103791988907, guid: 4a309beb5597ed4449703bb5e802d629, type: 3}
-  - {fileID: 2292143078135154294, guid: 290ece5f95975944eba4cf02dfe14064, type: 3}
   items: []
+  victoryText: With a baleful muu, the wounded Minobus retreats towards its desert
+    lair. Chase it down, stalwart hero, and retrieve the donations!

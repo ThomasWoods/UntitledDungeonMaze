@@ -7446,12 +7446,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'The greedy Minobus has been defeated and the donations returned to Child''s
-    Play Charity! The desert Bus for Hope fundraiser community thanks you for your
-    service.
-
-
-    Thank you for playing!'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14623,6 +14618,7 @@ MonoBehaviour:
   gameOverPanel: {fileID: 1103754226}
   pausePanel: {fileID: 918126757}
   raycastShield: {fileID: 1247799757}
+  victoryText: {fileID: 1575959371}
   gameOverText: {fileID: 455489234}
   m_SceneChanger: {fileID: 8953574786423269549}
   currentDungeonGameState: 0
