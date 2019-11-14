@@ -4023,7 +4023,8 @@ MonoBehaviour:
     bomb to jump to a random location on the floor. \n\t\tUtilize these to escape
     from dangerous situations!\n - Enter: Interact with an object in front of you.
     \n\t\tUse this to pick up items and go to the next floor.\n - Esc: Open the pause
-    menu. Check other controls from here!\n\nGood luck!\n"
+    menu. Check other controls from here!\n - Enemies will take damage from stepping
+    on traps. \n\t\tDefeat them by luring them to their doom!\n\nGood luck!\n"
 --- !u!222 &503405421
 CanvasRenderer:
   m_ObjectHideFlags: 0
