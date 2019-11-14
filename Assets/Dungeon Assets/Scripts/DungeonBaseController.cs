@@ -5,41 +5,49 @@ using UnityEngine.Events;
 
 public class DungeonBaseController : MonoBehaviour
 {
-    public static DungeonBaseController instance;
+	public static DungeonBaseController instance;
 
-    public GameObject m_Player;
-    public CharacterBaseController m_PlayerController;
-    public AttackablePlayer m_AttackablePlayer;
-    public List<CharacterBaseController> allCharacters;
+	public GameObject m_Player;
+	public CharacterBaseController m_PlayerController;
+	public AttackablePlayer m_AttackablePlayer;
+	public List<CharacterBaseController> allCharacters;
 
-    public List<CharacterBaseController> enemies = new List<CharacterBaseController>();
+	public List<CharacterBaseController> enemies = new List<CharacterBaseController>();
 
-    public GameObject entranceTile;
-    public GameObject exitTile;
-    
-    public DungeonGenerator m_DungeonGenerator;
-    public FloorSweeper m_FloorSweeper;
-    public TurnManager m_TurnManager;
-    public Animator m_FadeOutAnimator;
+	public GameObject entranceTile;
+	public GameObject exitTile;
 
-    public enum dungeonTurnState { SettingUpDungeon, TurnStart, ProcessTurns, TurnEnd }
-    public dungeonTurnState currentDungeonTurnState= dungeonTurnState.SettingUpDungeon;
-    public dungeonTurnState lastTurnState;
-	
+	public DungeonGenerator m_DungeonGenerator;
+	public FloorSweeper m_FloorSweeper;
+	public TurnManager m_TurnManager;
+	public Animator m_FadeOutAnimator;
+
+	public enum dungeonTurnState { SettingUpDungeon, TurnStart, ProcessTurns, TurnEnd }
+	public dungeonTurnState currentDungeonTurnState = dungeonTurnState.SettingUpDungeon;
+	public dungeonTurnState lastTurnState;
+
 	public UnityEvent OnNewTurn = new UnityEvent();
 	public UnityEvent OnEndTurn = new UnityEvent();
 	public UnityEvent OnNewDungeonFloor = new UnityEvent();
 
-    public int floorNumber;
-    public int dungeonTurn;
-    
-    public CharacterBaseController activeCharacter;
-	Stack<CharacterBaseController> ActionQueue = new Stack<CharacterBaseController>(); 
+	public int floorNumber;
+	public int dungeonTurn;
 
-    int growthOdds = 2;
+	public CharacterBaseController activeCharacter;
+	Stack<CharacterBaseController> ActionQueue = new Stack<CharacterBaseController>();
+
+	int growthOdds = 2;
 
 	public UnityEvent GetCompass = new UnityEvent();
 	public UnityEvent GetSmokeBomb = new UnityEvent();
+	public StringEvent SmokeBombsUpdated = new StringEvent();
+	public StringEvent PlayerLifeUpdated = new StringEvent();
+	public int _smokeBombs = 3;
+	public int smokeBombs {
+		get {return _smokeBombs;}
+		set {_smokeBombs=value; SmokeBombsUpdated.Invoke(_smokeBombs.ToString());}
+	}
+
 
     public Queue<CharacterBaseController> enemiesToAttack = new Queue<CharacterBaseController>();
 
@@ -233,5 +241,40 @@ public class DungeonBaseController : MonoBehaviour
 		Debug.Log("Got "+s);
 		if(s.Contains("Compass")) GetCompass.Invoke();
 		if(s.Contains("SmokeBomb")) GetSmokeBomb.Invoke();
+	}
+
+	public void AddSmokeBomb()
+	{
+		smokeBombs++;
+	}
+
+	public void UseSmokeBomb() {
+		if (smokeBombs > 0)
+		{
+			TileBase tile = FindRandomOpenTile();
+			if (tile)
+			{
+				smokeBombs--;
+				m_PlayerController.m_MovementController.currentTile.occupant = null;
+				m_Player.transform.position = tile.transform.position;
+				m_PlayerController.m_MovementController.OccupyTile();
+			}
+		}
+	}
+
+	public TileBase FindRandomOpenTile()
+	{
+		TileBase tile = null;
+		int safety = 100;
+		do
+		{
+			TileBase[] tiles = FindObjectsOfType<TileBase>();
+			tile=tiles[Random.Range(0, tiles.Length)];
+			if (!(tile != null && tile.walkable && tile.occupant == null)) tile = null;
+			safety--;
+		} while (tile == null && safety > 0);
+		if (safety == 0) Debug.Log("safety check");
+		if (!tile) Debug.Log("No open tile found!");
+		return tile;
 	}
 }

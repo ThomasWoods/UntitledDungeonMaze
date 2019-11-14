@@ -9,7 +9,13 @@ public class CharacterBaseController : MonoBehaviour
 {
     public string displayName;
 
-	public int life = 3;
+	public int _life = 3;
+	public int life
+	{
+		get { return _life; }
+		set { _life = value;
+			if (tag == "Player") DungeonBaseController.instance.PlayerLifeUpdated.Invoke(life.ToString()); }
+	}
 	public int turn = 0;
     
     public CharacterMovementController m_MovementController;

@@ -49,7 +49,9 @@ MonoBehaviour:
   trapTiles:
   - {fileID: 2214542103791988907, guid: 57152b1ac9b4a2b4c8d5c65ae780d3a9, type: 3}
   - {fileID: 2214542103791988907, guid: 675fb87dc2b20c3489b65ffe2ce30f2d, type: 3}
-  items: []
+  items:
+  - {fileID: 7211322843124064559, guid: 6ab23b7987c9c344dbe763957c0bdc56, type: 3}
+  - {fileID: 7211322843124064559, guid: 74bf3c2f4c3258c4ab33ed3e5c0589ff, type: 3}
   victoryText: 'The greedy Minobus has been defeated and the donations returned to
     Child''s Play Charity! The desert Bus for Hope fundraiser community thanks you
     for your service.
