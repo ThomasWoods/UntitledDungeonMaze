@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c60144413bffd2458e34b5f8f21fa2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: Satyr
+  displayName: a Satyr
   life: 4
   turn: 0
   m_MovementController: {fileID: 0}

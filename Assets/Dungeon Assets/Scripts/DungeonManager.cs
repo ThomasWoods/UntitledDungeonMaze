@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DungeonManager : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class DungeonManager : MonoBehaviour
     public GameObject victoryPanel;
     public GameObject gameOverPanel;
     public GameObject pausePanel;
+
+    public TextMeshProUGUI gameOverText;
 
     public SceneChanger m_SceneChanger;
 
@@ -68,6 +71,7 @@ public class DungeonManager : MonoBehaviour
 		Game.instance.PlayDeathMusic();
         pausePanel.SetActive(false);
         gameOverPanel.SetActive(true);
+        gameOverText.text = DungeonBaseController.instance.m_PlayerController.damageSource;
         SwitchDungeonGameState(dungeonGameState.defeat);
     }
 

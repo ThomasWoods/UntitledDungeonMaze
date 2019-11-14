@@ -22,8 +22,6 @@ public class GameStarter : MonoBehaviour
 
     private void Start()
     {
-        Game.DungeonData.hasBeenVictorious = true;
-
         if (Game.DungeonData.wasVictorious)
             Game.DungeonData.hasBeenVictorious = true;
 
