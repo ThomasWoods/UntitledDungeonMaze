@@ -99,7 +99,7 @@ public class Pathfinder : MonoBehaviour
 				if (adjLocation.x >= Area.GetLength(0) || adjLocation.x < 0 || adjLocation.y >= Area.GetLength(1) || adjLocation.y < 0)
 					continue;
 				PathSegment currentPath = Area[adjLocation.x, adjLocation.y];
-				if (currentPath.Exists && currentPath.Tile != null && currentPath.Tile.walkable && 
+				if (currentPath!=null && currentPath.Exists && currentPath.Tile != null && currentPath.Tile.walkable && 
 					(currentPath.Tile.occupant == null || currentPath.Tile.transform.position == destination) &&
 					currentPath.Tile.transform.position!=startPos)
 				{
