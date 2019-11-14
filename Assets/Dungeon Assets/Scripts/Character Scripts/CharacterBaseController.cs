@@ -165,7 +165,7 @@ public class CharacterBaseController : MonoBehaviour
         {
             TileBase tile = m_MovementController.CheckTile(transform.forward);
 
-            InteractableBase interactable = tile.GetComponent<InteractableBase>();
+            InteractableBase interactable = tile.GetComponentInChildren<InteractableBase>();
 
             if(interactable != null)
             {
