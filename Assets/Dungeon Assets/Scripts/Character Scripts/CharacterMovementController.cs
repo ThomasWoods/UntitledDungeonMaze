@@ -70,7 +70,6 @@ public class CharacterMovementController : MonoBehaviour
 		{
 			tile = tileColliders[0].GetComponent<TileBase>();
 		}
-		else { Debug.Log("No tiles within range"); }
 
 
 		return tile;

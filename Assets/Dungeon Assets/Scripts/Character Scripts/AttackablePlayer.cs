@@ -36,7 +36,6 @@ public class AttackablePlayer : MonoBehaviour
 
 	void Wearoff()
 	{
-		Debug.Log("Medusa Vision Effect Timer: " + timer);
 		if (timer <= 0)
 		{
 			OffMirrorVision.Invoke();

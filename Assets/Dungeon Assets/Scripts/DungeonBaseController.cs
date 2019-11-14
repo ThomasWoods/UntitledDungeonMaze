@@ -43,6 +43,8 @@ public class DungeonBaseController : MonoBehaviour
 
     public Queue<CharacterBaseController> enemiesToAttack = new Queue<CharacterBaseController>();
 
+    private bool playerIsInvincible = false;
+
     private void Awake()
     {
         instance = this;
@@ -89,7 +91,9 @@ public class DungeonBaseController : MonoBehaviour
     public void TurnEnd()
     {
         //Called from the turn manager
-        CheckIfAttacked();
+        if(!playerIsInvincible)
+            CheckIfAttacked();
+
         CheckDestroyedCharacters();
         OnEndTurn.Invoke();
     }
@@ -154,6 +158,7 @@ public class DungeonBaseController : MonoBehaviour
 	[ContextMenu("Go to next floor")]
     public void ExitReached()
     {
+        playerIsInvincible = true;
         StartCoroutine(FloorTransition());
     }
 
@@ -205,7 +210,6 @@ public class DungeonBaseController : MonoBehaviour
 			{
 				if (character.m_MovementController.currentTile == null)
 				{
-					Debug.Log("waiting for all characters!");
 					allready = false;
 					break;
 				}
@@ -217,6 +221,8 @@ public class DungeonBaseController : MonoBehaviour
 
         m_FadeOutAnimator.SetBool("FadeOut", false);
 		yield return new WaitForSeconds(1f);
+
+        playerIsInvincible = false;
 
 		DungeonManager.instance.SwitchDungeonGameState(DungeonManager.dungeonGameState.dungeonExploring);
         SwitchDungeonTurnState(dungeonTurnState.TurnStart);

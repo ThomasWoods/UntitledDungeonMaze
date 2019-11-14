@@ -69,10 +69,7 @@ public class DungeonGenerator : MonoBehaviour
         tileMapWidth = floorWidth * roomSize + 1;
         tileMapDepth = floorDepth * roomSize + 1;
         floorTileMap = new int[tileMapWidth, tileMapDepth];
-
-        Debug.Log("StartX: " + startXCoord);
-        Debug.Log("StartRoomID: " + floorAtlas[startXCoord, 0]);
-
+        
         GenerateDungeonFloorAtlas();
         GenerateFloorTileMap();
         BuildDungeon();
