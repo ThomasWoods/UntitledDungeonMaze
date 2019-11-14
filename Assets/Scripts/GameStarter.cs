@@ -38,8 +38,12 @@ public class GameStarter : MonoBehaviour
 
     private IEnumerator FadeToGameplay()
     {
-        m_FadePanelAnimator.SetBool("FadeOut", true);
-        yield return new WaitForSeconds(1f);
-        m_SceneChanger.ToGame();
+		StartCoroutine(Game.instance.FadeOutBGM(1f));
+		m_FadePanelAnimator.SetBool("FadeOut", true);
+		yield return new WaitForSeconds(1f);
+		Game.instance.PlayNewGameSound();
+		yield return new WaitForSeconds(4f);
+		Game.instance.PlayDungeonMusic();
+		m_SceneChanger.ToGame();
     }
 }

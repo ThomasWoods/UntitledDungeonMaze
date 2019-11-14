@@ -45,20 +45,46 @@ public class Game : MonoBehaviour
 		get { float volume = 0.0f; audioMixer.GetFloat("SFXVolume", out volume); return volume; }
 		set { audioMixer.SetFloat("SFXVolume", value); } }
 
-	public void PlaySound()
+	public void PlayButtonSound() { SFXPlayer.PlayOneShot(ButtonSFX); }
+	public void PlayFootstep() { SFXPlayer.PlayOneShot(WalkSFX); }
+	public void PlayNewGameSound() { SFXPlayer.PlayOneShot(NewGameSFX); }
+	public void PlayMainMenuMusic()
 	{
-		AudioClip sound = Resources.Load<AudioClip>("GDC Audio/button_002");
-        if (sound != null)
-        {
-            SFXPlayer.PlayOneShot(sound);
-        } 
+		BGMPlayer.clip = MainMenuBGM;
+		BGMPlayer.loop = true;
+		BGMPlayer.Play();
 	}
-	public void PlayFootstep()
+	public void PlayDungeonMusic()
 	{
-		AudioClip sound = Resources.Load<AudioClip>("GDC Audio/S23_SFX_Footsteps_Gravel_Loafers_Loops_Walk_Normal (modified)");
-		if (sound != null) SFXPlayer.PlayOneShot(sound);
+		BGMPlayer.clip = DungeonBGM;
+		BGMPlayer.loop = true;
+		BGMPlayer.Play();
 	}
-	public AudioClip MainMenuBGM, DungeonBGM, VictoryBGM;
+	public void PlayVictoryMusic()
+	{
+		BGMPlayer.clip = VictoryBGM;
+		BGMPlayer.loop = false;
+		BGMPlayer.Play();
+	}
+	public void PlayDeathMusic()
+	{
+		BGMPlayer.clip = DeathBGM;
+		BGMPlayer.loop = false;
+		BGMPlayer.Play();
+	}
+	public IEnumerator FadeOutBGM(float time)
+	{
+		float startVolume = BGMPlayer.volume;
+		while (BGMPlayer.volume > 0)
+		{
+			BGMPlayer.volume -= Time.deltaTime / time;
+			yield return 0;
+		}
+		BGMPlayer.Stop();
+		BGMPlayer.volume = startVolume;
+	}
+	public AudioClip MainMenuBGM, DungeonBGM, VictoryBGM, DeathBGM,
+		ButtonSFX, WalkSFX, NewGameSFX;
 	public bool SettingsLoaded = false;
 
 
@@ -95,14 +121,18 @@ public class Game : MonoBehaviour
 
 		MainMenuBGM = Resources.Load("Philammon Music/Going_Nowhere") as AudioClip;
 		VictoryBGM = Resources.Load("Philammon Music/Going_Nowhere_Victory_Theme") as AudioClip;
+		DeathBGM = Resources.Load("Philammon Music/Labyrinth_Death_Theme") as AudioClip;
+		DungeonBGM = Resources.Load("Philammon Music/Labyrinth_Theme") as AudioClip;
+
+		ButtonSFX = Resources.Load<AudioClip>("GDC Audio/button_002");
+		WalkSFX = Resources.Load<AudioClip>("GDC Audio/S23_SFX_Footsteps_Gravel_Loafers_Loops_Walk_Normal (modified)");
+		NewGameSFX = Resources.Load<AudioClip>("Philammon Music/MinobusLine");
 	}
 
 	void Start()
 	{
 		LoadSettings();
-		BGMPlayer.clip = MainMenuBGM;
-		BGMPlayer.loop = true;
-		BGMPlayer.Play();
+		PlayMainMenuMusic();
 	}
 
 	void LoadSettings()

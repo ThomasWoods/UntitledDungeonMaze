@@ -484,7 +484,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Made By:\n\tRedslash12 - Programming\n\tBengan - Programming, Art\n\tPhillammon
-    - Music"
+    - Music\n\tPhilammon's Mom - Music Theory"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 933c6f19c1c19004a954d2f9be3cf509, type: 2}
   m_sharedMaterial: {fileID: -6233963258144942829, guid: 933c6f19c1c19004a954d2f9be3cf509,
@@ -513,8 +513,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -530,7 +530,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 82
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -554,12 +554,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 148999031}
-    characterCount: 81
+    characterCount: 113
     spriteCount: 0
-    spaceCount: 14
-    wordCount: 12
+    spaceCount: 20
+    wordCount: 17
     linkCount: 0
-    lineCount: 4
+    lineCount: 5
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -612,7 +612,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.01, y: 0.01}
   m_AnchorMax: {x: 0.99, y: 0.99}
-  m_AnchoredPosition: {x: 0, y: -0.0000038146973}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &222010749
@@ -707,7 +707,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Made By:\n\tRedslash12 - Programming\n\tBengan - Programming, Art\n\tPhillammon
-    - Music"
+    - Music\n\tPhilammon's Mom - Music Theory"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 933c6f19c1c19004a954d2f9be3cf509, type: 2}
   m_sharedMaterial: {fileID: -6233963258144942829, guid: 933c6f19c1c19004a954d2f9be3cf509,
@@ -736,8 +736,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -753,7 +753,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 82
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -774,15 +774,15 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 1, y: 1, z: 0, w: 0}
+  m_margin: {x: 2, y: 2, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 222010751}
-    characterCount: 81
+    characterCount: 113
     spriteCount: 0
-    spaceCount: 14
-    wordCount: 12
+    spaceCount: 20
+    wordCount: 17
     linkCount: 0
-    lineCount: 4
+    lineCount: 5
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -2110,7 +2110,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Part Man, Part Bull, ALL BUS
+  m_text: Half Man, Half Bull, ALL BUS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6eb8ac75382d49142a37fe7c6e42c95f, type: 2}
   m_sharedMaterial: {fileID: 7731002856196049294, guid: 6eb8ac75382d49142a37fe7c6e42c95f,
@@ -3116,7 +3116,7 @@ RectTransform:
   m_AnchorMin: {x: 0.01, y: 0.01}
   m_AnchorMax: {x: 0.01, y: 0.01}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 120}
+  m_SizeDelta: {x: 400, y: 135}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1181437736
 MonoBehaviour:
@@ -5579,6 +5579,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 259.2572
       objectReference: {fileID: 0}
+    - target: {fileID: 805075265336926903, guid: f7b8796c1681b2f468c62adc079d25e9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9126996149219490318, guid: f7b8796c1681b2f468c62adc079d25e9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7b8796c1681b2f468c62adc079d25e9, type: 3}
 --- !u!1001 &1923679335805559397
@@ -6092,7 +6102,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Part Man, Part Bull, ALL BUS
+  m_text: Half Man, Half Bull, ALL BUS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6eb8ac75382d49142a37fe7c6e42c95f, type: 2}
   m_sharedMaterial: {fileID: 7731002856196049294, guid: 6eb8ac75382d49142a37fe7c6e42c95f,
