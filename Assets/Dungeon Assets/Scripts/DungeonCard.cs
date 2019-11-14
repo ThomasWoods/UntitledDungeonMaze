@@ -28,4 +28,6 @@ public class DungeonCard : ScriptableObject
     public GameObject[] endTiles;
     public GameObject[] crossTiles;
     public GameObject[] trapTiles;
+
+    public GameObject[] items;
 }

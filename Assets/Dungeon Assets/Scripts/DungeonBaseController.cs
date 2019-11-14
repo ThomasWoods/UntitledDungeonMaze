@@ -28,6 +28,7 @@ public class DungeonBaseController : MonoBehaviour
 	
 	public UnityEvent OnNewTurn = new UnityEvent();
 	public UnityEvent OnEndTurn = new UnityEvent();
+	public UnityEvent OnNewDungeonFloor = new UnityEvent();
 
     public int floorNumber;
     public int dungeonTurn;
@@ -36,6 +37,9 @@ public class DungeonBaseController : MonoBehaviour
 	Stack<CharacterBaseController> ActionQueue = new Stack<CharacterBaseController>(); 
 
     int growthOdds = 2;
+
+	public UnityEvent GetCompass = new UnityEvent();
+	public UnityEvent GetSmokeBomb = new UnityEvent();
 
     private void Awake()
     {
@@ -132,6 +136,7 @@ public class DungeonBaseController : MonoBehaviour
         currentDungeonTurnState = newState;
     }
 
+	[ContextMenu("Go to next floor")]
     public void ExitReached()
     {
         StartCoroutine(FloorTransition());
@@ -193,11 +198,19 @@ public class DungeonBaseController : MonoBehaviour
 		}
 		while(allready==false);
 
+		OnNewDungeonFloor.Invoke();
+
         m_FadeOutAnimator.SetBool("FadeOut", false);
 		yield return new WaitForSeconds(1f);
 
 		DungeonManager.instance.SwitchDungeonGameState(DungeonManager.dungeonGameState.dungeonExploring);
         SwitchDungeonTurnState(dungeonTurnState.TurnStart);
     }
-	
+
+	public void getItem(string s)
+	{
+		Debug.Log("Got "+s);
+		if(s.Contains("Compass")) GetCompass.Invoke();
+		if(s.Contains("SmokeBomb")) GetSmokeBomb.Invoke();
+	}
 }
