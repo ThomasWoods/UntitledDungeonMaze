@@ -97,17 +97,22 @@ public class DungeonBaseController : MonoBehaviour
     private void CheckDestroyedCharacters()
     {
         Queue<CharacterBaseController> defeatedCharacters = new Queue<CharacterBaseController>();
-        
-        foreach(CharacterBaseController character in allCharacters)
-        {
-            if (character.currentCharacterStatus == CharacterStatus.defeated)
-                defeatedCharacters.Enqueue(character);
-        }
 
-        while(defeatedCharacters.Count > 0)
+        if (m_PlayerController.currentCharacterStatus == CharacterStatus.defeated)
+            m_PlayerController.m_DefeatableBase.Defeated();
+        else
         {
-            CharacterBaseController character = defeatedCharacters.Dequeue();
-            character.m_DefeatableBase.Defeated();
+            foreach (CharacterBaseController character in enemies)
+            {
+                if (character.currentCharacterStatus == CharacterStatus.defeated)
+                    defeatedCharacters.Enqueue(character);
+            }
+
+            while (defeatedCharacters.Count > 0)
+            {
+                CharacterBaseController character = defeatedCharacters.Dequeue();
+                character.m_DefeatableBase.Defeated();
+            }
         }
     }
 
