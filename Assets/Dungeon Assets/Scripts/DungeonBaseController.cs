@@ -41,7 +41,7 @@ public class DungeonBaseController : MonoBehaviour
 	public UnityEvent GetCompass = new UnityEvent();
 	public UnityEvent GetSmokeBomb = new UnityEvent();
 	public StringEvent SmokeBombsUpdated = new StringEvent();
-	public StringEvent PlayerLifeUpdated = new StringEvent();
+	public IntEvent PlayerLifeUpdated = new IntEvent();
 	public int _smokeBombs = 3;
 	public int smokeBombs {
 		get {return _smokeBombs;}

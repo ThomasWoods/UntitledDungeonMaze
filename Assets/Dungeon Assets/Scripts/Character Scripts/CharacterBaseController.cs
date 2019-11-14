@@ -14,7 +14,7 @@ public class CharacterBaseController : MonoBehaviour
 	{
 		get { return _life; }
 		set { _life = value;
-			if (tag == "Player") DungeonBaseController.instance.PlayerLifeUpdated.Invoke(life.ToString()); }
+			if (tag == "Player") DungeonBaseController.instance.PlayerLifeUpdated.Invoke(life); }
 	}
 	public int turn = 0;
     
